@@ -1,4 +1,6 @@
 "use strict";
+// import Person, { makePerson } from "./person/Person";
+// import IPerson from "./person/IPerson";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -25,13 +27,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Person_1 = __importStar(require("./person/Person"));
 const chance_1 = __importDefault(require("chance"));
 const R = __importStar(require("ramda"));
-const change = new chance_1.default();
-let persons = R.range(0, 2).map((n) => new Person_1.default(change.name(), change.age()));
-console.log(persons);
+const chance = new chance_1.default();
 const testMakePerson = () => {
     let dos = Person_1.makePerson("dos");
-    let dos_2 = new Person_1.default("dos2");
-    console.log(dos, dos_2);
+    let test = new Person_1.default("test");
+    console.log(dos, test);
 };
 testMakePerson();
+let people = R.range(0, 3).map((i) => new Person_1.default(chance.name(), chance.age()));
+console.log(people);
 //# sourceMappingURL=index.js.map
