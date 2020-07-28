@@ -1,0 +1,13 @@
+.App {
+  width: 100%;
+  background-color: white;
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 22rem;
+  padding: 5px;
+  margin: 5px;
+}
