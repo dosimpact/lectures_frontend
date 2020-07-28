@@ -1,39 +1,23 @@
 "use strict";
 // import Person, { makePerson } from "./person/Person";
 // import IPerson from "./person/IPerson";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const Person_1 = __importStar(require("./person/Person"));
-const chance_1 = __importDefault(require("chance"));
-const R = __importStar(require("ramda"));
-const chance = new chance_1.default();
-const testMakePerson = () => {
-    let dos = Person_1.makePerson("dos");
-    let test = new Person_1.default("test");
-    console.log(dos, test);
-};
-testMakePerson();
-let people = R.range(0, 3).map((i) => new Person_1.default(chance.name(), chance.age()));
-console.log(people);
+// import Chance from "chance";
+// import * as R from "ramda";
+// const change = new Chance();
+// let persons: IPerson[] = R.range(0, 2).map(
+//   (n: number) => new Person(change.name(), change.age())
+// );
+// console.log(persons);
+// const testMakePerson = (): void => {
+//   let dos: IPerson = makePerson("dos");
+//   let dos_2: IPerson = new Person("dos2");
+//   console.log(dos, dos_2);
+// };
+// testMakePerson();
+let part1 = { name: "jane" }, part2 = { age: 22 }, part3 = { city: "Seoul", country: "Kr" };
+let merged = Object.assign(Object.assign(Object.assign({}, part1), part2), part3);
+console.log(merged); // { name: 'jane', age: 22, city: 'Seoul', country: 'Kr' }
+let coord = Object.assign({ x: 0 }, { y: 0 });
+console.log(coord); // {x:0, y: 0}
 //# sourceMappingURL=index.js.map
