@@ -1,5 +1,5 @@
-import { makeRandomNumber } from '../utils/makeRandomNumber'
-import IPerson from './IPerson'
+import { makeRandomNumber } from "../utils/makeRandomNumber";
+import IPerson from "./IPerson";
 
 export default class Person implements IPerson {
   constructor(public name: string, public age: number = makeRandomNumber()) {}
@@ -8,4 +8,6 @@ export default class Person implements IPerson {
 export const makePerson = (
   name: string,
   age: number = makeRandomNumber()
-): IPerson => ({ name, age })
+): IPerson => {
+  return { name, age };
+};
