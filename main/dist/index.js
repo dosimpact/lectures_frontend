@@ -18,8 +18,16 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const Person_1 = __importStar(require("./person/Person"));
+const chance_1 = __importDefault(require("chance"));
+const R = __importStar(require("ramda"));
+const change = new chance_1.default();
+let persons = R.range(0, 2).map((n) => new Person_1.default(change.name(), change.age()));
+console.log(persons);
 const testMakePerson = () => {
     let dos = Person_1.makePerson("dos");
     let dos_2 = new Person_1.default("dos2");
