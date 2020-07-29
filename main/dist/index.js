@@ -15,9 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //   console.log(dos, dos_2);
 // };
 // testMakePerson();
-let part1 = { name: "jane" }, part2 = { age: 22 }, part3 = { city: "Seoul", country: "Kr" };
-let merged = Object.assign(Object.assign(Object.assign({}, part1), part2), part3);
-console.log(merged); // { name: 'jane', age: 22, city: 'Seoul', country: 'Kr' }
-let coord = Object.assign({ x: 0 }, { y: 0 });
-console.log(coord); // {x:0, y: 0}
+let result = ((a, b) => a + b)(1, 2);
+console.log(result);
 //# sourceMappingURL=index.js.map

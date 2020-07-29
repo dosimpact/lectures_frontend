@@ -2,6 +2,7 @@
 // import IPerson from "./person/IPerson";
 
 import { F } from "ramda";
+import { generateKeyPair } from "crypto";
 
 // import Chance from "chance";
 // import * as R from "ramda";
@@ -19,12 +20,7 @@ import { F } from "ramda";
 // };
 
 // testMakePerson();
-let part1 = { name: "jane" },
-  part2 = { age: 22 },
-  part3 = { city: "Seoul", country: "Kr" };
 
-let merged = { ...part1, ...part2, ...part3 };
-console.log(merged); // { name: 'jane', age: 22, city: 'Seoul', country: 'Kr' }
+let result: number = ((a: number, b: number): number => a + b)(1, 2);
 
-let coord = { ...{ x: 0 }, ...{ y: 0 } };
-console.log(coord); // {x:0, y: 0}
+console.log(result);

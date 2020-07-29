@@ -5,6 +5,6 @@
 
 const MAX_NUM = 100;
 
-export function makeRandomNumber(max: number = MAX_NUM) {
+export const makeRandomNumber = (max: number = MAX_NUM): number => {
   return Math.ceil(Math.random() * max);
-}
+};

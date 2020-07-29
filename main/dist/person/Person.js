@@ -12,6 +12,9 @@ class Person {
 }
 exports.default = Person;
 exports.makePerson = (name, age = makeRandomNumber_1.makeRandomNumber()) => {
-    return { name, age };
+    return {
+        name,
+        age,
+    };
 };
 //# sourceMappingURL=Person.js.map

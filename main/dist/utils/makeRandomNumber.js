@@ -6,8 +6,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.makeRandomNumber = void 0;
 const MAX_NUM = 100;
-function makeRandomNumber(max = MAX_NUM) {
+exports.makeRandomNumber = (max = MAX_NUM) => {
     return Math.ceil(Math.random() * max);
-}
-exports.makeRandomNumber = makeRandomNumber;
+};
 //# sourceMappingURL=makeRandomNumber.js.map
