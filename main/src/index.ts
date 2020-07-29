@@ -21,6 +21,16 @@ import { generateKeyPair } from "crypto";
 
 // testMakePerson();
 
-let result: number = ((a: number, b: number): number => a + b)(1, 2);
+// 고차 함수 : 함수 실행 결과 또 함수를 반환한다.
 
-console.log(result);
+const multiply = (a: number) => (b: number) => (c: number) => a * b * c;
+
+console.log(multiply(11)(2)(3)); // 66
+
+const add = (a: number) => (b: number): number => a + b;
+
+console.log(add(10)(20)); // 30
+
+type keyType = {
+  [key: string]: string;
+};

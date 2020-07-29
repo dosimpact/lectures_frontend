@@ -15,6 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //   console.log(dos, dos_2);
 // };
 // testMakePerson();
-let result = ((a, b) => a + b)(1, 2);
-console.log(result);
+// 고차 함수 : 함수 실행 결과 또 함수를 반환한다.
+const multiply = (a) => (b) => (c) => a * b * c;
+console.log(multiply(11)(2)(3)); // 66
+const add = (a) => (b) => a + b;
+console.log(add(10)(20)); // 30
 //# sourceMappingURL=index.js.map
