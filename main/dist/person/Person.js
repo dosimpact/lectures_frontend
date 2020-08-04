@@ -3,15 +3,14 @@
 // import IPerson from "./IPerson";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.makePerson = void 0;
-const makeRandomNumber_1 = require("../utils/makeRandomNumber");
 class Person {
-    constructor(name, age = makeRandomNumber_1.makeRandomNumber()) {
+    constructor(name, age) {
         this.name = name;
         this.age = age;
     }
 }
 exports.default = Person;
-exports.makePerson = (name, age = makeRandomNumber_1.makeRandomNumber()) => {
+exports.makePerson = (name, age) => {
     return { name, age };
 };
 //# sourceMappingURL=Person.js.map

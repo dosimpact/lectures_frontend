@@ -11,17 +11,12 @@
 // ): IPerson => {
 //   return { name, age };
 // };
-
 import IPerson from "./IPerson";
-import { makeRandomNumber } from "../utils/makeRandomNumber";
 
 export default class Person implements IPerson {
-  constructor(public name: string, public age: number = makeRandomNumber()) {}
+  constructor(public name: string, public age: number) {}
 }
 
-export const makePerson = (
-  name: string,
-  age: number = makeRandomNumber()
-): IPerson => {
+export const makePerson = (name: string, age: number): IPerson => {
   return { name, age };
 };

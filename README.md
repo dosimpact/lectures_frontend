@@ -95,3 +95,70 @@
 - [ ] 12-4 리액트와 부트스트랩으로 프런트엔드 웹 만들기
 
 ![01.jpg](01.jpg)
+
+```js
+import React from "react";
+import { render } from "react-dom";
+import App from "./App";
+
+//0
+import { Map, List } from "immutable";
+
+//1
+const user = Map({
+  name: "doyoung",
+  study: Map({
+    cs: 10,
+    alog: 20,
+  }),
+});
+
+console.log(user.toJS());
+
+//2
+const course = List([
+  Map({ name: "python" }),
+  Map({ name: "C++" }),
+  Map({ name: "JAVA" }),
+]);
+console.log(course.toJS());
+
+//3. 새로운 값으로 바꾸고, 다른 obj 리턴
+
+let oUser = user.set("name", "alsrud");
+console.log(oUser.toJS());
+// console.log(oUser === user); // false
+
+//4. 값을 읽을때 - get 이용
+console.log(user.get("name"));
+console.log(course.get(0).toJS());
+
+//5. 읽은다음에 설정? : prev => ...
+let oUser2 = user.update("name", (prev) => prev + "[우수생]");
+console.log(oUser2.toJS());
+// console.log(oUser === oUser2); // false
+// console.log(user === oUser2); // false
+
+//6 with deep depth => []
+let oUser3 = user.setIn(["study", "cs"], 100);
+console.log(oUser3.getIn(["study", "cs"]));
+
+let nCourse = course.setIn([0, "name"], "Golang");
+console.log(nCourse.getIn([0, "name"]));
+
+//7
+
+let nCourse2 = course.push(Map({ name: "SQL" }));
+console.log(nCourse2.toJS());
+let nCourse3 = course.filter((e) => e.get("name") === "python");
+console.log(nCourse3.toJS());
+
+//8
+let oUser4 = user.delete("name");
+console.log(oUser4.toJS());
+
+let nCourse4 = course.delete(0);
+console.log(nCourse4.toJS());
+
+render(<App />, document.getElementById("root"));
+```
