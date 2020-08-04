@@ -3,6 +3,7 @@
 //   return Math.ceil(Math.random() * max);
 // }
 const MAX_NUM = 100;
-export const makeRandomeNumber = (num: number = MAX_NUM): number => {
-  return Math.ceil(Math.random() * num);
+
+export const makeRandomNumber = (max: number = MAX_NUM): number => {
+  return Math.ceil(Math.random() * max);
 };

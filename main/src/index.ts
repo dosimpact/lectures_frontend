@@ -2,6 +2,7 @@
 // import IPerson from "./person/IPerson";
 
 import { F } from "ramda";
+import { generateKeyPair } from "crypto";
 
 // import Chance from "chance";
 // import * as R from "ramda";
@@ -19,23 +20,17 @@ import { F } from "ramda";
 // };
 
 // testMakePerson();
-// let part1 = { name: "jane" },
-//   part2 = { age: 22 },
-//   part3 = { city: "Seoul", country: "Kr" };
 
-// let merged = { ...part1, ...part2, ...part3 };
-// console.log(merged); // { name: 'jane', age: 22, city: 'Seoul', country: 'Kr' }
+// 고차 함수 : 함수 실행 결과 또 함수를 반환한다.
 
-// let coord = { ...{ x: 0 }, ...{ y: 0 } };
-// console.log(coord); // {x:0, y: 0}
+const multiply = (a: number) => (b: number) => (c: number) => a * b * c;
 
-import IPerson from "./person/IPerson";
-import Person, { makePerson } from "./person/Person";
-const test = (): void => {
-  let person01 = new Person("doyoung", 12);
-  console.log(person01);
-  let person02 = makePerson("dododoyoung", 21);
-  console.log(person02);
+console.log(multiply(11)(2)(3)); // 66
+
+const add = (a: number) => (b: number): number => a + b;
+
+console.log(add(10)(20)); // 30
+
+type keyType = {
+  [key: string]: string;
 };
-
-test();

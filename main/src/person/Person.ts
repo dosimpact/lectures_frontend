@@ -16,7 +16,12 @@ import IPerson from "./IPerson";
 export default class Person implements IPerson {
   constructor(public name: string, public age: number) {}
 }
-
-export const makePerson = (name: string, age: number): IPerson => {
-  return { name, age };
+export const makePerson = (
+  name: string,
+  age: number = makeRandomNumber()
+): IPerson => {
+  return {
+    name,
+    age,
+  };
 };
