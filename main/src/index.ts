@@ -1,36 +1,48 @@
-// import Person, { makePerson } from "./person/Person";
-// import IPerson from "./person/IPerson";
+import IPerson from "./person/IPerson";
+import Chance from "chance";
+import * as R from "ramda";
+const chance = new Chance();
 
-import { F } from "ramda";
-import { generateKeyPair } from "crypto";
+//  =========== example make array
 
-// import Chance from "chance";
-// import * as R from "ramda";
+let names: string[] = R.range(0, 3).map((e: number) => chance.name());
 
-// const change = new Chance();
-// let persons: IPerson[] = R.range(0, 2).map(
-//   (n: number) => new Person(change.name(), change.age())
-// );
-// console.log(persons);
+console.log(names);
 
-// const testMakePerson = (): void => {
-//   let dos: IPerson = makePerson("dos");
-//   let dos_2: IPerson = new Person("dos2");
-//   console.log(dos, dos_2);
-// };
+let ages: number[] = R.range(0, 3).map((e: number) => chance.age());
 
-// testMakePerson();
+console.log(ages);
 
-// 고차 함수 : 함수 실행 결과 또 함수를 반환한다.
+let people: IPerson[] = R.range(0, 3).map((e: number) => ({
+  name: chance.name(),
+  age: chance.age(),
+}));
 
-const multiply = (a: number) => (b: number) => (c: number) => a * b * c;
+// =========== example  split string    to string[]   : split
+// =========== example  split string[]  to string     : join
 
-console.log(multiply(11)(2)(3)); // 66
+const split = (str: string, delim: string = ""): string[] => str.split(delim);
 
-const add = (a: number) => (b: number): number => a + b;
+console.log(split("h,e,llo", ","));
 
-console.log(add(10)(20)); // 30
+const join = (str: string[], delim: string = ""): string => str.join(delim);
 
-type keyType = {
-  [key: string]: string;
-};
+console.log(join(["hello", "world"], "|"));
+
+// =========== example  for...in | for...of |
+
+for (const idx in names) {
+  console.log(names[idx]);
+}
+
+for (const name of names) {
+  console.log(name);
+}
+
+for (const [idx, name] of names.entries()) {
+  console.log(`[${idx}] : ${name}`);
+}
+
+for (const person of people) {
+  console.log(person);
+}

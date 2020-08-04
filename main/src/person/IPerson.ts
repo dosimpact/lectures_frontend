@@ -1,9 +1,4 @@
-// export default interface Person {
-//   name: string;
-//   age: number;
-// }
-
-export default interface IPerson {
+export default interface Person {
   name: string;
   age: number;
 }
