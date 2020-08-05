@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
-    "esModuleInterop": true,
-    "target": "ES2015",
     "moduleResolution": "node",
-    "outDir": "dist",
+    "target": "ES2015",
     "baseUrl": ".",
+    "outDir": "dist",
+    "paths": { "*": ["node_modules/*"] },
+    "esModuleInterop": true,
     "sourceMap": true,
     "downlevelIteration": true,
-    "noImplicitAny": true,
-    "paths": { "*": ["node_modules/*"] }
+    "noImplicitAny": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
