@@ -14,50 +14,48 @@ let people: IPerson[] = R.range(0, 3).map((e: number) => ({
   age: chance.age(),
 }));
 
-// make essential memory
-interface IMemory {
-  counter: number;
-  value: number;
-}
-interface ICalFunc {
-  add: (arg0: number) => this;
-  sub: (arg0: number) => this;
-  getState: (arg0: number, arg1: number) => { counter: number; value: number };
-  resetState: () => boolean;
-}
-// make realize interface
-class ThisCal implements IMemory, ICalFunc {
-  static SERIRAL = "q1123f2w51sq3z5v8e741g681231q125";
-  constructor(public counter: number = 0, public value: number = 0) {
-    this.counter = counter;
-    this.value = value;
+// example make R.range
+
+const range = (from: number, to: number): number[] =>
+  from < to ? [from, ...range(from + 1, to)] : [];
+
+// example make fold function ( like reducer )
+const fold = <T>(
+  array: T[],
+  callback: (result: T, val: T) => T,
+  initValue: T
+) => {
+  let result: T = initValue;
+  for (let i = 0; i < array.length; ++i) {
+    const value = array[i];
+    result = callback(result, value);
   }
-  add(a: number) {
-    this.counter += 1;
-    this.value += a;
-    return this;
+  return result;
+};
+
+let result = fold(
+  range(0, 101),
+  (result, value) => {
+    return value % 2 === 0 ? result : result + value;
+  },
+  0
+);
+console.log(result);
+
+// example filter
+const filter = <T>(
+  array: T[],
+  callback: (value: T, index?: number) => boolean
+): T[] => {
+  let result: T[] = [];
+  for (let index: number = 0; index < array.length; index++) {
+    const value = array[index];
+    if (callback(value, index)) result = [...result, value];
   }
-  sub(a: number) {
-    this.counter += 1;
-    this.value -= a;
-    return this;
-  }
-  getState(): { counter: number; value: number } {
-    return {
-      counter: this.counter,
-      value: this.value,
-    };
-  }
-  resetState(): boolean {
-    this.counter = 0;
-    this.value = 0;
-    return true;
-  }
-}
-// test class
-let cal01: ThisCal = new ThisCal();
-console.log(ThisCal.SERIRAL);
-cal01.add(10).add(20).add(30);
-console.log(cal01.getState());
-cal01.resetState();
-console.log(cal01.getState());
+  return result;
+};
+
+let oddRes = filter(range(0, 11), (e, idx) => (e % 2 == 0 ? true : false));
+console.log(oddRes);
+
+// example map
