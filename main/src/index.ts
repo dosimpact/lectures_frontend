@@ -3,6 +3,24 @@ import Chance from "chance";
 import * as R from "ramda";
 const chance = new Chance();
 
+class Human {
+  public name: string;
+  public age: number;
+  public gender: string;
+  constructor(name: string, age: number, gender: string) {
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+  }
+
+  printProfile() {
+    return `[${this.name}의 프로파일] ${this.age} - ${this.gender} `;
+  }
+}
+
+const dos = new Human("DSO", 24, "남");
+console.log(dos.printProfile());
+
 //  =========== example make array
 
 let names: string[] = R.range(0, 3).map((e: number) => chance.name());
