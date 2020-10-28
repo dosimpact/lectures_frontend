@@ -1,21 +1,13 @@
 # 인프런 - Node.js TS 적용하기
 
 
+[https://github.com/ZeroCho/ts-nodebird](https://github.com/ZeroCho/ts-nodebird)
 
 # 1. 프로젝트 구조 갖추기
 
 - [✔] 강좌 소개
-
-```js
-node 에서 실력을 가르는 요소는 애러로 서버가 죽지 않게끔 만드는것.
-애러를 예측해서 예외처리를 한다.
-TypeScript는 JS에서 나올 실수들을 정말 많이 잡아준다.
-- 특히나 type 관련된 애러 ( cannot read property..  )
-- pm2 등의 툴을 이용해서 서버를 살려도 또 애러난 부분을 돌리면 또 죽고 pm2가 또 살리고 반복
-- Server 안정성을 위해서 = TS 는 무조건 도입하고 + Test 코드까지 작성하도록 한다.
-```
 - [✔] 초기 세팅
-- [ ] express와 ts-node
+- [✔] express와 ts-node
 - [ ] module resolution
 - [ ] express 미들웨어
 - [ ] 시퀄라이즈
