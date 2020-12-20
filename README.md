@@ -5,9 +5,15 @@
 # 타입스크립트 학습
 
 ```
-DO it typescript : ts 기본서
-제로초 - React + TS 강의
-제로초 - Node + TS 강의
+DO it typescript : ts 기본서 (진행중)
+- 소스 코드 :  ts_doit_source
+- 내용 정리 코드 : ts_doit_recap
+- playground
+```
+
+```
+제로초 - React + TS 강의 (진행중)
+제로초 - Node + TS 강의 (진행중)
 ```
 
 ### 01장 타입스크립트와 개발 환경 만들기

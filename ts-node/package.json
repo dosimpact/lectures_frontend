@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "tsc-watch --onSuccess \"node dist/index.js \"",
+    "start": "tsc && node dist/index"
+  },
   "dependencies": {
     "@types/bcrypt": "^3.0.0",
     "@types/cookie-parser": "^1.4.2",
