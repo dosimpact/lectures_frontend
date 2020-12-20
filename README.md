@@ -4,6 +4,8 @@
 
 # 타입스크립트 학습
 
+# 01 - 바닐라 TS
+
 ```
 DO it typescript : ts 기본서 (진행중)
 - 소스 코드 :  ts_doit_source
@@ -11,9 +13,16 @@ DO it typescript : ts 기본서 (진행중)
 - playground
 ```
 
+# 01 - TS Node
+
+```
+제로초 - Node + TS 강의 (진행중)
+```
+
+# 01 - TS React
+
 ```
 제로초 - React + TS 강의 (진행중)
-제로초 - Node + TS 강의 (진행중)
 ```
 
 ### 01장 타입스크립트와 개발 환경 만들기
