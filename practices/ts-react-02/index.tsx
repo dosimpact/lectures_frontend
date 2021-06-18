@@ -1,9 +1,13 @@
 import * as React from "react";
-import ReactDOM from "react-dom";
+import * as ReactDOM from "react-dom";
 import { hot } from "react-hot-loader/root";
-
+import GuGuDan from "./components/GuGuDan";
 const App = () => {
-  return <div>app231 asd</div>;
+  return (
+    <div>
+      <GuGuDan />
+    </div>
+  );
 };
 const Hot = hot(App);
 

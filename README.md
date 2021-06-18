@@ -1,6 +1,28 @@
-# DO IT TS
+# JS -> Typescript
 
 ![00.jpg](00.jpg)
+
+- [0] practices~~
+- [1] JS -> TS
+- [2] JSX -> TSX
+- [3] node.js -> typing
+
+```
+.
+├── [0] playground
+├── [0] playground_cra
+├── [0] practices
+├── [1] ts-docs
+├── [1] ts-handbook
+├── [3] ts-node
+├── [2] ts-react
+├── [0] ts-react-practice
+├── [1] ts_doit_recap
+└── [1] ts_doit_source
+
+```
+
+--
 
 # 타입스크립트 학습
 
