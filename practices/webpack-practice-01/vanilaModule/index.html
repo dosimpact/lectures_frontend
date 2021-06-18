@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="./src/hello.js"></script> -->
+    <!-- <script src="./src/hello.js"></script> -->
+
+<body>
+    <div>WORD:</div>
+    <h3 id="root"></h3>
+    <script type="module">
+        import hello from "./src/hello.js"
+        import word from "./src/world.js"
+        document.querySelector("#root").innerHTML = hello + " " + word
+    </script>
+</head>
+</body>
+</html>
