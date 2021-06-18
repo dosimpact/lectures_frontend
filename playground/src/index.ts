@@ -77,3 +77,12 @@ let oddRes = filter(range(0, 11), (e, idx) => (e % 2 == 0 ? true : false));
 console.log(oddRes);
 
 // example map
+
+const RSP = {
+  R: -1,
+  S: 0,
+  P: 1,
+} as const;
+console.log(RSP);
+type keysOfRPS = keyof typeof RSP;
+type valsOfRPS = typeof RSP[keysOfRPS];
