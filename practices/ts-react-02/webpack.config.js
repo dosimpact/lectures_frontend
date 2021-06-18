@@ -1,27 +1,28 @@
 const path = require("path");
-const webpack = require("webpack");
 
 module.exports = {
+  name: "number-baseball-dev",
   mode: "development",
-  devtool: "eval", // hidden-source-map
+  devtool: "eval",
   resolve: {
-    extensions: [".jsx", ".js", ".tsx", ".ts"],
+    extensions: [".js", ".jsx", ".tsx", ".ts"],
   },
-
   entry: {
-    app: "./client",
+    app: "./index",
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         loader: "awesome-typescript-loader",
+        exclude: path.join(__dirname, "node_modules"),
       },
     ],
   },
-  plugins: [new webpack.LoaderOptionsPlugin({ debug: true })],
+  plugins: [],
   output: {
-    filename: "app.js",
     path: path.join(__dirname, "dist"),
+    filename: "[name].js",
+    publicPath: "/dist",
   },
 };
