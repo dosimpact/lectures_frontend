@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "strict": true,
-        "lib": ["es5","ES2015","es2016","ES2017"],
+        "lib": ["DOM", "es5","ES2015","es2016","ES2017"],
         "jsx": "react"
     }
 }
