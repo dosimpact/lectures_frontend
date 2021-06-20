@@ -5,11 +5,19 @@ import GuGuDan from "./components/GuGuDan";
 import WordRelay from "./components/WordRelay";
 import GuGuDanClass from "./components/GuGuDanClass";
 import WordRelay2 from "./components/WordRelay2";
+import NumberBaseball from "./components/NumberBaseball";
+import NB from "./components/NB";
+import ResponseCheck from "./components/ResponseCheck";
+import RC from "./components/RC";
 
 const App = () => {
   return (
     <div>
-      <WordRelay2 />
+      <RC />
+      {/* <ResponseCheck /> */}
+      {/* <NB /> */}
+      {/* <NumberBaseball /> */}
+      {/* <WordRelay2 /> */}
       {/* <GuGuDanClass />
       <GuGuDan />
       <WordRelay></WordRelay> */}
