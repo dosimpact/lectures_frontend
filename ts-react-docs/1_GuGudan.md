@@ -16,3 +16,21 @@ interface HTMLImageElement extends HTMLElement { }
 interface HTMLInputElement extends HTMLElement { }
 
 ```
+
+## FB
+
+- class컴포넌트에서, 맴버함수와 화살표 맴버 함수의 차이
+
+```js
+
+  mySubmit3(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    console.log(this.state);
+  }// 안먹힘
+  mySubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(this.state);
+  };// 먹힘
+
+<form onSubmit={this.onSubmit}>
+```

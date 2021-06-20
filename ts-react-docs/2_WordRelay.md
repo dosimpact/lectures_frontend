@@ -19,3 +19,14 @@ const handleInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
   setAns(e.currentTarget.value);
 }, []);
 ```
+
+- usecallback 제너릭 타이핑
+
+```ts
+const onSubmitForm = useCallback<(e: React.FormEvent) => void>(
+  (e) => {
+    e.preventDefault();
+  },
+  [word, value]
+);
+```
