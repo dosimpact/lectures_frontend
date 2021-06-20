@@ -1,5 +1,8 @@
 # 1
 
+- 구구단
+- useState 사용, useRef 사용하여 input에 포커스
+
 ## useRef 타이핑
 
 - useRef를 이용해서, 랜더링에 걸리지 안도록 객체를 참조한다.

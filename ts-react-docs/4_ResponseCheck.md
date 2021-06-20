@@ -1,5 +1,8 @@
 # 4
 
+- 반응속도 체크 게임
+- timer 함수(setTimerout)을 Ref로 다루는것
+
 ### 1. DOM 의 클래스 조작 방법
 
 1. useState로 변수를 만들어서, <div class={state}/> 로 전달하기

@@ -9,11 +9,16 @@ import NumberBaseball from "./components/NumberBaseball";
 import NB from "./components/NB";
 import ResponseCheck from "./components/ResponseCheck";
 import RC from "./components/RC";
+// import RSP from "./components/RSP";
+import MyRSP from "./components/MyRSP";
 
+import MineSearch from "./mineSearch/MineSearch";
 const App = () => {
   return (
     <div>
-      <RC />
+      <MyRSP />
+      {/* <MineSearch /> */}
+      {/* <RSP /> */}
       {/* <ResponseCheck /> */}
       {/* <NB /> */}
       {/* <NumberBaseball /> */}

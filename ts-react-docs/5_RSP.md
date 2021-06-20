@@ -42,3 +42,9 @@ const computerChoice = (imgCoords: ImgCoords) => {
 - FunctionComponent
 - 별명 : FC
 - 버려진 멸병 : SFC, StatelessComponent ( useState 훅때문에 더이상 stateless하지 않다.)
+
+### 5. cf) (onClick + useRef<setTimeout()> vs useEffect + useRef<setInterval()> )
+
+- useRef로 timer관련 함수를 다룰 수 있다.
+- 클릭시 timer컨트롤 하는것이 반응체크 게임의 예제였다.(onClick시 clear/setTimeout)
+- 랜더링(혹은 특정변수변경)시 timer 컨트롤 하는것이 RSP 게임 ( 시작시,useEffect 사용하여 setInterval )
