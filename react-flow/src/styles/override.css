@@ -1,0 +1,6 @@
+.react-flow__node {
+    background: azure;
+  }
+.react-flow__node.selected {
+    background: antiquewhite;
+  }
