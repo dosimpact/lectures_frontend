@@ -10,12 +10,14 @@ import "react-flow-renderer/dist/style.css";
 import "react-flow-renderer/dist/theme-default.css";
 import "./styles/override.css";
 
+import Dragdrop from "./dragdrop/index";
 function App() {
   return (
     <>
+      <Dragdrop />
       {/* <Ex01 /> */}
       {/* <Ex02 /> */}
-      <CustomNodeFlow />
+      {/* <CustomNodeFlow /> */}
     </>
   );
 }
