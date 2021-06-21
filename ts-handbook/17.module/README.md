@@ -11,6 +11,8 @@
 - 다른 모듈에서 import를 사용해 명시적으로 로드
 - 모듈로더 : CommonJS 모듈용 Node.js , AMD 모듈용 RequireJS로더
 
+- 모듈은 지역scope로 변수를 보호하며, 일부를 export할 수 있다.
+
 ```ts
 import { NumberValidator } from "./interfaces";
 
@@ -29,6 +31,7 @@ export default SSNValiator;
 ### export/import statements
 
 - as 구문
+- 이름을 바꿔서 export/import 가능 하다.
 
 ```ts
 import { StringValidator } from "./interfaces";
@@ -52,10 +55,34 @@ import { SSN, Zip as ZipEval } from "./validator"
 
 ### re-export
 
+- export { } from ""
+- 모듈을 재조립해서 출력하고 싶을때 ( 하위 모듈을 다 정리한, index.ts 파일 )
+
+- export \* as Renamed from ""
+- export default가 없는 모듈을, 명명하여 export 할 때
+
 ```ts
 // 3 Re-export 하기 (Re-exports)
 export { SSNValiator as SSN } from "./numberValidator";
 export { ZipCodeValidator as Zip } from "./stringValidator";
+```
+
+```ts
+// 3 Re-export 하기 (Re-exports)
+import { NumberValidator } from "./interfaces";
+export const SSNRegExp = /^[0-9]*$/;
+class SSNValiator implements NumberValidator {
+  validate(s: string): boolean {
+    return s.length === 6 && SSNRegExp.test(s);
+  }
+}
+export { SSNValiator };
+export default SSNValiator;
+---
+export * as NumberValidObj from "./numberValidator";
+---
+import { NumberValidObj } from "./validator/index";
+new NumberValidObj.default().validate("hello");
 ```
 
 ### side-effect only import
