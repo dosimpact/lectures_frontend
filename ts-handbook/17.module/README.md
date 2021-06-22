@@ -98,3 +98,54 @@ import "./hello.script";
 // type을 명시적으로 import 하기 ( interface, type 등만 가능 ! )
 import type { NumberValidator } from "./validator/interfaces";
 ```
+
+### "export = " 지원
+
+- 기존의 exports를 단일객체로 지정하는것은 export default 가 대체된다.
+- 기존의 exports = {}로 객체를 넣는것은 export 구문으로 대처된다.
+
+- exports 객체의 워크플로우를 모델링 하기위해 "export = "구문으로 지원한다.
+- "export =" 구문은 import module = require("module") 로 가져와야한다.
+
+```ts
+const zipCodeReg = /^[0-9]*$/;
+class ZipCodeValidator {
+  isAcceptable(s: string) {
+    return s.length === 5 && zipCodeReg.test(s);
+  }
+}
+
+export = ZipCodeValidator;
+---
+import Zip = require("./export/ZipCodeValidator");
+const testRes = new Zip().isAcceptable("05154");
+console.log("Zip - testRes", testRes);
+
+```
+
+### 🚀 모듈을 위한 코드 생성
+
+- 대상 모듈에 따라서, 컴파일 되는 코드가 다르다.
+- 모듈 대상은
+  Node.js (CommonJS), require.js (AMD), UMD, SystemJS, , ECMAScript 2015 native modules (ES6)
+
+### 🚀동적 모듈 로딩
+
+- if 구문에 의해서, require 모듈
+- ts 스크립트 또한 typesafe한 동적 로딩 시나리오 제공
+
+### 🚀 .d.ts 모듈
+
+### 🚀 와일드카드 모듈 선언
+
+## 🚀 모듈 구조화에 대한 지침 (Guidance for structuring modules)
+
+### Export as close to top-level as possible
+
+### if you're only exporting a single class or function, use export default
+
+### If you're exporting multiple objects, put them all at top-level
+
+### Explicitly list imported names
+
+### Re-export to extend

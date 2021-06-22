@@ -1,3 +1,6 @@
-import { NumberValidObj } from "./validator/index";
-
-new NumberValidObj.default().validate("hello");
+// -
+// import "./Test01";
+//
+// import "./Test02";
+//
+import "./Test03";
