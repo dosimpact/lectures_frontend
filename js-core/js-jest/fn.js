@@ -9,8 +9,12 @@ class Person {
   }
 }
 
+const throwErrorer = (octopus) => {
+  throw new Error(octopus);
+};
+
 // export func
-module.exports = { add, makePerson, Person };
+module.exports = { add, makePerson, Person, throwErrorer };
 
 // export default func
 // module.exports = add;
