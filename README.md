@@ -1,5 +1,31 @@
 # JS -> Typescript
 
+## 코어 JS
+
+### 코어JS/Jest 학습
+
+[js jest](https://github.com/DosImpact/lecture_ts_tutorial_02/tree/master/js-core/js-jest)
+
+### 코어JS/공식 문서 학습
+
+[js docs](https://github.com/DosImpact/lecture_ts_tutorial_02/tree/master/js-core/js-docs)
+
+## 코어 TS 학습
+
+[typescript 공식 헨드북 정리](https://github.com/DosImpact/lecture_ts_tutorial_02/tree/master/ts-handbook)
+
+## 리액트 TSX 학습
+
+[리액트+typescript 적용 강좌- 소스 코드](https://github.com/DosImpact/lecture_ts_tutorial_02/tree/master/ts-react)
+
+[리액트+typescript 적용 강좌- 정리 마크다운](https://github.com/DosImpact/lecture_ts_tutorial_02/tree/master/ts-react-docs)
+
+## node.js + typesciprt 학습
+
+## playground
+
+---
+
 ![00.jpg](00.jpg)
 
 - [0] practices~~
