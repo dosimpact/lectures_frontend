@@ -1,3 +1,5 @@
+# 데코레이터
+
 목적 : 데코레이터, 손쉬운 추가 기능
 대상 :
 
@@ -122,3 +124,7 @@ class Greeter2 {
 
 console.log(new Greeter2("world"));
 ```
+
+## 2. 메서드 데코레이터
+
+... continue

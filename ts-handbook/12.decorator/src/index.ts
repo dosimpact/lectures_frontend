@@ -11,8 +11,11 @@ function color(value: string) {
 // 평가 - top down , 실행 - bottom up
 // import "./test01";
 
-// 2. 클래스 생성자 <- 데코레이터
+// 2. 클래스 자체 <- 데코레이터
 import "./test02";
 
 // 3. 클래스 생성자 <- 데코레이터
 import "./test03";
+
+// 4. eg)  2+3
+import "./test04";
