@@ -27,7 +27,6 @@ try {
   Object.defineProperty(obj, "foo", {
     get: function () {
       return "g";
-      ㄴ;
     },
   }); // TypeError 발생
 } catch (error) {}
