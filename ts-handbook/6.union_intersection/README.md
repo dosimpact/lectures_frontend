@@ -1,11 +1,11 @@
-목적 : 새로운 타입을 계속 만들어 내기 보다는 원시타입을 조합해서 만들자
+목적 : 새로운 타입을 계속 만들어 내기 보다는 원시타입을 조합해서 만들자  
 두가지 방법 : 유니온과 교차
 
-## 유니언 타입 (Union Types)
+## 1 유니언 타입 (Union Types)
 
 - | OR 문법을 사용해서 조합하자.
 
-### string | number
+### 1.1 string | number
 
 - 원시타입의 조합
 
@@ -24,7 +24,7 @@ let indentedString = padLeft("Hello world", "  ~~ ");
 console.log(indentedString);
 ```
 
-### Fish | Bird
+### 1.2 Fish | Bird
 
 - 여기서는 공통된 프로퍼티(교집합)만 가능하다.
 
@@ -51,10 +51,11 @@ pet.layEggs();
 // pet.swim();
 ```
 
-### 원시타입 + 객체타입의 유니온
+### 1.3 원시타입 + 객체타입의 유니온
 
 - 객체 공통 속성 교집합을 반영
 - 객체 프로퍼티 state = "loading" | "failed" | " success " 는 유니온이 된다.
+- switch 구문을 통해서, 타입을 좁혀 나갈 수 있다.
 
 ```ts
 type NetworkLoadingState = {
@@ -107,12 +108,12 @@ function networkStatus(state: NetworkState): string {
 }
 ```
 
-## 교차 타입 (Intersection Types)
+## 2 교차 타입 (Intersection Types)
 
 - & (AND) 문법을 이용해서 조합하자.
 - 객체에선 여러 타입을 합치는 과정 ( 직관과 다르다)
 
-### ArtworksData & ErrorHandling
+### 2.1 ArtworksData & ErrorHandling
 
 ```ts
 interface ErrorHandling {
@@ -147,23 +148,32 @@ const handleArtistsResponse = (response: ArtistsResponse) => {
 };
 ```
 
-### ⚠️ 믹스인
+### 2.2 ⚠️ 교차를 통한 믹스인
 
-- 두 객체를 하나로 합치고 싶을때~
+- 목적 : 두 객체를 하나로 합치고 싶을때~
 
 ```ts
+// eg) 두 객체를 extends<T1,T2>
+// 단, 함수는 T1, T2 객체의 key를 알아내어, 공통된 key만  허용되어야 한다.
+
+// Person , loggable 객체를 합칠 예정임
 class Person {
   constructor(public name: string) {}
 }
+
 interface Loggable {
   log(name: string): void;
 }
+
 class ConsoleLogger implements Loggable {
+  // JS에서 클래스의 맴버 함수는 prototype 에서 확인 가능하다.
   log(name: string) {
     console.log(`Hello, I'm ${name}.`);
   }
 }
+
 // 두 객체를 받아 하나로 합칩니다.
+// 단 조건을 합칠때, 함수 제너릭에 의해 First와 Second의 key 만 허용된다.
 function extend<First extends {}, Second extends {}>(
   first: First,
   second: Second
@@ -181,6 +191,7 @@ function extend<First extends {}, Second extends {}>(
   }
   return result as First & Second;
 }
+
 const jim = extend(new Person("Jim"), ConsoleLogger.prototype);
 jim.log(jim.name);
 ```

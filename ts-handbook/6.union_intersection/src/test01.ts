@@ -10,3 +10,5 @@ function padLeft(value: string, padding: string | number) {
 
 let indentedString = padLeft("Hello world", "  ~~ ");
 console.log(indentedString);
+let indentedNumber = padLeft("hello world", 5);
+console.log(indentedNumber);

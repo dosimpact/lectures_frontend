@@ -23,10 +23,6 @@ type NetworkState =
   | NetworkFailedState
   | NetworkSuccessState;
 
-type NetworkStateKey = keyof NetworkState;
-
-const vvvv: NetworkStateKey = "state";
-
 function networkStatus(state: NetworkState): string {
   // 현재 TypeScript는 셋 중 어떤 것이
   // state가 될 수 있는 잠재적인 타입인지 알 수 없습니다.
@@ -37,14 +33,16 @@ function networkStatus(state: NetworkState): string {
 
   // state에 swtich문을 사용하여, TypeScript는 코드 흐름을 분석하면서
   // 유니언 타입을 좁혀나갈 수 있습니다.
+
+  // ------> NetworkState 임을 추론
   switch (state.state) {
-    case "loading":
+    case "loading": // ------> NetworkLoadingState 으로 좁혀갔음 추론
       return "Downloading...";
-    case "failed":
+    case "failed": // ------> NetworkFailedState 으로 좁혀갔음 (추론)
       // 여기서 타입은 NetworkFailedState일 것이며,
       // 따라서 `code` 필드에 접근할 수 있습니다.
       return `Error ${state.code} downloading`;
-    case "success":
+    case "success": // ------> NetworkSuccessState 으로 좁혀갔음 (추론)
       return `Downloaded ${state.response.title} - ${state.response.summary}`;
   }
 }
