@@ -18,3 +18,13 @@ const todo1 = {
 const todo2 = updateTodo(todo1, {
   description: "throw out trash",
 });
+
+//Required<T>
+interface Props {
+  a?: number;
+  b?: string;
+}
+
+const obj: Props = { a: 5 }; // 성공
+
+const obj2: Required<Props> = { a: 5, b: "23" }; // 반드시 필요
