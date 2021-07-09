@@ -1,14 +1,7 @@
-interface PageInfo {
-  title: string;
+function freeze<T>(obj: T): Readonly<T> {
+  return Object.freeze(obj);
 }
 
-type Page = "home" | "about" | "contact";
-
-// Record
-// page의 문자리터럴을 key로
-// pageInfo의 객체를 value로 매핑해준다.
-const x: Record<Page, PageInfo> = {
-  home: { title: "home" },
-  about: { title: "about" },
-  contact: { title: "contact" },
-};
+//  error TS2540: Cannot assign to 'name' because it is a read-only property.
+const res = freeze({ name: "dodo" });
+// res.name = "dr";
