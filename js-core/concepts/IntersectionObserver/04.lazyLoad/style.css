@@ -1,0 +1,16 @@
+.box {
+  width: 300px;
+  height: 200px;
+  background-color: antiquewhite;
+  margin-top: 500px;
+  margin-left: 200px;
+}
+
+.tada {
+  animation: tada 1s forwards ease-in-out;
+}
+
+.bounce {
+  display: inline-block;
+  animation: bounce 1s infinite ease;
+}
