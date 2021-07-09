@@ -1,4 +1,4 @@
-## 알고리즘
+## 스크롤 Reveal 애님 알고리즘
 
 1. 애니메이션 header 파일 추가 ( keyfremes 프리셋들)
 2. 스크롤 이벤트를 document에 건다.
