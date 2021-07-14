@@ -18,6 +18,8 @@ document.querySelectorAll("div").forEach((el) => {
     },
     { capture: true }
   );
+  // 다르게는 3번째 인자는 boolean 값을 받을 수 있는데, 이는 useCapture 옵션 on/off 이다.
+  // el.addEventListener("click", (e) => {}, true);
 });
 
 // eg) 이벤트 캡쳐링,버블링 방지
