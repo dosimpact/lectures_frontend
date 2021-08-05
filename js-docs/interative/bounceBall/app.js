@@ -35,6 +35,16 @@ class App {
   }
 }
 
+// 1 Render Tree 형성 완료
+window.addEventListener("DOMContentLoaded", () => {
+  console.log("DOMContentLoaded");
+});
+
+// 2 리소스(사진,등) 까지 로딩 완료
+window.addEventListener("load", () => {
+  console.log("load");
+});
+
 window.onload = () => {
   new App();
 };

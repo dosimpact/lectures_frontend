@@ -2,14 +2,6 @@
 
 ## webpack react ts (minimal setting)
 
-- 이슈, awesome-typescript-loader 는 아직 typescript:3.9 까지밖에  
-  (의존성 트리 이슈 -> typescript 를 다운 그래이드 하여 해결 )
-- 이슈, webpack-dev-server가 의존하는 파일이 webpack-cli 에 없음  
-   (webpack-cli 와 webpack-dev-server 버전 일치 )
-  [Ref][https://velog.io/@adam2/webpack-dev-server-%ec%82%ac%ec%9a%a9%ed%95%98%ea%b8%b0%ec%82%bd%ec%a7%88%ed%9b%84%ea%b8%b0#webpack-dev-server%ec%9d%98-%eb%8f%99%ec%9e%91%ec%9b%90%eb%a6%ac]
-
-  <br/>
-
 ## install
 
 - package.json
@@ -78,3 +70,14 @@ module.exports = {
   },
 };
 ```
+
+## 참고 이슈 사항  
+
+- 이슈, awesome-typescript-loader 는 아직 typescript:3.9 까지밖에    
+  (의존성 트리 이슈 -> typescript 를 다운 그래이드 하여 해결 )  
+  
+- 이슈, webpack-dev-server가 의존하는 파일이 webpack-cli 에 없음    
+   (webpack-cli 와 webpack-dev-server 버전 일치 )  
+  [Ref][https://velog.io/@adam2/webpack-dev-server-%ec%82%ac%ec%9a%a9%ed%95%98%ea%b8%b0%ec%82%bd%ec%a7%88%ed%9b%84%ea%b8%b0#webpack-dev-server%ec%9d%98-%eb%8f%99%ec%9e%91%ec%9b%90%eb%a6%ac]
+
+  <br/>

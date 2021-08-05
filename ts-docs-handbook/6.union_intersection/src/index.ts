@@ -1,6 +1,5 @@
 // 1 유니온 타입
 // string | number 의 유니온 타입 ( 합집합 )
-import { log } from "console";
 import "./test01";
 // Brid | Fish 의 유니온 타입 ( 교집합 )
 import "./test02";
