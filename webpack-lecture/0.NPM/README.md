@@ -49,37 +49,6 @@ case4 ) ^ 버전 명시 --- ✔ 지금 사용하는 방법
 - 패치 버전만 변경하면서 설치가 된다. (1.0 이하)  
 
 
-## 2. Webpack
-
-### 2.1 웹팩이 필요한 이유
-
-배경  
-- 모듈시스템이 없어서, 전역 변수들이 오염될 가능성이 있음  
-- 즉시실행함수를 이용해서 함수 스코프로 감싸 모듈을 만들었다.  
-
-### 👨‍💻 IIFE immidiately invoked function expression  
-- 실습  
-### 👨‍💻 es_module  
-- 실습  
-
-type = module 을 모든 브라우저가 지원하지 않기 때문에  
-웹팩을 통해 JS 을 번들링 한다.  
-
-### 2.2 
-
-webpack 실행하기  
-- npm install -D webpack webpack-cli  
-- 노드모듈스 폴더 안에 .bin 안에 실행파일들이 설치된다.  
-- CLI 명령어를 사용할 수 있게 된다.  
-
-webpack 옵션   
---mode development | prodcution | none  
---entry ./src/app.js
---output dist/main.js
-
-### 👨‍💻 3_webpack_cli
-npx webpack --mode development --entry ./src/app.js -o dist
-
 ## ref
 - 강의  
 https://www.inflearn.com/course/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/lecture/31727?tab=curriculum
