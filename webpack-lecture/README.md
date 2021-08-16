@@ -49,9 +49,9 @@ case4 ) ^ 버전 명시 --- ✔ 지금 사용하는 방법
 - 패치 버전만 변경하면서 설치가 된다. (1.0 이하)  
 
 
-## 2. Webpack
+# 2. Webpack
 
-### 2.1 웹팩이 필요한 이유
+## 2.1 웹팩이 필요한 이유
 
 배경  
 - 모듈시스템이 없어서, 전역 변수들이 오염될 가능성이 있음  
@@ -65,7 +65,7 @@ case4 ) ^ 버전 명시 --- ✔ 지금 사용하는 방법
 type = module 을 모든 브라우저가 지원하지 않기 때문에  
 웹팩을 통해 JS 을 번들링 한다.  
 
-### 2.2 
+## 2.2 엔트리,아웃풋
 
 webpack 실행하기  
 - npm install -D webpack webpack-cli  
@@ -80,9 +80,38 @@ webpack 옵션
 ### 👨‍💻 3_webpack_cli
 npx webpack --mode development --entry ./src/app.js -o dist
 
+
+### 👨‍💻 4_webpack_config  
+
+```js
+const path = require("path");
+
+module.exports = {
+  mode: "development",
+  entry: {
+    main: "./src/app.js", // entry point가 여러개일 수 있다.
+    main2: "./src/app2.js",
+  },
+  output: {
+    path: path.resolve("./dist"),
+    filename: "[name].js", // entry포인트가 여러개인 경우 name 변수를 동적으로 할당해준다.
+  },
+};
+// 실행 명령어
+// 1. npx webpack
+// script : "build":"webpack"
+```
+### 👨‍💻 4_webpack_config - 실습
+
+
+
+
 ## ref
 - 강의  
 https://www.inflearn.com/course/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/lecture/31727?tab=curriculum
 
 - 블로그  
 https://jeonghwan-kim.github.io/series/2019/12/09/frontend-dev-env-npm.html
+
+- 깃허브  
+https://github.com/jeonghwan-kim/lecture-frontend-dev-env
