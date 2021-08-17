@@ -80,7 +80,6 @@ webpack 옵션
 ### 👨‍💻 3_webpack_cli
 npx webpack --mode development --entry ./src/app.js -o dist
 
-
 ### 👨‍💻 4_webpack_config  
 
 ```js
@@ -105,6 +104,81 @@ module.exports = {
 
 
 
+## 2.3 로더
+
+로더의 역할  
+- 웹팩은 모든 파일을 모듈로 바라본다.  
+- JS,CSS,SCSS,Image,Font -> 전부 모듈이라 import 사용가능  
+- TS --- JS 변환, imgae --- data url 변환, CSS --- JS 로딩  
+
+### 👨‍💻 5_loader
+
+- eg) .js 파일의 console.log 를 alert 으로 바꾸자.  
+- my-webpack-loader.js  
+```js
+module.exports = function myWebpackLoader(content) {
+  console.log("mywebpackloader 동작");
+  //   return content;
+  return content.replace("console.log(", "alert(");
+};
+```
+- webpack.config.js
+```js
+  ...
+  // 로더를 실행시키는 규칙
+  module: {
+    rules: [{ test: /\.js$/, use: [path.resolve("./my-webpack-loader.js")] }],
+  },
+```
+
+## 2.4 CSS 로더  
+
+### css-loader , style-loader
+- CSS를 모듈로 바라보자.  
+>npm install css-loader  
+>npm install style-loader
+
+- css로더는 css파일을 JS안에 넣어줄 뿐  
+- style로더가 JS안의 CSS를 CSSOM으로 바꿔주어 브라우저에서 그리도록 한다.  
+- webpack.config.js  
+```js
+...
+  module: {
+    // use는 뒤에서부터 앞으로 처리된다.
+    rules: [{ test: /\.css$/, use: ["style-loader", "css-loader"] }],
+  },
+```
+
+### file-loader
+- CSS 안의 배경 등 파일들을 불러올때 file-loader가 필요하다.  
+```css
+body{
+    /* background-color: brown; */
+    background-image: url(bg.png);
+    width: 100vw;
+    height: 100vh;
+}
+```
+- webpack.config.js  
+```css
+    ...  {
+        //file-loader
+        // test: /\.png$/,
+        // use: ["file-loader"],
+
+        test: /\.png$/,
+        loader: "file-loader", // loader라고 불러도 된다.
+        options: {
+          publicPath: "./dist", // 경로 문제
+          name: "[name].[ext]?[hash]", // hash값을 주어,빌드시 캐시 무력화
+        },
+   ...   
+```
+
+
+### url-loader
+- 용량이 작은 파일은 네트워크 통신으로 가져오지 말고, dataURL스키마로 넣으면 어떻까?  
+- 이 기능을 해주는 것이 url loader 이다.  
 
 ## ref
 - 강의  
