@@ -1,3 +1,13 @@
+## ref
+- 강의  
+https://www.inflearn.com/course/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/lecture/31727?tab=curriculum
+
+- 블로그  
+https://jeonghwan-kim.github.io/series/2019/12/09/frontend-dev-env-npm.html
+
+- 깃허브  
+https://github.com/jeonghwan-kim/lecture-frontend-dev-env
+
 
 ## 1. NPM
 
@@ -6,7 +16,7 @@
 - Babel, Typescipt, SASS 사용하려면 트랜스 파일러 필요  
 
 - 2. 빌드 자동화
-- 파일 압축, 코드 난독화 등  
+- 파일 압축, 코드 난독화 등    
 
 - 3. 개발환경 커스터 마이징  
 - CRA 툴 있지만 각자의 사정에 맞는 환경에선 Node.js 지식이 필요  
@@ -56,6 +66,11 @@ case4 ) ^ 버전 명시 --- ✔ 지금 사용하는 방법
 배경  
 - 모듈시스템이 없어서, 전역 변수들이 오염될 가능성이 있음  
 - 즉시실행함수를 이용해서 함수 스코프로 감싸 모듈을 만들었다.  
+
+다양한 모듈 스펙  
+- CommonJS : exports 와 require 키워드로 사용 (Node.js)  
+- AMD : 비동기 환경 에서 모듈을 사용 (주로 브라우저)  
+- UMD : AMD기반 CommonJS까지 지원하는 환경     
 
 ### 👨‍💻 IIFE immidiately invoked function expression  
 - 실습  
@@ -179,13 +194,21 @@ body{
 ### url-loader
 - 용량이 작은 파일은 네트워크 통신으로 가져오지 말고, dataURL스키마로 넣으면 어떻까?  
 - 이 기능을 해주는 것이 url loader 이다.  
+- webpack.config.js  
 
-## ref
-- 강의  
-https://www.inflearn.com/course/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/lecture/31727?tab=curriculum
+```js
+    rules: [
+      {
+        test: /\.(png|jpg|jpge|svg|gif)$/,
+        loader: "url-loader",
+        options: {
+          publicPath: "./dist",
+          name: "[name].[ext]?[hash]",
+          limit: 20 * 1000, //20kb 미안의 파일은 base64인코딩을 한다. 그외는 file-loader가 실행
+        },
+      },
+    ],
+```
+결과 : 
+data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/...
 
-- 블로그  
-https://jeonghwan-kim.github.io/series/2019/12/09/frontend-dev-env-npm.html
-
-- 깃허브  
-https://github.com/jeonghwan-kim/lecture-frontend-dev-env

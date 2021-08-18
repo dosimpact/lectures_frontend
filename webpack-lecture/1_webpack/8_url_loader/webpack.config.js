@@ -17,15 +17,12 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        //file-loader
-        // test: /\.png$/,
-        // use: ["file-loader"],
-
-        test: /\.png$/,
-        loader: "file-loader", // loader라고 불러도 된다.
+        test: /\.(png|jpg|jpge|svg|gif)$/,
+        loader: "url-loader",
         options: {
-          publicPath: "./dist", // 경로 문제
-          name: "[name].[ext]?[hash]", // hash값을 주어,빌드시 캐시 무력화
+          publicPath: "./dist",
+          name: "[name].[ext]?[hash]",
+          limit: 20 * 1000, //20kb 미안의 파일은 base64인코딩을 한다. 그외는 file-loader가 실행
         },
       },
     ],
