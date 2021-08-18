@@ -9,6 +9,21 @@ https://jeonghwan-kim.github.io/series/2019/12/09/frontend-dev-env-npm.html
 https://github.com/jeonghwan-kim/lecture-frontend-dev-env
 
 
+## 주의
+- webpack 버전과 loader들의 버전을 직접 명세해서 설치하자.  
+- 버전 업으로 인한 argments는 나중에 조정해보자.  
+- 여러가지 로더들을 사용하니, 버전에 많이 민감함 편...  
+```js
+"devDependencies": {
+    "css-loader": "^3.4.1",
+    "file-loader": "^5.0.2",
+    "style-loader": "^1.1.2",
+    "url-loader": "^3.0.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+```
+
 ## 1. NPM
 
 ### 프론트 엔드 개발에 Nodejs가 필요한 이유
@@ -146,7 +161,7 @@ module.exports = function myWebpackLoader(content) {
   },
 ```
 
-## 2.4 CSS 로더  
+## 2.4 다양한 로더
 
 ### css-loader , style-loader
 - CSS를 모듈로 바라보자.  
@@ -212,3 +227,54 @@ body{
 결과 : 
 data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/...
 
+
+
+## 2.5 플러그인  
+
+로더 : 파일단위로 처리  
+플러그인 : 번들단위로 처리  
+- eg) JS 코드 난독화  
+- eg) 특정 텍스트 추출  
+
+
+### 커스텀 플러그인  
+
+파일 위에 번들 날짜를 추가하는 배너플러그인을 만들어 보자.  
+- my-webpack-plugin.js  
+- 로더와 다르게 클래스로 만들어서 넣는다.  
+```js
+class MyWebpackPlugin {
+  apply(compiler) {
+    // compiler.hooks.done 플러그인 실행 done 일때,
+    compiler.hooks.done.tap("My Plugin", (stats) => {
+      console.log("✔ MyPlugin: done");
+    });
+
+    // compiler.plugin() 함수로 후처리한다
+    compiler.plugin("emit", (compilation, callback) => {
+      const source = compilation.assets["main.js"].source();
+      compilation.assets["main.js"].source = () => {
+        const banner = [
+          "/**",
+          " * 이것은 BannerPlugin이 처리한 결과입니다.",
+          " * Build Date: 2021-08-18",
+          " */",
+        ].join("\n");
+        return banner + "\n" + source;
+      };
+      callback();
+    });
+  }
+}
+
+module.exports = MyWebpackPlugin;
+
+```
+
+- webpack.config.js  
+```js
+module.exports = {
+  ...
+  plugins: [new MyWebpackPlugin()],
+}
+```
