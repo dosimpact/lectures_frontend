@@ -1,0 +1,1 @@
+npx webpack --mode development --entry ./src/app.js -o dist/app.js

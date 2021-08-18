@@ -124,7 +124,7 @@ module.exports = {
 로더의 역할  
 - 웹팩은 모든 파일을 모듈로 바라본다.  
 - JS,CSS,SCSS,Image,Font -> 전부 모듈이라 import 사용가능  
-- TS --- JS 변환, imgae --- data url 변환, CSS --- JS 로딩  
+- TS --- JS 변환, image --- data url 변환, CSS --- JS 로딩  
 
 ### 👨‍💻 5_loader
 
