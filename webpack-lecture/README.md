@@ -278,3 +278,12 @@ module.exports = {
   plugins: [new MyWebpackPlugin()],
 }
 ```
+
+## 2.6 자주사용하는 플러그인  
+
+### 2.6.1 BannerPlugin  
+
+### 2.6.2 DefinePlugin
+### 2.6.3 HtmlWebpackPlugin
+### 2.6.4 CleanWebpackPlugin
+### 2.6.5 MiniCssExtractPlugin
