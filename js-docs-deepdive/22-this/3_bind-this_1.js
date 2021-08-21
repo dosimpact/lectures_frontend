@@ -31,7 +31,7 @@ var obj = {
 };
 obj.foo(); // 100
 
-// eg2) arrow functino
+// eg2) arrow function
 var value = 1;
 var obj = {
   value: 100,
