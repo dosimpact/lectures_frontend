@@ -1,6 +1,6 @@
 // ##  📌 this는 호출한 객체를 참조한다.
 
-// 누가 나를 불렀는가?
+// 누가 나를 불렀는가?( 어떤객체가 나를 불렀는가? )
 // 누가 = this
 
 // 🟢 (1) this 가 window(global)
@@ -29,11 +29,11 @@ console.log(circle.getRaius()); // undefined
 // 🟢 (3) this 가 인스턴스
 function Person(name) {
   this.name = name;
-  console.log(this); // Person { name: 'dodo' }
+  console.log(this);
 }
-new Person("dodo");
+new Person("dodo"); // Person { name: 'dodo' }
 
-// 🟢 (4) global 객체가 this되는건 의미가 없다.
+// 🟢 (4) (엄격모드) 일반함수에서 global 객체가 this되는건 의미가 없다.
 // - undefined 가 나온다.
 
 (function () {
