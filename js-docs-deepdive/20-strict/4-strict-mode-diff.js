@@ -1,3 +1,7 @@
+/**
+ * strict mode 적용에 의한 변화
+ */
+
 // 1. 일반함수의 this
 //     - 생성자 아니면 this는 undefined
 

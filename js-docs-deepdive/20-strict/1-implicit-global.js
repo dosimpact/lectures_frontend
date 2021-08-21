@@ -1,3 +1,6 @@
+/**
+ * implicit-global 암묵적 전역
+ */
 // "use strict";
 
 // x 변수는 foo 스코프에 없으면 referenceError가 나와야 하는데
