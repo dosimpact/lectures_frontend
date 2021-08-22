@@ -1,3 +1,7 @@
+/**
+ * strict mode 가 발생하시키는 애러
+ */
+
 // 1. implicit-global
 
 // (function foo() {
