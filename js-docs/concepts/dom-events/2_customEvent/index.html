@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+      <div id="container">
+        <input type="text" id="inputText" readonly />
+        <button type="button" id="btnMessage">Toggle Message</button>
+      </div>
+    <script>
+      const $container = document.querySelector("#container");
+      const $input = document.querySelector("#inputText");
+      const $btn = document.querySelector("#btnMessage");
+      const event = new CustomEvent("setDefaultMessage", {
+        detail: {
+          message: "sample message",
+        },
+        bubbles:true
+      });
+      $container.addEventListener("setDefaultMessage", function (e) {
+          console.log("bubbles:true",e.detail.message);
+      });
+      $input.addEventListener("setDefaultMessage", function (e) {
+          console.log(e);
+        $input.value = $input.value ? "" : e.detail.message;
+      });
+
+      $btn.addEventListener("click", function (e) {
+        $input.dispatchEvent(event);
+      });
+    </script>
+  </body>
+</html>
