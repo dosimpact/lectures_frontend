@@ -1,6 +1,6 @@
 [http://blog.hyeyoonjung.com/2019/01/09/intersectionobserver-tutorial/](http://blog.hyeyoonjung.com/2019/01/09/intersectionobserver-tutorial/)
 
-## IO알고리즘
+## IO 알고리즘
 
 - intersectionObserver 옵션과 함께 생성
 - 관찰할 엘리먼트 등록

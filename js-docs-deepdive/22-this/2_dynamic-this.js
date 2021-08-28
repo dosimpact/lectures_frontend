@@ -18,6 +18,7 @@ const circle = {
     return this.radius * 2;
   },
   getRaius: () => {
+    // ⚠️ 왜 안될까 ㅜ
     return this.radius;
   },
 };

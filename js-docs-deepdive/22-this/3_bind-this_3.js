@@ -33,7 +33,7 @@ std2.speak.bind(std1)("someone");
 // eg) 유사배열 arguments를 slice에 바인딩  - [ 1, 2, 3 ]
 function convertArgsToArray() {
   console.log(arguments);
-  // Arguments] { '0': 1, '1': 2, '2': 3 } <- ⚠️ 유사배열객체
+  // [Arguments] { '0': 1, '1': 2, '2': 3 } <- ⚠️ 유사배열객체
   return Array.prototype.slice.call(arguments);
 }
 console.log(convertArgsToArray(1, 2, 3));

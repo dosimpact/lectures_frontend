@@ -3,13 +3,14 @@
 // makerCounter마다 별개의 클로져를 만든다. ---> 수정
 // counter가 변수를 공유하도록
 
-const counter = (function () {
+const counter = (() => {
   let counter = 2;
-  return function (predicate) {
+  return (predicate) => {
     counter = predicate(counter);
     return counter;
   };
-})();
+})(); // IIFE
+
 const double = (n) => n * n;
 const ddouble = (n) => n * n * n;
 

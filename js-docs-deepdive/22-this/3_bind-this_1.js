@@ -4,6 +4,7 @@
 // 3. 화살표 함수 이용 (상위 스코프의 this를 가르킨다.(호출객체가 아닌))
 
 // eg1) this - that 전달
+// bind 함수 없이 this를 설정하기
 var value = 1;
 var obj = {
   value: 100,
