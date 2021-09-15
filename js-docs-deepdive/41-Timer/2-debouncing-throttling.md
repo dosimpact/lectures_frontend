@@ -49,3 +49,68 @@ document.querySelector("#input").addEventListener("input", function (e) {
   }
 });
 ```
+
+## 클로저 버전의 디바운스, 쓰로틀링 구현 (브라우저)
+
+```ts
+export const throttling = (cb: Function, ms: number) => {
+  // ✅ 타이머 자유 변수 설정
+  let timer: number | null = null;
+
+  return (e: any) => {
+    // ✅ 타이머가 없는경우만 실행시킨다. 그외 이벤트는 무시
+    if (!timer) {
+      timer = window.setTimeout(() => {
+        timer = null;
+        if (cb) {
+          cb(e);
+        }
+      }, ms);
+    }
+  };
+};
+// cb는 input element에 거는 핸들러 함수라고 가정하자.
+// onChange = {(e)=>{}} 에서 cb는 (e)=>{} 가 된다.
+// 이를 디바운싱 미들웨어 같은? 함수로 감싸보자.
+export const debouncing = (cb: Function, ms: number) => {
+  // ✅ 타이머 자유 변수 설정
+  let timer: number | null = null;
+
+  // e는 이벤트 객체이다.
+  return (e: any) => {
+    // ✅ 타이머가 있는 경우 초기화 하여
+    if (timer) {
+      clearTimeout(timer);
+    }
+    // ✅ 타이머 + 콜백함수를 준비한다.
+    timer = window.setTimeout(() => {
+      timer = null;
+      // 원래 부르려고 했던 함수를 불러주자
+      if (cb) {
+        cb(e);
+      }
+    }, ms);
+  };
+};
+```
+
+```tsx
+<input
+  className="tickerInput"
+  type="text"
+  placeholder="코드,기업명을 입력해주세요"
+  autoComplete="off"
+  {...register("term", { required: true })}
+  // ✅ onChange에 디바운스 적용
+  onChange={debouncing((e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue("term", e.target.value);
+  }, 100)}
+  // ✅ onKeyDown에 디바운스 적용
+  onKeyDown={debouncing((e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && onKeyDownEnter) {
+      onKeyDownEnter(e);
+      setValue("term", "");
+    }
+  }, 100)}
+></input>
+```
