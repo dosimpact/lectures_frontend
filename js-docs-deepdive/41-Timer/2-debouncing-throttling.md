@@ -1,3 +1,5 @@
+## 41.3 디바운스와 스로틀
+
 ## ref
 
 [https://www.zerocho.com/category/JavaScript/post/59a8e9cb15ac0000182794fa](https://www.zerocho.com/category/JavaScript/post/59a8e9cb15ac0000182794fa)
