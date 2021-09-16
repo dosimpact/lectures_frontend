@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="button3">ClickMe3</button>
+    <script>
+        const $button3 = document.querySelector("#button3")
+        const handleClick = function(){
+            console.log("clicked button3");
+        }
+        $button3.addEventListener("click",handleClick) 
+        // ✅ 익명함수를 등록하면 제거할 방법이 없다.
+        $button3.addEventListener("click",function(){
+            console.log("button3 ~ ✔");
+        }) 
+        // ✅ 이벤트 제거
+        // 이벤트 캡처링 리스너로 등록되어 있다면 , option=true 인자까지 전달해야, 제거가된다. 
+        // -- 이벤트 제거 실패
+        $button3.removeEventListener("click",handleClick,true)
+        // -- 이벤트 제거 성공
+        $button3.removeEventListener("click",handleClick)
+
+        // ❌ 익명함수 이벤트를 삭제하는 방법 - 생성과 동시에 삭제해야함(1회성)
+        // -- strict mode에서 arguments.callee 사용이 금지 되므로 하지 말자
+        $button3.addEventListener("click",function(){
+            console.log("✨ 단한번만 발생하는 이벤트 ~ ✔");
+            $button3.removeEventListener("click",arguments.callee)
+        }) 
+
+    </script>
+
+</body>
+</html>

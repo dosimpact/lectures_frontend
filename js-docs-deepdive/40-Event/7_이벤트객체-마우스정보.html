@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 50px;
+        height: 50px;
+        background-color: yellowgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <script>
+      // ✅ 이벤트 객체의 프로퍼티 - 마우스 정보
+
+      // MouseEvent 타입의 이벤트 객체는 마우스에 대한 고유 정보를 갖는다.
+      // - 마우스 포인터 좌표 정보
+      // - 버튼 정보
+
+      // eg) 박스 요소를 드래그 하는 example
+      // 알고리즘 
+      // event : box 요소를 마우스 다운 
+      // -- move 이벤트 작동
+      // event : window에서 마우스 업
+      // -- move 이벤트 중단
+      const $box = document.querySelector(".box");
+      const offset = {x:0,y:0} // 박스위치 (기준점은 좌-상 점)
+      const inBoxOffset = { x: 0, y: 0 }; // offset기준점이 좌상Point이므로
+      // ✅ 박스 내부를 클릭한경우 , 박스의 기준점  ~ 마우스 위치의 거리를 기록해야함
+      // - 박스와 마우스 포인터의 상대위치라고 볼 수 있음 
+      const move = (e)=>{
+        // 이 경우에는 박스이동이 부자연 스러움 
+        // offset.x = e.clientX 
+        // offset.y = e.clientY
+        
+        // 박스절대위치 - (박스-마우스 상대위치) 조정
+        offset.x = e.clientX  - inBoxOffset.x;
+        offset.y = e.clientY - inBoxOffset.y;
+        $box.style.transform = `translate3d(${offset.x}px,${offset.y}px,0)`;
+      }
+
+      $box.addEventListener("mousedown", (e) => {
+        // ✔ 박스와 마우스의 상대 위치
+        inBoxOffset.x = e.clientX - offset.x;
+        inBoxOffset.y = e.clientY - offset.y;
+
+        document.addEventListener('mousemove',move)
+      });
+
+      document.addEventListener("mouseup",()=>{
+        document.removeEventListener('mousemove',move)
+      })
+
+    </script>
+  </body>
+</html>
