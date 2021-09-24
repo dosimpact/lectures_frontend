@@ -1,40 +1,13 @@
 ## 01 install
 
-- npm i jest
-- script "jest":"jest"
+Javascript 주요 테스팅 라이브러리
 
-```js
-const add = (a, b) => a + b;
+- Jest, Cypress, Storybook, Puppeteer, Mocha, Enzyme, Jasmine
 
-// export func
-module.exports = { add };
+Jest 설치하기
 
-// export default func
-// module.exports = add;
-```
-
-- fn.test.js;
-- name convention
-
-```js
-// import { add } from ""
-const { add } = require("./fn");
-
-// import adder from ""
-// const adder = require("./fn");
-
-test("should one", () => {
-  expect(1).toBe(1);
-});
-
-test("should 1+1", () => {
-  expect(add(1, 1)).toBe(2);
-});
-
-test("should 2+3", () => {
-  expect(add(2, 3)).toBe(5);
-});
-```
+- npm i jest -D
+- script "test":"jest"
 
 ## 02
 
