@@ -1,5 +1,7 @@
 const path = require("path");
-const MyWebpackPlugin = require("./my-webpack-plugin");
+const webpack = require("webpack");
+const childProcess = require("child_process");
+const banner = require("./banner");
 
 module.exports = {
   mode: "development",
@@ -28,5 +30,16 @@ module.exports = {
       },
     ],
   },
-  plugins: [new MyWebpackPlugin()],
+  plugins: [
+    // ✅ 웹팩은 BannerPlugin 기본 제공
+    new webpack.BannerPlugin({
+      banner: () => `
+      Build Date: ${new Date().toLocaleString()}
+      Commit Version: ${childProcess.execSync("git rev-parse --short HEAD")}
+      Author: ${childProcess.execSync("git config user.name")}
+      `,
+    }),
+    // ✅ 배너 함수를 따로 빼도 좋다.
+    // new webpack.BannerPlugin(banner),
+  ],
 };

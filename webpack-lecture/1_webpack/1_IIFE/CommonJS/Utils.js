@@ -1,3 +1,4 @@
+// ✅ module.exports 사용
 module.exports = {
   util01: function () {
     console.log("util01 is excuted!");
