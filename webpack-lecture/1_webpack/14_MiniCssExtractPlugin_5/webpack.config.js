@@ -2,6 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 const banner = require("./banner");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "development",
@@ -17,7 +18,12 @@ module.exports = {
       {
         // css,style-loader
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [
+          process.env.NODE_ENV === "production"
+            ? MiniCssExtractPlugin.loader // 프로덕션 환경
+            : "style-loader", // 개발 환경
+          "css-loader",
+        ],
       },
       {
         test: /\.(png|jpg|jpge|svg|gif)$/,
@@ -63,6 +69,9 @@ module.exports = {
               removeComments: true, // 주석 제거
             },
     }),
+    ...(process.env.NODE_ENV === "production"
+      ? [new MiniCssExtractPlugin({ filename: `[name].css` })]
+      : []),
   ],
 };
 // ✅ window 에서는 cross-env모듈을 이용해서 NODE_ENV을 주자

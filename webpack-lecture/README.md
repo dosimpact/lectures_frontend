@@ -14,14 +14,34 @@ https://github.com/jeonghwan-kim/lecture-frontend-dev-env
 - 버전 업으로 인한 argments는 나중에 조정해보자.  
 - 여러가지 로더들을 사용하니, 버전에 많이 민감함 편...  
 ```js
-"devDependencies": {
+  {
+  "name": "1.webpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cross-env NODE_ENV=production webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cross-env": "^7.0.3"
+  },
+  "devDependencies": {
     "css-loader": "^3.4.1",
     "file-loader": "^5.0.2",
     "style-loader": "^1.1.2",
+    "html-webpack-plugin": "^3.2.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "mini-css-extract-plugin": "^0.9.0",
     "url-loader": "^3.0.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
-  },
+  }
+}
+
 ```
 
 ## 1. NPM
@@ -314,9 +334,8 @@ module.exports = {
     // new webpack.BannerPlugin(banner),
   ],
 };
-
-
 ```
+
 ### 2.6.2 DefinePlugin
 
 베포환경에 따라서 env가 달라진다. 이런 환경변수를 DefinePlugin을 통해 주입
@@ -324,50 +343,15 @@ module.exports = {
 기본으로 제공해주는 env가 process.env.NODE_ENV 이다.
 - webpack의 mode에 따라서 NODE_ENV 값이 달라진다.
 
-```
+```js
 const path = require("path");
 const webpack = require("webpack");
 const childProcess = require("child_process");
 const banner = require("./banner");
 
 module.exports = {
-  mode: "development",
-  entry: {
-    main: "./src/app.js",
-  },
-  output: {
-    path: path.resolve("./dist"),
-    filename: "[name].js",
-  },
-  module: {
-    rules: [
-      {
-        // css,style-loader
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.(png|jpg|jpge|svg|gif)$/,
-        loader: "url-loader",
-        options: {
-          publicPath: "./dist",
-          name: "[name].[ext]?[hash]",
-          limit: 20 * 1000, //20kb 미안의 파일은 base64인코딩을 한다. 그외는 file-loader가 실행
-        },
-      },
-    ],
-  },
+  
   plugins: [
-    // ✅ 웹팩은 BannerPlugin 기본 제공
-    // new webpack.BannerPlugin({
-    //   banner: () => `
-    //   Build Date: ${new Date().toLocaleString()}
-    //   Commit Version: ${childProcess.execSync("git rev-parse --short HEAD")}
-    //   Author: ${childProcess.execSync("git config user.name")}
-    //   `,
-    // }),
-    // ✅ 배너 함수를 따로 빼도 좋다.
-    new webpack.BannerPlugin(banner),
     // ✅ env 등 상수를 정의해주는 플러그 인이다.
     new webpack.DefinePlugin({
       TWO: "1+1", // 값을 리턴
@@ -384,8 +368,8 @@ console.log(process.env.TWO);
 console.log(TWO);
 console.log(TRHEE);
 console.log(api.domain);
-
 ```
+
 ### 2.6.3 HtmlWebpackPlugin
 
 
@@ -398,57 +382,17 @@ eg)
 - 1) src로 옮겨진 index.html > dist로 빌드된 index.html
 - * 자동으로 main.js가 추가된것을 확인
 - 2) templateParameters 넣어보기
-- 3) minify 옵션으로, html의 주석을 제거, 공백을 제거
-```
+- 3) minify 옵션으로, html의 주석을 제거, 공백을 제거3
+
+
+```js
 const path = require("path");
 const webpack = require("webpack");
 const banner = require("./banner");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  mode: "development",
-  entry: {
-    main: "./src/app.js",
-  },
-  output: {
-    path: path.resolve("./dist"),
-    filename: "[name].js",
-  },
-  module: {
-    rules: [
-      {
-        // css,style-loader
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.(png|jpg|jpge|svg|gif)$/,
-        loader: "url-loader",
-        options: {
-          // publicPath: "./dist",
-          name: "[name].[ext]?[hash]",
-          limit: 20 * 1000, //20kb 미안의 파일은 base64인코딩을 한다. 그외는 file-loader가 실행
-        },
-      },
-    ],
-  },
   plugins: [
-    // ✅ 웹팩은 BannerPlugin 기본 제공
-    // new webpack.BannerPlugin({
-    //   banner: () => `
-    //   Build Date: ${new Date().toLocaleString()}
-    //   Commit Version: ${childProcess.execSync("git rev-parse --short HEAD")}
-    //   Author: ${childProcess.execSync("git config user.name")}
-    //   `,
-    // }),
-    // ✅ 배너 함수를 따로 빼도 좋다.
-    new webpack.BannerPlugin(banner),
-    // ✅ env 등 상수를 정의해주는 플러그 인이다.
-    new webpack.DefinePlugin({
-      TWO: "1+1", // 값을 리턴
-      TRHEE: JSON.stringify("1+2"), //문자열 자체를 리턴
-      "api.domain": JSON.stringify("http://dev.api.domain.com"), //객체도 OK
-    }),
     // ✅ script:src="main.js" 을 자동으로 넣어준다.
     new HtmlWebpackPlugin({
       template: "./src/index.html", // 템플릿 경로를 지정
@@ -472,7 +416,8 @@ module.exports = {
 //npx cross-env NODE_ENV=development npm run build
 
 ```
-```
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -488,6 +433,7 @@ module.exports = {
 </body>
 </html>
 ```
+
 ### 2.6.4 CleanWebpackPlugin
 
 이전 빌드 결과물을 제거하는 플러그인
@@ -504,3 +450,35 @@ module.exports = {
 
 스타일 시트가 많아지면 하나의 JS로 만드는게 부담이 된다.
 - CSS 파일을 분리해서 JS,CSS 파일 각각 하나로 만들자
+
+$ npm install -D mini-css-extract-plugin
+
+webpack.config.js:
+```js
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+
+module.exports = {
+  plugins: [
+    ...(process.env.NODE_ENV === "production"
+      ? [new MiniCssExtractPlugin({ filename: `[name].css` })]
+      : []),
+  ],
+}
+---
+// 프로덕션 환경에서는 별도의 CSS 파일으로 추출하는 플러그인을 적용했으므로 다른 로더가 필요
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          process.env.NODE_ENV === "production"
+            ? MiniCssExtractPlugin.loader // 프로덕션 환경
+            : "style-loader", // 개발 환경
+          "css-loader",
+        ],
+      },
+    ],
+  },
+}
+```
