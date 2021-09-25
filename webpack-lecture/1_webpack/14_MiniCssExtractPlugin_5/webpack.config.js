@@ -2,6 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 const banner = require("./banner");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
@@ -69,6 +70,7 @@ module.exports = {
               removeComments: true, // 주석 제거
             },
     }),
+    new CleanWebpackPlugin(),
     ...(process.env.NODE_ENV === "production"
       ? [new MiniCssExtractPlugin({ filename: `[name].css` })]
       : []),
