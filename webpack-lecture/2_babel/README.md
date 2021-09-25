@@ -141,3 +141,81 @@ module.exports = {
 }
 ```
 👨‍💻 03_babel_preset
+
+
+## env target 설정과 폴리필
+
+### env target 설정
+
+```js
+// babel.config.js :
+module.exports = {
+  presets: [
+    [
+      "@babel/preset-env",
+      {
+        targets: {
+          chrome: "79", 
+          ie: "11", // ie 11까지 지원하는 코드를 만든다
+        },
+      },
+    ],
+  ],
+}
+```
+### 폴리필 설정
+
+```js
+// babel.config.js:
+module.exports = {
+  presets: [
+    [
+      "@babel/preset-env",
+      {
+        useBuiltIns: "usage", // 폴리필 사용 방식 지정
+        corejs: {
+          // 폴리필 버전 지정
+          version: 2,
+        },
+      },
+    ],
+  ],
+}
+```
+
+## 웹팩으로의 통합 - 바벨
+
+babel.config.js 을 바벨로더가 인식하니 웹팩에다 설정을 구지 안해도 된다.  
+
+>npm install -D babel-loader
+>npm i core-js@2
+
+```js
+// webpack.config.js:
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "babel-loader", // 바벨 로더를 추가한다
+      },
+    ],
+  },
+}
+```
+
+```
+// npm i core-js@2 설치가 없다면 나오는 애러
+
+ERROR in ./app.js
+Module not found: Error: Can't resolve 'core-js/modules/es6.object.to-string.js' in 'D:\Lecture\ts\lectures_js-es6-ts_02\webpack-lecture\2_babel\05_webpack_babel'
+ @ ./app.js 1:0-49
+
+ERROR in ./app.js
+Module not found: Error: Can't resolve 'core-js/modules/es6.promise.js' in 'D:\Lecture\ts\lectures_js-es6-ts_02\webpack-lecture\2_babel\05_webpack_babel'
+ @ ./app.js 2:0-40
+```
+
+
+👨‍💻 05_webpack_babel
