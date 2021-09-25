@@ -8,3 +8,7 @@ Jest 설치하기
 
 - npm i jest -D
 - script "test":"jest"
+
+Jest 실행하기
+
+- npx jest
