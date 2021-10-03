@@ -1,0 +1,22 @@
+{
+  "name": "tdd-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest --runInBand --detectOpenHandles",
+    "start:dev":"node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.3"
+  },
+  "devDependencies": {
+    "jest": "^26.4.2",
+    "node-mocks-http": "^1.9.0",
+    "supertest": "^4.0.2"
+  }
+}
