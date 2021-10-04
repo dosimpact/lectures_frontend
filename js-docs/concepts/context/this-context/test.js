@@ -1,14 +1,11 @@
-function foo3() {
-  return {
-    first: "hyojin",
-    last: "lee",
-    asyncFn: function () {
-      console.log(this); // {first: "hyojin", last: "lee", setTimeFunc: ƒ}
-      setTimeout(() => {
-        console.log(this.first);
-      }, 100);
-    },
+class Parent {
+  getName = () => {
+    console.log("my name is 심재철");
   };
 }
-let bar3 = foo3();
-bar3.asyncFn(); // hyojin
+class Child extends Parent {
+  getName() {
+    console.log("my name is 자식");
+  }
+}
+new Child().getName();

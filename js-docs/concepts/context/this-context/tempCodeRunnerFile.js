@@ -1,10 +1,10 @@
-function foo2() {
-  setTimeout(() => {
-    console.log(this.a);
-  }, 100);
+class Parent {
+  getName = () => {
+    console.log("my name is 심재철");
+  };
 }
-let obj = {
-  a: 20,
-};
-foo2.call(obj);
-foo2.call({ a: 30 });
+class Child extends Parent {
+  getName() {
+    console.log("my name is 자식");
+  }
+}

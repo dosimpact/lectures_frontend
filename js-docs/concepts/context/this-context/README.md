@@ -1,6 +1,6 @@
 # this가 바인딩 되는 5가지 규칙
 
-## 1. case 객체의 매서드를 호출할때 
+## 1. 객체의 매서드를 호출할때 
 // ✅ case1. 객체의 매서드를 호출할때, 타 객체의 메서드를 가져와 호출할때
 // ✅ case2. 객체에 함수를 붙이고 때기
 // ✅ case3. 객체 메서드에서 내부 함수가 호출되는 경우
@@ -22,12 +22,18 @@
 
 ## 5.  화살표 함수( Arrow Function )에서의 this 바인딩
 // ✅ case1. 화살표 함수의 정적 this 바인딩, 달라지는 외부 this 환경
-// ✅ case1.2 setTimeout 함수와 화살표 함수
+// ✅ case1.2  setTimeout 함수와 화살표 함수
 // ✅ case1.3  setTimeout 함수와 화살표 함수 - 2
+
+// ✅ case2 매서드로 화살표함수를 쓰는 경우
+// ✅ case3 클래스안에서 일반함수+bind vs 화살표함수
+// ✅ case4 클래스안에서 화살표함수를 매서드로 쓸 때 문제점1,2,3
 
 ## ref
 https://hyojin96.tistory.com/entry/객체의-메서드를-호출할-때-this?category=846712
-
+https://bluayer.com/25
+https://simsimjae.tistory.com/452
+https://hoilzz.github.io/javascript/arrow-functions-in-class-properties/
 
 ## 질의 응답 
 
@@ -36,7 +42,7 @@ https://hyojin96.tistory.com/entry/객체의-메서드를-호출할-때-this?cat
 ```js
 const obj1 = {
   name: "dodo",
-  say: function () {
+  sayName: function () {
     console.log(`my name : ${this.name}`);
   },
 };
@@ -48,6 +54,10 @@ console.log(obj1.sayName());
 obj2.sayName = obj1.sayName;
 console.log(obj2.sayName());
 ```
+
+
+- ANS
+
 ```
 my name : dodo
 my name : nana
@@ -73,6 +83,8 @@ obj1.speak = speak;
 obj1.speak();
 speak.call(obj2);
 ```
+
+- ANS
 ```
 [dodo] is speaking...
 [nana] is speaking...
@@ -94,6 +106,8 @@ const obj1 = {
 
 obj1.sayName();
 ```
+
+- ANS
 ```
 my name : dodo
 my age : undefined
@@ -116,6 +130,8 @@ const obj1 = {
 
 obj1.sayName();
 ```
+
+- ANS
 ```
 my name : dodo
 my age : 12
@@ -144,6 +160,8 @@ var obj = {
 obj.func1();
 
 ```
+
+- ANS
 ```
 2
 101
@@ -181,6 +199,8 @@ var obj = {
 obj.func1();
 
 ```
+
+- ANS
 ```
 2
 3
@@ -199,6 +219,8 @@ function Person(name, age = 20) {
 const p1 = new Person("dodo");
 console.log(p1);
 ```
+
+- ANS
 ```
 Person { name: 'dodo', age: 20 }
 hacked
@@ -217,6 +239,7 @@ console.dir(foo);
 
 ```
 
+- ANS
 ```
 { name: 'foo', age: 25 }
 ```
@@ -231,6 +254,8 @@ function func() {
 
 func(1, 2, 3);
 ```
+
+- ANS
 ```
 [Arguments] { '0': 1, '1': 2, '2': 3 }
 [ 2, 3 ]
@@ -249,6 +274,8 @@ say.apply(foo2, ["Hello!", "What are you doing?"]);
 say.call(foo2, "Hi!", "How old are you?"); 
 
 ```
+
+- ANS
 ```
 // Hello! hyojin What are you doing?
 // Hi! hyojin How old are you?
@@ -267,6 +294,7 @@ let bar3 = say.bind(foo);
 bar3("Hello!", "Nice to meet you"); 
 ```
 
+- ANS
 ```
 Hello! foo Nice to meet you
 ```
@@ -285,6 +313,8 @@ setTimeout(obj.hello, 100);
 setTimeout(obj.hello.bind(obj), 100); 
 name = "global context";
 ```
+
+- ANS
 ```
 hyojin
 global context(undefined)
@@ -309,6 +339,8 @@ foo.call(obj2)();
 let bar = foo.call(obj1);
 bar.call(obj2); 
 ```
+
+- ANS
 ```
 2
 3
@@ -328,10 +360,13 @@ let obj = {
 foo2.call(obj); 
 foo2.call({ a: 30 }); 
 ```
+
+- ANS
 ```
 20
 30
 ```
+
 ```js
 function foo3() {
   return {
@@ -348,6 +383,8 @@ function foo3() {
 let bar3 = foo3();
 bar3.asyncFn(); 
 ```
+
+- ANS
 ```
 { first: 'hyojin', last: 'lee', asyncFn: [Function: asyncFn] }
 hyojin
