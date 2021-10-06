@@ -8,7 +8,7 @@
 
 const circle = {
   radius: 5,
-  // ✅  화살표함수는 이럴때 사용하는것이 아님!
+  // ✅  화살표함수는 매서드로 사용하면 안된다.
   getDiameter: () => {
     // circle.radius
     return this.radius * 2;
@@ -24,3 +24,9 @@ console.log(circle);
 console.log(circle.getDiameter()); //NaN
 console.log(circle.getArea()); //15.7
 console.log(circle.getPerimeter()); // 31.4
+// ✅ ## 19.2 상속과 프로토 타입
+
+function Circle(radius) {
+  this.radius = radius;
+  this.getArea = function () {};
+}
