@@ -5,6 +5,11 @@
 // describe,test
 
 `
+규칙 - before/after-All은 Each를 감싼다.
+규칙 - outterEach는 innerEach를 감싼다.
+순서 - beforeAll(Outter) - beforeAll(inner) - * -  afterAll(inner) - afterAll(Outter)
+* = beforeEach(Outter) - beforeEach(inner) - test -  afterEach(inner) - afterEach(Outter)
+
 beforeAll (Outter)
     -- describe
     ---- beforeAll()
@@ -13,7 +18,7 @@ beforeAll (Outter)
           test()
     ---- afterEach()
 - afterEach (Outter)
-    ---- beforeAll()
+    ---- afterAll()
 afterAll (Outter)
 `;
 beforeAll(() => {
@@ -30,9 +35,9 @@ afterEach(() => {
   console.log("outter afterEach");
 });
 
-test(`test start`, () => {
-  expect(0).toBe(0);
-});
+// test(`test start`, () => {
+//   expect(0).toBe(0);
+// });
 
 describe("inner test", () => {
   let counter = 0;
@@ -59,8 +64,8 @@ describe("inner test", () => {
     expect(0).toBe(0);
     console.log("counter", counter);
   });
-  test(`inner test #${counter}`, () => {
-    expect(0).toBe(0);
-    console.log("counter", counter);
-  });
+  // test(`inner test #${counter}`, () => {
+  //   expect(0).toBe(0);
+  //   console.log("counter", counter);
+  // });
 });
