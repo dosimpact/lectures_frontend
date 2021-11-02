@@ -1,0 +1,12 @@
+{
+  "name": "designPatterns",
+  "version": "1.0.0",
+  "description": "1. Creational Design Pattern\r - Constructor\r - Factory\r - Abstract Factory\r - Prototype\r - Singleton\r - Builder",
+  "main": "01.test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

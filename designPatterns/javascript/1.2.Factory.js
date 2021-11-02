@@ -5,7 +5,7 @@
 
 // ✅ example) 자동차 팩토리
 
-// 자동차 만드는 생성자 함수
+// 자동차 만드는 생성자 함수 (IIFE 형태로 만들어도 된다.)
 function Car(options) {
   // some defaults
   this.doors = options.doors || 4;
@@ -82,8 +82,8 @@ console.log(movingTruck);
 // - 트럭생성을 기본값으로 하는 팩토리 상속하기
 
 function TruckFactory() {}
-TruckFactory.prototype = new VehicleFactory();
-TruckFactory.prototype.vehicleClass = Truck;
+TruckFactory.prototype = new VehicleFactory(); // extends
+TruckFactory.prototype.vehicleClass = Truck; // override
 
 var truckFactory = new TruckFactory();
 var myBigTruck = truckFactory.createVehicle({
