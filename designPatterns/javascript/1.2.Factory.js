@@ -28,19 +28,35 @@ const Truck = (function () {
 const VehicleFactory = (function () {
   // 팩토리 생성자 매서드, 뼈대 만들기
   function VehicleFactory() {}
-  // 기본 리턴 타입은 Car 이다.
+  // 기본 리턴 타입은 Car 이다. // ✅ 프로토타입객체안에 있고 변하지 않는다.
   VehicleFactory.prototype.vehicleClass = Car;
   // createVehicle는 type에 맞는 생성자 함수를 고른다.
   VehicleFactory.prototype.createVehicle = function (options) {
+    console.log(
+      options.vehicleType,
+      "this.vehicleClass",
+      this.vehicleClass,
+      VehicleFactory.prototype.vehicleClass,
+      this.vehicleClass === VehicleFactory.prototype.vehicleClass
+    );
     switch (options.vehicleType) {
       case "car":
+        //✅ this키워드를 쓴 순간, 인스턴스의 vehicleClass이 변한다. (prototype.vehicleClass이 아닌!)
         this.vehicleClass = Car;
         break;
       case "truck":
+        //✅ this키워드를 쓴 순간, 인스턴스의 vehicleClass이 변한다.
         this.vehicleClass = Truck;
         break;
       //defaults to VehicleFactory.prototype.vehicleClass (Car)
     }
+    console.log(
+      options.vehicleType,
+      "this.vehicleClass",
+      this.vehicleClass,
+      VehicleFactory.prototype.vehicleClass,
+      this.vehicleClass === VehicleFactory.prototype.vehicleClass
+    );
     return new this.vehicleClass(options);
   };
   return VehicleFactory;
@@ -83,6 +99,9 @@ console.log(movingTruck);
 
 function TruckFactory() {}
 TruckFactory.prototype = new VehicleFactory(); // extends
+
+// ✅ 아니 이게 왜 오버라이드가 되지?
+// this체인이 프로토타입까지도 뒤지는건가?
 TruckFactory.prototype.vehicleClass = Truck; // override
 
 var truckFactory = new TruckFactory();
