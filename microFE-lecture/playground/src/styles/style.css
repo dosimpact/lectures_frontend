@@ -1,0 +1,12 @@
+body {
+  background-color: antiquewhite;
+}
+.background {
+  background-image: url(../asset/bg.png);
+  width: 500px;
+  height: 500px;
+  background-size: cover;
+}
+h2 {
+  color: blue;
+}

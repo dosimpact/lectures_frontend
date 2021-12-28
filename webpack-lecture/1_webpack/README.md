@@ -9,7 +9,7 @@ https://jeonghwan-kim.github.io/series/2019/12/09/frontend-dev-env-npm.html
 https://github.com/jeonghwan-kim/lecture-frontend-dev-env
 
 
-## 주의
+## 주의(먼저 알아두기)  
 - webpack 버전과 loader들의 버전을 직접 명세해서 설치하자.  
 - 버전 업으로 인한 argments는 나중에 조정해보자.  
 - 여러가지 로더들을 사용하니, 버전에 많이 민감함 편...  
@@ -50,6 +50,8 @@ https://github.com/jeonghwan-kim/lecture-frontend-dev-env
 
 ### 👨‍💻 1_IIFE immidiately invoked function expression  
 - 실습  
+- IIFE 모듈 , exports, module,exports, ES6 모듈
+
 ### 👨‍💻 2_es_module  
 - 실습  
 
@@ -73,6 +75,8 @@ npx webpack --mode development --entry ./src/app.js -o dist
 
 ### 👨‍💻 4_webpack_config  
 
+- default entry는 ./src/index.js 을 바로본다.
+
 ```js
 const path = require("path");
 
@@ -93,7 +97,7 @@ module.exports = {
 ```
 ### 👨‍💻 4_webpack_config - 실습
 
-
+---
 
 ## 2.3 로더
 
@@ -127,13 +131,20 @@ module.exports = function myWebpackLoader(content) {
 
 ## 2.4 다양한 로더
 
-### css-loader , style-loader
-- CSS를 모듈로 바라보자.  
->npm install css-loader  
->npm install style-loader
+### css-loader , style-loader 
+- CSS를 모듈로 바라보자.   
+>npm install css-loader    
+>npm install style-loader  
+
+	link:css 로딩 처리 , css 파일을  js 코드로 변경
+style-loader 
+	CSS Render, js로 변경된 css 내용을 동적으로 DOM에 추가, 
+**따라서 css를 번들링하기 위해서는 css-loader, style-loader를 함께 사용함
 
 - css-로더는 css파일을 JS안에 넣어줄 뿐  
 - style-로더가 JS안의 CSS를 CSSOM으로 바꿔주어 브라우저에서 그리도록 한다.  
+- 배열로 설정하면 뒤에서부터 앞으로 순서대로 로더가 동작
+
 - webpack.config.js  
 ```js
 ...
@@ -143,8 +154,11 @@ module.exports = function myWebpackLoader(content) {
   },
 ```
 
-### file-loader
-- CSS 안의 배경 등 파일들을 불러올때 file-loader가 필요하다.  
+### file-loader   
+
+- 참고) 웹팩5에서는 Asset 모듈로 마이그레이션 - https://webpack.js.org/guides/asset-modules/  
+- CSS 안의 배경 등 파일들을 불러올때 file-loader가 필요하다.    
+
 ```css
 body{
     /* background-color: brown; */
@@ -153,7 +167,9 @@ body{
     height: 100vh;
 }
 ```
+
 - webpack.config.js  
+
 ```css
     ...  {
         //file-loader

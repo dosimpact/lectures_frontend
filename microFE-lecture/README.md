@@ -11,6 +11,8 @@ npm install faker@5.1.0
 
 npm install -D webpack webpack-cli webpack-dev-server  
 npm install -D html-webpack-plugin
+npm install -D css-loader style-loader file-loader url-loader
+
 npm install faker
 
 ```
