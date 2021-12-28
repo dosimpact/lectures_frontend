@@ -13,6 +13,8 @@ https://github.com/jeonghwan-kim/lecture-frontend-dev-env
 - webpack 버전과 loader들의 버전을 직접 명세해서 설치하자.  
 - 버전 업으로 인한 argments는 나중에 조정해보자.  
 - 여러가지 로더들을 사용하니, 버전에 많이 민감함 편...  
+- 심지어 오류도 제대로 안나온다.  
+
 ```js
   "devDependencies": {
     "cross-env": "^7.0.3",
