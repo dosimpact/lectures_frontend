@@ -577,9 +577,374 @@ Call Tree : JS 실행 - 위에서부터 보여줌
 
 [ 도구 ]
 
-- [ ] Network, Performance, Lighthouse, Coverage 탭
-      Coverage 은 JS 전체 중 어느정도 비율로 사용 하는가 ?  
-      즉, 쓸모없는 JS 코드가 얼마나 번들링 되어 있는지 알 수 있다.
+- [ ] Network, Performance, Lighthouse, Coverage 탭.  
+       Coverage 은 JS 전체 중 어느정도 비율로 사용 하는가 ?  
+       즉, 쓸모없는 JS 코드가 얼마나 번들링 되어 있는지 알 수 있다.
+
+## 3-3) 이미지 지연(lazy) 로딩 (intersection observer).
+
+문제점 : 첫 랜딩 페이지에 이미지,동영상이 있다.  
+동영상이 먼저 보여지고, 나중에 이미지가 보여지는 구조이다.  
+하지만 Network Tab을 보니 이미지 먼저 다운로드가 된다.
+
+해결방법 :  
+(1) 이미지를 빠르게 다운로드 받게 한다.  
+(2) 이미지를 lazyloading 시킨다.
+
+IntersectionObserver 이용한 이미지 loading
+
+```js
+import React, { useEffect, useRef } from "react";
+
+function Card(props) {
+  // DOMElement 참조
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    const options = {};
+    const callback = (entries, observer) => {
+      // callback 함수 (최초등록시,viewport-in,viewport-out)
+      entries.forEach((entry) => {
+        // vierport-in 이라면
+        if (entry.isIntersecting) {
+          // src 로 속성을 옮겨 이미지 다운로드
+          console.log("is intersecting", entry.target.dataset.src);
+          entry.target.src = entry.target.dataset.src;
+          // 관찰 해제
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+    // observer 객체 생성
+    const observer = new IntersectionObserver(callback, options);
+    // observer target 등록
+    observer.observe(imgRef.current);
+  }, []);
+
+  return (
+    <div className="Card text-center">
+      <img data-src={props.image} ref={imgRef} />
+      <div className="p-5 font-semibold text-gray-700 text-xl md:text-lg lg:text-xl keep-all">
+        {props.children}
+      </div>
+    </div>
+  );
+}
+
+export default Card;
+```
+
+## 3-4) 이미지 사이즈 최적화
+
+### 이미지 사이즈 최적화 방법
+
+1. 이미지 크기 줄이기
+2. 이미지 압축 하기
+
+### 이미지 사이즈 포멧
+
+PNG : 무손실, 투명 이미지  
+JPG : PNG보단 더 압축, 화질 높음  
+WEBP : 구글의 차세대 이미지 포멧
+
+- WEBP는 지원하지 않은 브라우저가 몇몇 있지만, 용량과 화질에서 개선이 되었다.
+- 구글에서 릴리즈한 WEBP 서비스
+
+> squoosh.app
+
+1. 퀄리티 75~80 보존 (이것만으로 80% 이상의 용량 압축)
+2. 사이즈 조정
+
+? 이런 웹팩 플러그인으로도 가능하지 않을까??  
+https://www.npmjs.com/package/imagemin-webp-webpack-plugin
+
+### 이슈 핸들링 - 분기( Webp 지원 안하는 브라우저면 jpg 로딩 )
+
+해결 : picture 태그
+
+- 화면 사이즈에 따라서 다른 이미지를 불러온다.
+- 혹은 user agent의 지원 type별로 source를 다르게 불러온다.  
+  http://www.tcpschool.com/html-tags/picture  
+  https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture
+
+### The type attribute
+
+```
+The type attribute specifies a MIME type for the resource URL(s) in the <source> element's srcset attribute. If the user agent does not support the given type, the <source> element is skipped.
+```
+
+```html
+<picture>
+  <source srcset="logo.webp" type="image/webp" />
+  <img src="logo.png" alt="logo" />
+</picture>
+```
+
+요약 :  
+picture , source, img 을 이용해서 다음 항목 설정 가능
+
+- 화면 크기에 따른 분기
+- user Agent 에 따른 이미지 지원 분기
+- 이미지 로딩 실패에 따른 대처 이미지
+
+## 4-1) 실습 내용 소개
+
+목표
+[ 로딩 성능 최적화 ]
+
+- [ ] 이미지 lazyloading
+
+[ 렌더링 성능 최적화 ]
+
+- [ ] Layout Shift ( CLS , culmulative layout shift )
+- 이미지가 뚝뚝 끊기며 밀리면서 나오는 현상의 총합(LCS)
+- [ ] useSelector
+- [ ] Redux Reselect
+- [ ] 병목 함수 - Memo
+- [ ] 병목 함수 - 로직 개선
+
+[ 분석 툴 ]
+Chrome - Network, Performance, Lighthosue
+React Developer Tools (Profiler,Components)
+Redux DevTools.
+
+## 4-3) Layout Shift 피하기
+
+Performance 탭에서 layout shift 을 볼 수 있다.
+
+- 0~1 사이의 수치로 Culmulative Layout shfit 가 나온다.
+
+Layout Shift : 이미지가 늦게 로딩되는 이유로, 다른 레이아웃이 밀리는 현상
+
+- 이는 성능상의 이슈가 발생이 되고,
+- 사용성에 큰 영향을 준다.(화면 클릭하려 했건만 요소가 밀림)
+- 스켈레톤 로딩을 사용하는 이유이기도 함
+
+### Layout Shift 원인
+
+1. 사이즈가 정해져 있지 않은 이미지
+2. 사이즈가 정해져 있지 않은 광고
+3. 동적으로 삽입된 콘텐츠
+4. Web font( FOIT, FOUT ).
+
+### 해결 방법
+
+1. 사이즈를 정해준다.
+2. 사이즈 예측이 어렵다면, 어느정도 사이즈를 잡아주자.
+
+### 코드 로직
+
+이미지를 서버에서 가져와야 크기를 알기때문에, 이미 Wrapper Box을 만들어야 한다.
+
+- 16:9 의 Ratio Box Wrapper 을 만들고
+- 그 안에 이미지를 꽉 채우자.
+- 단 이때, inner Image는 position:absolute 로 설정하여, content가 더 커지는것을 방지 하자.
+
+```js
+
+function PhotoItem({ photo: { urls, alt } }) {
+  ...
+  return (
+    <ImageWrap>
+      <LazyLoad offset={1000}>
+        <Image src={urls.small} alt={alt} onClick={openModal} />
+      </LazyLoad>
+    </ImageWrap>
+  );
+}
+// 부모의 width와 padding으로 16:9 사이즈를 미리 확보해 둔다.
+// Ratio Wrapper Box
+const ImageWrap = styled.div`
+  width: 100%;
+  padding-bottom: 56.25%;
+  position: relative;
+`;
+// Ratio Box 안에 position:absolute 로 꽉 채워 준다.
+const Image = styled.img`
+  cursor: pointer;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+`;
+
+export default PhotoItem;
+```
+
+### 4-4) 이미지 지연(lazy) 로딩 (react-lazyload)
+
+react-lazyload 라는 라이브러리도 있다.
+
+- 스크롤 기반의 Lazyload를 해준다고 한다.
+- https://www.npmjs.com/package/react-lazyload
+
+```js
+import LazyLoad from "react-lazyload";
+import { showModal } from "../redux/imageModal";
+
+function PhotoItem({ photo: { urls, alt } }) {
+  const dispatch = useDispatch();
+
+  const openModal = () => {
+    dispatch(showModal({ src: urls.full, alt }));
+  };
+
+  return (
+    <ImageWrap>
+      <LazyLoad offset={1000}>
+        <Image src={urls.small} alt={alt} onClick={openModal} />
+      </LazyLoad>
+    </ImageWrap>
+  );
+}
+```
+
+### More font 최적화
+
+https://d2.naver.com/helloworld/4969726
+
+## 4-5) useSelect 렌더링 문제 해결
+
+useSelector을 이용해서 store을 구독하고 있는데, 왜 모달에 관한 state 변경이 photoList의 state 변경까지 영향을 미칠까?  
+-> 정확한 useSelector의 원리를 알아야 한다.
+
+useSelector 는 값의 비교를 통해 **달라진 경우만** 리랜더링 한다.  
+여기서 값의 비교는 useSelector의 함수의 리턴값을 통해 이루어 진다.  
+아래 코드에서는 항상 새로운 객체가 리턴되므로, 반드시 리랜더링 된다.
+
+```js
+const { modalVisible, bgColor, src, alt } = useSelector((state) => ({
+  modalVisible: state.imageModal.modalVisible,
+  bgColor: state.imageModal.bgColor,
+  src: state.imageModal.src,
+  alt: state.imageModal.alt,
+}));
+```
+
+### useSelector 문제 해결 방법
+
+1. Object를 새로 만들지 않도록, State 쪼개기
+2. 새로운 Equality Function 사용하기
+
+3. Object를 새로 만들지 않도록, State 쪼개기 코드
+
+- 값 선택을 프리미티프 타입까지 쪼갠다면, 같은 값에 대해 리랜더링이 일어나지 않음
+
+```js
+// before
+const { modalVisible, bgColor, src, alt } = useSelector((state) => ({
+  modalVisible: state.imageModal.modalVisible,
+  bgColor: state.imageModal.bgColor,
+  src: state.imageModal.src,
+  alt: state.imageModal.alt,
+}));
+
+// after
+// 프리미티브 값으로 비교되게끔 변경되었음
+const modalVisible = useSelector((state) => state.imageModal.modalVisible);
+const bgColor = useSelector((state) => (bgColor: state.imageModal.bgColor));
+const src = useSelector((state) => state.imageModal.src);
+const alt = useSelector((state) => state.imageModal.alt);
+```
+
+2. 새로운 Equality Function 사용하기 코드
+
+- 얕은 비교하는 함수대신, 직접 어떤 값을 비교하면 되는지 알도록 함수를 제공
+- 리덕스에서 제공해주는 shallowEqual 을 이용해서 1-depth 까지는 쉽게 비교하도록 한다.
+
+```js
+import { useSelector, shallowEqual } from "react-redux";
+
+function ImageModalContainer() {
+  const { modalVisible, bgColor, src, alt } = useSelector(
+    (state) => ({
+      modalVisible: state.imageModal.modalVisible,
+      bgColor: state.imageModal.bgColor,
+      src: state.imageModal.src,
+      alt: state.imageModal.alt,
+    }),
+    shallowEqual // add 객체의 첫번째 뎁스까지 같은지 비교 하도록 하여 리랜더링 방지
+  );
+
+  return (
+    <ImageModal
+      modalVisible={modalVisible}
+      bgColor={bgColor}
+      src={src}
+      alt={alt}
+    />
+  );
+}
+
+export default ImageModalContainer;
+```
+
+- 아래와 같은 코드는, filter가 있으므로 매번 1-depth값을 비교해도, 항상 새로운 객체가 나오므로 리랜더링의 대상이 된다.
+- 해결 : 우선 state를 가져오고, filter 로직은 밖으로 빼도록 하자.
+
+```js
+
+
+// before
+const { photos, loading } = useSelector(
+  (state) => (
+    {
+      photos:
+        state.category.category === "all"
+          ? state.photos.data
+          : state.photos.data.filter( // 매번 달라지는 객체의 값 - shallowEqual 무용지물
+              (photo) => photo.category === state.category.category
+            ),
+      loading: state.photos.loading,
+    },
+    shallowEqual
+  )
+);
+
+// after
+// 값 추출 이후, 파생  데이터를 처리하자.
+const { category, allPhotos, loading } = useSelector(
+  (state) => ({
+    category: state.category.category, // 우선 값을 추출하고
+    allPhotos: state.photos.data,
+    loading: state.photos.loading,
+  }),
+  shallowEqual
+);
+
+const photos =
+  category === "all"
+    ? allPhotos
+    : allPhotos.filter((photo) => photo.category === category);
+```
+
+---
+
+### cf)
+
+~ 틸드( Tilt ) 연산자
+
+- NOT 연산을 하며, ~~은 이중 NOT 연산을 통해 Math.floor() 와 같은 연산 (양수만)
+
+```js
+~5.5; // => -6
+~-6; // => 5
+~~5.5; // => 5  (same as Math.trunc(5.5) and Math.floor(5.5))
+~~-5.5; // => -5 (same as Math.trunc(-5.5) but NOT the same as Math.floor(-5.5), which would give -6 )
+```
+
+---
+
+### cf) Ec2 Free티어 메모리 부족 해결
+
+메모리 Swap 늘리기
+https://sundries-in-myidea.tistory.com/102
+
+띄울려는 Docker kafka 옵션 설정
+https://github.com/confluentinc/cp-docker-images/issues/741
+
+---
 
 ### ref
 
