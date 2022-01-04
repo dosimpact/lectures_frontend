@@ -1,0 +1,14 @@
+{
+  "plugins": ["testing-library", "jest-dom"],
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended"
+  ]
+}
+/*
+eslint test code 적용을 위한 플러그인  
+npm install -D eslint-plugin-jest-dom
+npm install -D eslint-plugin-testing-library
+*/

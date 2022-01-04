@@ -34,6 +34,7 @@
 
 - 리소스 불러오는 성능
 - 이를 위해 통신에 대해 알아야함
+- preload, lazyload, 캐싱, 압축 등의 기술 사용
 
 2. ✅ 랜더링 성능
 
@@ -49,7 +50,8 @@
  -[ ] 코드 스플릿  
  -[ ] 텍스트 압축
 
-[ ] 랜더링 성능 최적화 -[ ]**Bottleneck** 코드 최적화
+[ ] 랜더링 성능 최적화  
+ -[ ]**Bottleneck** 코드 최적화
 
 ### 분석 툴 소개
 
@@ -70,7 +72,7 @@ yarn install
 yarn start && yarn server
 ```
 
-라이트 하우스 실행을 시키면 퍼포먼스 접수가 나온다.
+라이트 하우스 실행 후 스코어가 나온다.
 
 - Opportunities 항목 : 로딩 관점에서 개선시킬 부분들
 - Diagnostics 항목 : 웹브라우저 퍼포먼스 관점에서 개선시킬 부분들
@@ -79,10 +81,10 @@ yarn start && yarn server
 
 **이슈 : Properly size images**
 
-랜더링 되는 앨리먼트의 이미지 사이즈로 맞추자.
+랜더링 되는 앨리먼트의 크기와 이미지 사이즈를 맞추자
 
-- 래티나 디스플레이등 같은 픽셀에 2배 해상도를 그리는 디스플래이가 있다.
-- 그래서 120\*120 공간은 2배큰 240X240 을 그려주도록 하자.
+- 래티나 디스플레이는 같은 픽셀크기에 2배 해상도를 그리는 디스플래이가 있다.
+- 그래서 120X120 공간은 2배큰 240X240 을 그려주도록 하자.
 
 자체 서버에서 이미지를 제공해주는 경우 -> 직접 잘라도 된다.  
 외부 서버에서 이미지를 제공해 주는 경우  
@@ -144,7 +146,7 @@ https://www.npmjs.com/package/webpack-bundle-analyzer
 CRA 환경에서도 번들을 분석해줄 패키지가 다행이 있다.  
 https://www.npmjs.com/package/cra-bundle-analyzer
 
-### 분석하기
+### 번들 리포트 분석하기
 
 그 결과 react-dom, refractor 등의 큰 규모의 js 코드들을 볼 수 있다.  
 ( refractor 하위에는 php,pug,c# 등등 언어마다 하이라이팅 해주는 js코드들이 있고 사이즈가 매우 크다. )  
@@ -578,8 +580,10 @@ Call Tree : JS 실행 - 위에서부터 보여줌
 [ 도구 ]
 
 - [ ] Network, Performance, Lighthouse, Coverage 탭.  
-       Coverage 은 JS 전체 중 어느정도 비율로 사용 하는가 ?  
+       Coverage 탭은 전체 JS코드의 Usage 비율을 보여준다.  
        즉, 쓸모없는 JS 코드가 얼마나 번들링 되어 있는지 알 수 있다.
+
+- - Coverage Tab이 보이지 않는다면, ctrl+shift+P 로 명령줄에서 coverage를 검색하자.
 
 ## 3-3) 이미지 지연(lazy) 로딩 (intersection observer).
 
@@ -884,8 +888,6 @@ export default ImageModalContainer;
 - 해결 : 우선 state를 가져오고, filter 로직은 밖으로 빼도록 하자.
 
 ```js
-
-
 // before
 const { photos, loading } = useSelector(
   (state) => (
@@ -893,7 +895,8 @@ const { photos, loading } = useSelector(
       photos:
         state.category.category === "all"
           ? state.photos.data
-          : state.photos.data.filter( // 매번 달라지는 객체의 값 - shallowEqual 무용지물
+          : state.photos.data.filter(
+              // 매번 달라지는 객체의 값 - shallowEqual 무용지물
               (photo) => photo.category === state.category.category
             ),
       loading: state.photos.loading,
