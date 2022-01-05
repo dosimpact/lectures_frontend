@@ -28,7 +28,7 @@
 
 ## 웹성능 결정 요인
 
-\*결국 모든 성능은 2가지로 귀결
+**웹 성능 개선은 크게 2가지로 접근**
 
 1. ✅ 로딩 성능
 
@@ -40,6 +40,8 @@
 
 - 불러온 리소스를 얼마나 빠르게 그리는지
 - 브라우저의 동작원리를 알아야 한다.
+
+---
 
 # 1장. 블로그 사이트 최적화
 
@@ -702,9 +704,9 @@ picture , source, img 을 이용해서 다음 항목 설정 가능
 
 - [ ] Layout Shift ( CLS , culmulative layout shift )
 - 이미지가 뚝뚝 끊기며 밀리면서 나오는 현상의 총합(LCS)
-- [ ] useSelector
-- [ ] Redux Reselect
-- [ ] 병목 함수 - Memo
+- [ ] React - useSelector
+- [ ] React - Redux Reselect
+- [ ] React - 병목 함수 - Memo
 - [ ] 병목 함수 - 로직 개선
 
 [ 분석 툴 ]
@@ -714,15 +716,15 @@ Redux DevTools.
 
 ## 4-3) Layout Shift 피하기
 
-Performance 탭에서 layout shift 을 볼 수 있다.
-
-- 0~1 사이의 수치로 Culmulative Layout shfit 가 나온다.
-
 Layout Shift : 이미지가 늦게 로딩되는 이유로, 다른 레이아웃이 밀리는 현상
 
-- 이는 성능상의 이슈가 발생이 되고,
-- 사용성에 큰 영향을 준다.(화면 클릭하려 했건만 요소가 밀림)
-- 스켈레톤 로딩을 사용하는 이유이기도 함
+- 이는 성능상의 이슈가 발생이 되고  
+- 사용성에 큰 영향을 준다.(화면 클릭하려 했건만 요소가 밀려 다른곳을 클릭함)  
+- 스켈레톤 로딩을 사용하는 이유이기도 함  
+
+
+Performance 탭에서 layout shift 을 볼 수 있다.
+- 0~1 사이의 수치로 Culmulative Layout shfit 가 나온다.
 
 ### Layout Shift 원인
 
@@ -738,11 +740,12 @@ Layout Shift : 이미지가 늦게 로딩되는 이유로, 다른 레이아웃�
 
 ### 코드 로직
 
-이미지를 서버에서 가져와야 크기를 알기때문에, 이미 Wrapper Box을 만들어야 한다.
+이미지는 로딩 후에야 비로소 크기(width,height)를 안다.  
+미리 사이즈가 정해진 Wrapper Box을 만들어 이 안에 이미지를 넣자.    
 
-- 16:9 의 Ratio Box Wrapper 을 만들고
-- 그 안에 이미지를 꽉 채우자.
-- 단 이때, inner Image는 position:absolute 로 설정하여, content가 더 커지는것을 방지 하자.
+- 16:9 의 Ratio Box Wrapper 을 만들고  
+- 그 안에 이미지를 꽉 채우자.  
+- 단 이때, inner Image는 position:absolute 로 설정하여, content가 더 커지는것을 방지 하자.  
 
 ```js
 
@@ -750,9 +753,7 @@ function PhotoItem({ photo: { urls, alt } }) {
   ...
   return (
     <ImageWrap>
-      <LazyLoad offset={1000}>
         <Image src={urls.small} alt={alt} onClick={openModal} />
-      </LazyLoad>
     </ImageWrap>
   );
 }
@@ -818,6 +819,7 @@ useSelector 는 값의 비교를 통해 **달라진 경우만** 리랜더링 한
 아래 코드에서는 항상 새로운 객체가 리턴되므로, 반드시 리랜더링 된다.
 
 ```js
+//문제가 되는 코드
 const { modalVisible, bgColor, src, alt } = useSelector((state) => ({
   modalVisible: state.imageModal.modalVisible,
   bgColor: state.imageModal.bgColor,
@@ -828,10 +830,8 @@ const { modalVisible, bgColor, src, alt } = useSelector((state) => ({
 
 ### useSelector 문제 해결 방법
 
-1. Object를 새로 만들지 않도록, State 쪼개기
-2. 새로운 Equality Function 사용하기
-
-3. Object를 새로 만들지 않도록, State 쪼개기 코드
+1. Object를 새로 만들지 않도록, State 쪼개기  
+2. Equality Function 사용하기(shallowEqual)    
 
 - 값 선택을 프리미티프 타입까지 쪼갠다면, 같은 값에 대해 리랜더링이 일어나지 않음
 
@@ -854,10 +854,11 @@ const alt = useSelector((state) => state.imageModal.alt);
 
 2. 새로운 Equality Function 사용하기 코드
 
-- 얕은 비교하는 함수대신, 직접 어떤 값을 비교하면 되는지 알도록 함수를 제공
+- 얕은 비교대신, 직접 어떤 값을 비교하면 되는지 알도록 함수를 제공  
 - 리덕스에서 제공해주는 shallowEqual 을 이용해서 1-depth 까지는 쉽게 비교하도록 한다.
 
 ```js
+// shallowEqual 사용한 1depth 비교
 import { useSelector, shallowEqual } from "react-redux";
 
 function ImageModalContainer() {
@@ -870,7 +871,6 @@ function ImageModalContainer() {
     }),
     shallowEqual // add 객체의 첫번째 뎁스까지 같은지 비교 하도록 하여 리랜더링 방지
   );
-
   return (
     <ImageModal
       modalVisible={modalVisible}
@@ -880,8 +880,6 @@ function ImageModalContainer() {
     />
   );
 }
-
-export default ImageModalContainer;
 ```
 
 - 아래와 같은 코드는, filter가 있으므로 매번 1-depth값을 비교해도, 항상 새로운 객체가 나오므로 리랜더링의 대상이 된다.
@@ -946,6 +944,51 @@ https://sundries-in-myidea.tistory.com/102
 
 띄울려는 Docker kafka 옵션 설정
 https://github.com/confluentinc/cp-docker-images/issues/741
+
+
+## 4-6) Redux Reselect를 통한 렌더링 최적화
+
+store에서 가져온 값을 가공한 파생 데이터에 대한 최적화를 하자.
+eg) 모든 사진 리스트에서 카테고리에 맞는 객체만 filter 할때, 카테고리값과 사진 배열값이 동일하면 메모이제이션 처리 하자    
+
+- 1.store 값 가져오기
+- 2.메모 함수를 이용해서 값 파싱하기  
+- 1+2 과정을 reselect 라는 라이브러리에서 제공  
+- 이를 통해 훅으로 로직을 분리할 수 있다.   
+
+```
+npm install reselect
+```  
+
+ 
+```js
+
+import { createSelector } from 'reselect';
+
+export default createSelector(
+  // 메모 + 가져올 값을 배열에 넣는다.
+  [state => state.photos.data, state => state.category.category],
+  // 가져온 값에서 데이터의 가공을 한다. 
+  (photos, category) =>
+    category === 'all'
+      ? photos
+      : photos.filter(photo => photo.category === category)
+);
+```
+
+```js
+function PhotoListContainer() {
+  const photos = useSelector(selectFilteredPhotos);
+  return <PhotoList photos={photos} />;
+}
+
+
+```
+
+### 4-7) 병목 함수에 memoization 적용
+
+
+
 
 ---
 
