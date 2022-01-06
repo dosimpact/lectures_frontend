@@ -1,6 +1,7 @@
 # Practice
 
 - [x] webpack config
+    - [x] webpack-merge
 - [x] 로더
   - [x] 커스텀 로더
   - [x] css-loader
@@ -8,7 +9,7 @@
   - [x] scss-loader
   - [x] file-loader
   - [x] url-loader
-- [ ] 플러그인
+- [x] 플러그인
   - [x] 커스텀 플러그인
   - [x] BannerPlugin
   - [x] DefinePlugin
@@ -16,7 +17,8 @@
   - [x] CleanWebpackPlugin
   - [x] MiniCssExtractPlugin
 
-cf)
+
+cf) feedback
 
 
 - use는 뒤에서부터 처리된다.  
@@ -39,7 +41,7 @@ cf)
     또한 css파일을 추출한 경우 MiniCssExtractPlugin.loader는 
     html에 css:link 구문을 삽입시켜준다   
 
-    
+
 - version align
 ```js
   "devDependencies": {
@@ -52,7 +54,8 @@ cf)
     "mini-css-extract-plugin": "^0.9.0",
     "url-loader": "^3.0.0",
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "webpack-merge": "^5.8.0"
   }
 ```
 

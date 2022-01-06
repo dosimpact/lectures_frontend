@@ -527,7 +527,7 @@ webpack을 환경설정시 개발을 위한 설정과 베포를 위한 설정이
 
 - 이를 분리해서 webpack.common.js, webpack.dev.js, webpack.prod.js
 
-```
+```js
   "scripts": {
     "build:dev": "cross-env NODE_ENV=development webpack --config webpack.dev.js --progress",
     "build:prod": "cross-env NODE_ENV=production webpack --config webpack.prod.js --progress"
