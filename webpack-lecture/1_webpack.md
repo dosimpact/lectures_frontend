@@ -390,12 +390,12 @@ module.exports = {
 };
 ```
 
-```
-console.log(process.env.NODE_ENV);
-console.log(process.env.TWO);
-console.log(TWO);
-console.log(TRHEE);
-console.log(api.domain);
+```js
+console.log(process.env.NODE_ENV); // development
+console.log(process.env.TWO);//undefined
+console.log(TWO);//2
+console.log(TRHEE);//1+2
+console.log(api.domain);//http://dev.api.domain.com
 ```
 
 ### 2.6.3 HtmlWebpackPlugin
@@ -405,6 +405,10 @@ HTML을 후처리하는데 사용한다.
 - 빌드 타임의 값 넣기
 - 코드를 압축
 - index.html 도 src에서 dist로 옮기고 싶다면 소스로 관리 가능
+
+주의 ! - 빌드환경변수 vs 웹런타임환경변수  
+- process.env.NODE_ENV 은 webpack 빌드환경(node.js ) 이므로 cross-env 모듈로 환경변수를 주입시켜주자.    
+- DefinePlugin은 AMD 환경에서 작동한다.  
 
 eg)
 
@@ -477,13 +481,15 @@ module.exports = {
 
 스타일 시트가 많아지면 하나의 JS로 만드는게 부담이 된다.
 
-- CSS 파일을 분리해서 JS,CSS 파일 각각 하나로 만들자
+- CSS 파일을 분리해서 JS,CSS 파일 각각 하나로 만들자  
 
-$ npm install -D mini-css-extract-plugin
+```
+$ npm install -D mini-css-extract-plugin  
+```
+webpack.config.js 
 
-webpack.config.js:
+```js  
 
-```js
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 module.exports = {
@@ -493,6 +499,7 @@ module.exports = {
       : []),
   ],
 }
+
 ---
 // 프로덕션 환경에서는 별도의 CSS 파일으로 추출하는 플러그인을 적용했으므로 다른 로더가 필요
 module.exports = {
