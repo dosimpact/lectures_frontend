@@ -988,6 +988,20 @@ function PhotoListContainer() {
 ### 4-7) 병목 함수에 memoization 적용
 
 
+긴 연산이 있는 함수에서 동일한 입력이면 다시 계산하는것은 낭비이다. (단, 순수함수에 한함)  
+그래서 입력에 대한 결과값을 , key-value 형태로 저장하자   
+구현은 클로저 함수를 이용하고 여러곳에서 재활용하려면 팩토리 패턴을 이용하자.  
+
+eg) ImgElement 에 대한 캐싱처리   
+함수 : imgElement의 모든 픽셀들의 rgb값의 평균을 구하자( 5초 걸리는 로직 )  
+- 캐시 자료구조 : Object
+- 캐시 키 값: imgElement.src
+- 캐시 결과 값 : Object 
+
+
+
+
+
 
 
 ---
