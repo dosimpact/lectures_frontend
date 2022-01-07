@@ -1,4 +1,5 @@
 import './styles/app.css';
+import './styles/app.scss';
 import './assets/test.txt';
 
 // test - 커스텀 플러그인으로 const -> var 변환 여부 체크

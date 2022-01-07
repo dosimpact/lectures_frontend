@@ -11,10 +11,10 @@
   - [x] 커스텀 로더
   - [x] css-loader
   - [x] style-loader
-  - [x] scss-loader
   - [x] file-loader
   - [x] url-loader
   - [x] babel-loader
+  - [x] sass-loader
 
 - [x] webpack 플러그인
 
@@ -33,6 +33,7 @@
   - [x] 바벨 프리셋 리스트 확인
   - [x] 폴리필 설정 방법
   - [x] 웹팩 통합 (babel-loader)
+  - [ ] SASS 적용 (sass-loader)
 
 - [ ] eslint
 
@@ -77,6 +78,12 @@ cf) feedback
   또한 .babelrc 와 babel.config.js 는 다르다 ( 필요시 찾아볼 것)
 
 - esLint의 규칙은 다음에서 확인 가능하다. https://eslint.org/docs/rules/
+
+- sass 로더 추가하기  
+  그냥 sass-loader를 설치하면 12버전인데 이는 webpack v5 이상이 필요하다.  
+  webpack v4 환경에서는 sass-loader@^8.0.0 버전으로 설치하자  
+  그러면 node-sass 가 필요하다는 오류가 나온다. 설치하자  
+  node-sass 7버전이 깔리는데 node-sass@^4.0.0 버전으로 설치
 
 - version align
 

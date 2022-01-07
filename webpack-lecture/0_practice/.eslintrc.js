@@ -1,5 +1,8 @@
 module.exports = {
+  // eslint 적용 환경
+  // https://eslint.org/docs/user-guide/configuring/language-options#specifying-environments
   env: {
+    node: true,
     browser: true,
     es2021: true,
   },
