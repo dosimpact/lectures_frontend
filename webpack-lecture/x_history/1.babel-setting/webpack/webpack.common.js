@@ -20,7 +20,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.txt$/,
+        test: /\.js$/,
         use: [path.resolve("webpack/my-webpack-loader.js")],
       },
       {
