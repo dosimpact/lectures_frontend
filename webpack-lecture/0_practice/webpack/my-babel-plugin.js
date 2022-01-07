@@ -1,4 +1,4 @@
-// myplugin.js:
+// my-babel-plugin.js:
 module.exports = function myplugin() {
   return {
     visitor: {
@@ -14,5 +14,4 @@ module.exports = function myplugin() {
     },
   };
 };
-
-//npx babel app.js --plugins ./myplugin.js
+//npx babel ./src/app.js --plugins ./webpack/my-babel-plugin.js

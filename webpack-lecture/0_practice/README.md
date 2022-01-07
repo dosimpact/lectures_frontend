@@ -11,6 +11,7 @@
   - [x] scss-loader
   - [x] file-loader
   - [x] url-loader
+  - [x] babel-loader
 - [x] 플러그인
   - [x] 커스텀 플러그인
   - [x] BannerPlugin
@@ -19,12 +20,12 @@
   - [x] CleanWebpackPlugin
   - [x] MiniCssExtractPlugin
   - [x] Webpack Bundle Analyzer  
-- [ ] 바벨
-  - [ ] 플러그인
-  - [ ] 커스텀 플러그인
-  - [ ] 폴리필
-  - [ ] 웹팩 통합
-- [ ] eslint
+- [x] 바벨
+  - [x] 커스텀 플러그인
+  - [x] 플러그인
+  - [x] 폴리필
+  - [x] 웹팩 통합 (babel-loader)
+- [ ] eslint, prettier(formatter)
   - [ ] 옵션
   - [ ] 웹팩 통합
 - [ ] webpack Dev Server 
@@ -55,6 +56,8 @@ cf) feedback
     또한 css파일을 추출한 경우 MiniCssExtractPlugin.loader는 
     html에 css:link 구문을 삽입시켜준다   
 
+- 비어있는 .babelrc 설정파일은 오류를 낸다. 
+  또한 .babelrc 와 babel.config.js 는 다르다 ( 필요시 찾아볼 것)
 
 - version align
 ```js
@@ -72,4 +75,13 @@ cf) feedback
     "webpack-merge": "^5.8.0"
   }
 ```
+```
 
+yarn add -D @babel/cli@^7.15.7 @babel/core@^7.15.5
+yarn add -D @babel/plugin-transform-arrow-functions
+yarn add -D @babel/plugin-transform-block-scoping
+yarn add -D @babel/plugin-transform-strict-mode 
+yarn add -D @babel/preset-env
+
+
+```
