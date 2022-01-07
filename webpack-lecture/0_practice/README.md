@@ -1,5 +1,7 @@
 # Practice
 
+웹팩 환경설정과 다음의 로더 및 플러그인을 실습합니다. 
+
 - [x] webpack config
     - [x] webpack-merge
 - [x] 로더
@@ -16,6 +18,18 @@
   - [x] HtmlWebpackPlugin
   - [x] CleanWebpackPlugin
   - [x] MiniCssExtractPlugin
+  - [x] Webpack Bundle Analyzer  
+- [ ] 바벨
+  - [ ] 플러그인
+  - [ ] 커스텀 플러그인
+  - [ ] 폴리필
+  - [ ] 웹팩 통합
+- [ ] eslint
+  - [ ] 옵션
+  - [ ] 웹팩 통합
+- [ ] webpack Dev Server 
+  - [ ] 옵션( hot reload )
+  - [ ] 미들웨어
 
 
 cf) feedback

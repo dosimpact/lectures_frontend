@@ -7,12 +7,15 @@ const MyWebpackPlugin = require("./my-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 const { merge } = require("webpack-merge");
 const common = require("./webpack.common");
 
 module.exports = merge(common,{
   mode: "development",
+  watch:true,
   module: {
     rules: [
       {
@@ -55,6 +58,6 @@ module.exports = merge(common,{
         env:"(개발용)"
       },
       minify:false
-    }),
+    })
   ],
 })

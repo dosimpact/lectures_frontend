@@ -7,7 +7,7 @@ const MyWebpackPlugin = require("./my-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   entry: {
@@ -33,5 +33,10 @@ module.exports = {
         Author: ${childProcess.execSync("git config user.name")}`,
     }),
     new CleanWebpackPlugin(),
+    new BundleAnalyzerPlugin({
+      analyzerMode: "static",
+      reportFilename: "BundleAnalyzerReport.html",
+      openAnalyzer: false,
+    }),
   ]
 };
