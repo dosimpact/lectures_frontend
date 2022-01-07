@@ -5,26 +5,43 @@
 - [x] webpack config
 
   - [x] webpack-merge
+    - 분리된 prod,dev 환경을 공통 설정과 통합 합니다.
+  - [ ] webpack- v4 to v5
+    - 마이그레이션 연습
 
 - [x] webpack 로더
 
   - [x] 커스텀 로더
+    - 나만의 로더를 제작
   - [x] css-loader
+    - css 파일 처리 (raw-loader 대처 가능)
   - [x] style-loader
+    - html 로드시 스타일 로딩
   - [x] file-loader
+    - 이미지 등의 파일 require 처리
   - [x] url-loader
+    - base64 변환 처리
   - [x] babel-loader
+    - webpack에서 바벨기능 처리
   - [x] sass-loader
+    - scss 파일 처리
 
 - [x] webpack 플러그인
 
   - [x] 커스텀 플러그인
+    - 나만의 플로그인 로직
   - [x] BannerPlugin
+    - 번들결과 파일 상단의 코멘트
   - [x] DefinePlugin
+    - 환경변수 설정
   - [x] HtmlWebpackPlugin
+    - Html에 js 파일 링크
   - [x] CleanWebpackPlugin
+    - 번들결과 클리닝
   - [x] MiniCssExtractPlugin
+    - css 최적화
   - [x] Webpack Bundle Analyzer
+    - 번들링 되는 JS 파일릐 크기를 분석
 
 - [x] 바벨
 
@@ -33,7 +50,9 @@
   - [x] 바벨 프리셋 리스트 확인
   - [x] 폴리필 설정 방법
   - [x] 웹팩 통합 (babel-loader)
-  - [ ] SASS 적용 (sass-loader)
+  - [x] SASS 처리 (sass-loader)
+  - [ ] JSX 처리
+  - [ ] Typescipt(TSX) 처리
 
 - [ ] eslint
 
@@ -41,7 +60,7 @@
   - [x] rules 리스트 확인 https://eslint.org/docs/rules/
   - [x] extends로 추천규칙 셋 추가
 
-- [ ] prettier(formatter)
+- [x] prettier(formatter)
 
   - [x] prettier 설치 및 .prettierrc 환경 설정 파일 생성
   - [x] eslint-config-prettier, eslint-plugin-prettier 설치 후 린터 통합 적용
@@ -50,7 +69,7 @@
   - [ ] 옵션( hot reload )
   - [ ] 미들웨어
 
-cf) feedback
+### cf) feedback
 
 - use는 뒤에서부터 처리된다.
 - css의 url 문법도 require & import 처럼 다른 모듈을 필요로 하는 문법이다.  
@@ -85,34 +104,67 @@ cf) feedback
   그러면 node-sass 가 필요하다는 오류가 나온다. 설치하자  
   node-sass 7버전이 깔리는데 node-sass@^4.0.0 버전으로 설치
 
-- version align
+- version align  
+  webpack v4와 v5는 정말 많이 바뀌었다.  
+  패키지 매니저로 플러그인 설치시 웹팩과의 버 align이 제대로 동작 안함  
+  그래서 미리 프리셋 버전을 사용하거나 하나식 버전을 맞추어 나가자.
 
-```js
+```json
+// package.json
+{
+  "name": "0_practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "webpack": "cross-env NODE_ENV=development webpack --config webpack/webpack.dev.js",
+    "webpack:prod": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.js --progress",
+    "lint": "eslint src/test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "core-js": "2"
+  },
   "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.5",
+    "@babel/plugin-transform-arrow-functions": "^7.16.7",
+    "@babel/plugin-transform-block-scoping": "^7.16.7",
+    "@babel/plugin-transform-strict-mode": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "babel-loader": "^8.2.3",
+    "clean-webpack-plugin": "^3.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^3.4.1",
-    "file-loader": "^5.0.2",
-    "style-loader": "^1.1.2",
+    "eslint": "^8.6.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^3.2.0",
-    "clean-webpack-plugin": "^3.0.0",
     "mini-css-extract-plugin": "^0.9.0",
-    "url-loader": "^3.0.0",
-    "webpack": "^4.41.5",
+    "node-sass": "^4.0.0",
+    "prettier": "^2.5.1",
+    "rimraf": "^3.0.2",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.1.2",
+    "url-loader": "^4.1.1",
+    "webpack": "^4.46.0",
+    "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^3.3.10",
     "webpack-merge": "^5.8.0"
   }
-```
+}
+// .eslintrc.js
 
-```
+// .prettierrc
 
-yarn add -D @babel/cli@^7.15.7 @babel/core@^7.15.5
-yarn add -D @babel/plugin-transform-arrow-functions
-yarn add -D @babel/plugin-transform-block-scoping
-yarn add -D @babel/plugin-transform-strict-mode
-yarn add -D @babel/preset-env
+// babel.config.js
 
-yarn add -D eslint
-yarn add -D prettier eslint-config-prettier eslint-plugin-prettier
+// webpack.common.js
 
+// webpack.dev.js
 
+// webpack.prod.js
 ```
