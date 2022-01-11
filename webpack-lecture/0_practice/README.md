@@ -66,9 +66,10 @@
   - [x] prettier 설치 및 .prettierrc 환경 설정 파일 생성
   - [x] eslint-config-prettier, eslint-plugin-prettier 설치 후 린터 통합 적용
 
-- [ ] webpack Dev Server
+- [ ] webpack devServer
 
-  - [ ] 기본설정
+  - [x] 환경설정
+  - [x] devServer:before (+mock-api)
   - [ ] HRM
 
 - [ ] 최적화

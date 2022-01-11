@@ -13,8 +13,6 @@ const BundleAnalyzerPlugin =
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
 
-const { before } = require('./mock-api');
-
 module.exports = merge(common, {
   mode: 'development',
   devServer: {
@@ -30,7 +28,7 @@ module.exports = merge(common, {
     //히스토리 API를 사용하는 SPA 개발시 설정한다. 404가 발생하면 index.html로 리다이렉트한다.
     historyApiFallback: true,
     hot: false,
-    before,
+    before: require('./mock-api').before,
   },
   module: {
     rules: [
