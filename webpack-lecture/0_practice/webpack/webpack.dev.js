@@ -13,9 +13,25 @@ const BundleAnalyzerPlugin =
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
 
+const { before } = require('./mock-api');
+
 module.exports = merge(common, {
   mode: 'development',
-  watch: false,
+  devServer: {
+    // 정적파일을 제공할 경로. 기본값은 웹팩 아웃풋이다.
+    contentBase: path.join(__dirname, 'dist'),
+    // 브라우져를 통해 접근하는 경로. 기본값은 '/' 이다. (?)
+    publicPath: '/',
+    // 도메인을 맞추어야 하는 상황 (쿠기 기반 인증)
+    // host: 'dev.domain.com',
+    overlay: true,
+    // 메시지 수준 'none', 'errors-only', 'minimal', 'normal', 'verbose'
+    stats: 'errors-only',
+    //히스토리 API를 사용하는 SPA 개발시 설정한다. 404가 발생하면 index.html로 리다이렉트한다.
+    historyApiFallback: true,
+    hot: false,
+    before,
+  },
   module: {
     rules: [
       {

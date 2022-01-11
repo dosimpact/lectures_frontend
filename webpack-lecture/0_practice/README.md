@@ -6,8 +6,9 @@
 
   - [x] webpack-merge
     - 분리된 prod,dev 환경을 공통 설정과 통합 합니다.
-  - [ ] webpack- v4 to v5
-    - 마이그레이션 연습
+  - [ ] webpack - 마이그레이션
+    - v4 to v5 마이그레이션 연습
+    - v3 to v5 마이그레이션 연습
 
 - [x] webpack 로더
 
@@ -39,9 +40,9 @@
   - [x] CleanWebpackPlugin
     - 번들결과 클리닝
   - [x] MiniCssExtractPlugin
-    - css 최적화
+    - css 추출 및 최적화
   - [x] Webpack Bundle Analyzer
-    - 번들링 되는 JS 파일릐 크기를 분석
+    - 번들링 되는 JS 파일의 크기를 분석
 
 - [x] 바벨
 
@@ -66,8 +67,15 @@
   - [x] eslint-config-prettier, eslint-plugin-prettier 설치 후 린터 통합 적용
 
 - [ ] webpack Dev Server
-  - [ ] 옵션( hot reload )
-  - [ ] 미들웨어
+
+  - [ ] 기본설정
+  - [ ] HRM
+
+- [ ] 최적화
+  - [ ] production 모드
+  - [ ] optimazation 속성
+  - [ ] 코드 스플리팅
+  - [ ] externals
 
 ### cf) feedback
 
