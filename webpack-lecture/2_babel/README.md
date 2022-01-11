@@ -37,6 +37,9 @@ npx babel app.js --plugins ./myplugin.js
 ```
 ## 01 플러그인
 
+바벨은 파싱과 출력만 담당하고 변환 작업은 다른 녀석이 처리하데 이것을 "플러그인" 이라고 부른다.
+
+
 ### 플러그인 - 커스텀 플러그인 작성
 
 커스텀 플러그인 작성    
@@ -84,6 +87,9 @@ module.exports = function myplugin() {
 
 ### 플러그인 -  @babel 플러그인 
 
+직접 바벨 플러그인을 만들지 말고 다운로드 해서 사용해 보자.  
+- 물론 나중에는 이런 플러그인들을 프리셋으로 설정  
+
 ```js
 npm install -D @babel/plugin-transform-block-scoping
 npm install -D @babel/plugin-transform-arrow-functions
@@ -95,8 +101,20 @@ npx babel app.js --plugins @babel/plugin-transform-block-scoping
 // 화살표 함수 변환 추가
 npx babel app.js --plugins @babel/plugin-transform-block-scoping --plugins @babel/plugin-transform-arrow-functions
 
+
+// babel.config.js: 추가
+module.exports = {
+  plugins: [
+    "@babel/plugin-transform-block-scoping",
+    "@babel/plugin-transform-arrow-functions",
+    "@babel/plugin-transform-strict-mode",
+  ],
+};
+
+
 // 설정파일 추가 후 
 npx babel app.js
+
 ```
 👨‍💻 01_plugin
 
@@ -126,7 +144,13 @@ module.exports = {
   presets: ["./mypreset.js"],
 }
 ```
+
+cf) 플러그인 리스트 
+https://babeljs.io/docs/en/plugins-list  
+
+
 👨‍💻 02_custom_preset
+
 
 ### @babel 프리셋
 
@@ -140,12 +164,26 @@ module.exports = {
   presets: ["@babel/preset-env"],
 }
 ```
-👨‍💻 03_babel_preset
+👨‍💻 03_babel_preset  
+
+
+이처럼 바벨은 목적에 따라 몇 가지 프리셋을 제공한다.  
+
+    preset-env  
+    preset-flow  
+    preset-react  
+    preset-typescript  
+
+preset-env는 ECMAScript2015+를 변환할 때 사용한다.   
+preset-flow, preset-react, preset-typescript는 flow, 리액트, 타입스크립트를 변환하기 위한 프리셋이다.  
 
 
 ## 04 env target 설정과 폴리필
 
 ### env target 설정
+
+예) 크롬 79버전은 화살표 함수를 이해하므로 바벨이 변환하지 않는다. 
+예) ie11 지원을 하려면, 화살표 함수를 일반함수로 바벨이 변환 한다. 
 
 ```js
 // babel.config.js :
@@ -165,6 +203,9 @@ module.exports = {
 ```
 ### 폴리필 설정
 
+useBuiltIns 옵션이 false 라고 설정되어 있어 폴리필이 적용되지 않았다.  
+ie11을 지원하기 위해서는, 이 옵션을 활성화(usage) 시켜야 한다.  
+
 ```js
 // babel.config.js:
 module.exports = {
@@ -172,7 +213,8 @@ module.exports = {
     [
       "@babel/preset-env",
       {
-        useBuiltIns: "usage", // 폴리필 사용 방식 지정
+        //"usage"|"entry"|false (기본) 폴리필 사용 방식 지정
+        useBuiltIns: "usage",
         corejs: {
           // 폴리필 버전 지정
           version: 2,
@@ -181,6 +223,19 @@ module.exports = {
     ],
   ],
 }
+```
+
+변환 결과 
+- ie에서 Promise 를 사용하기 위한, 모듈을 불러오도록 하는것을 볼 수 있다. 
+
+```js
+npx babel src/app.js
+"use strict";
+
+require("core-js/modules/es6.promise");
+require("core-js/modules/es6.object.to-string");
+
+new Promise();
 ```
 
 ## 05 웹팩으로의 통합 - 바벨

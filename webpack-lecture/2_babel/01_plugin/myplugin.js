@@ -14,3 +14,5 @@ module.exports = function myplugin() {
     },
   };
 };
+
+//npx babel app.js --plugins ./myplugin.js
