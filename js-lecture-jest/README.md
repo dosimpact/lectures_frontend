@@ -12,3 +12,8 @@ Jest 설치하기
 Jest 실행하기
 
 - npx jest
+
+
+## Jest 함수 찿기 URL
+>https://jestjs.io/docs/expect
+

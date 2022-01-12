@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Example Observer 패턴을 이용한 체크박스 on/off -->
+    <script>
+      const ObserverList = (function () {
+        function ObserverList() {
+          this.observerList = [];
+        }
+
+        ObserverList.prototype.add = function (obj) {
+          return this.observerList.push(obj);
+        };
+
+        ObserverList.prototype.count = function () {
+          return this.observerList.length;
+        };
+
+        ObserverList.prototype.get = function (index) {
+          if (index > -1 && index < this.observerList.length) {
+            return this.observerList[index];
+          }
+        };
+
+        ObserverList.prototype.indexOf = function (obj, startIndex) {
+          var i = startIndex;
+
+          while (i < this.observerList.length) {
+            if (this.observerList[i] === obj) {
+              return i;
+            }
+            i++;
+          }
+
+          return -1;
+        };
+
+        ObserverList.prototype.removeAt = function (index) {
+          this.observerList.splice(index, 1);
+        };
+
+        return ObserverList;
+      })();
+
+      const Subject = (function () {
+        function Subject() {
+          // 구독자 리스트를 배열로 선언해도 되지만, 리스트를 한번더 추상화를 했다.
+          this.observers = new ObserverList();
+        }
+
+        Subject.prototype.addObserver = function (observer) {
+          this.observers.add(observer);
+        };
+
+        Subject.prototype.removeObserver = function (observer) {
+          this.observers.removeAt(this.observers.indexOf(observer, 0));
+        };
+
+        Subject.prototype.notify = function (context) {
+          var observerCount = this.observers.count();
+          for (var i = 0; i < observerCount; i++) {
+            this.observers.get(i).update(context);
+          }
+        };
+        return Subject;
+      })();
+
+      // The Observer
+      const Observer = (function () {
+        function Observer(props) {
+          this.name = props.name || "observerName";
+        }
+        Observer.prototype.update = function (payload) {
+          console.log(`${this.name} is recived payload`, payload);
+        };
+        return Observer;
+      })();
+
+      // main test
+
+      const subject = new Subject();
+      subject.addObserver(new Observer({ name: "ob1" })); // ob1 subscribe
+      subject.addObserver(new Observer({ name: "ob2" })); // ob2 subscribe
+
+      subject.notify({ name: "dodo" });
+
+      // Extend an object with an extension
+      function extend(obj, extension) {
+        for (var key in extension) {
+          obj[key] = extension[key];
+        }
+      }
+
+      // References to our DOM elements
+      var controlCheckbox = document.getElementById("mainCheckbox"),
+        addBtn = document.getElementById("addNewObserver"),
+        container = document.getElementById("observersContainer");
+
+      // Concrete Subject
+
+      // Extend the controlling checkbox with the Subject class
+      extend(controlCheckbox, new Subject());
+
+      // Clicking the checkbox will trigger notifications to its observers
+      controlCheckbox.onclick = function () {
+        controlCheckbox.notify(controlCheckbox.checked);
+      };
+
+      addBtn.onclick = addNewObserver;
+      // Concrete Observer
+      function addNewObserver() {
+        // Create a new checkbox to be added
+        var check = document.createElement("input");
+        check.type = "checkbox";
+
+        // Extend the checkbox with the Observer class
+        extend(check, new Observer());
+
+        // Override with custom update behaviour
+        check.update = function (value) {
+          this.checked = value;
+        };
+        // Add the new observer to our list of observers
+        // for our main subject
+        controlCheckbox.addObserver(check);
+
+        // Append the item to the container
+        container.appendChild(check);
+      }
+    </script>
+  </body>
+</html>
