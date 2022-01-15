@@ -1,3 +1,4 @@
-import 'products/ProductsIndex';
+import "productsApp/ProductsIndex";
+import "productsApp/ProductsUtiles";
 
-console.log('Container!');
+console.log("Container!");
