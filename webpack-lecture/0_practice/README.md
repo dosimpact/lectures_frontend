@@ -26,6 +26,8 @@
     - webpack에서 바벨기능 처리
   - [x] sass-loader
     - scss 파일 처리
+  - [ ] postcss-loader
+    - scss 파일 처리
 
 - [x] webpack 플러그인
 
@@ -73,10 +75,14 @@
   - [ ] HRM
 
 - [ ] 최적화
+
   - [ ] production 모드
   - [ ] optimazation 속성
   - [ ] 코드 스플리팅
   - [ ] externals
+
+- [ ] 추가 폴리필
+  - [ ]
 
 ### cf) feedback
 
