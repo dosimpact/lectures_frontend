@@ -20,7 +20,59 @@ class PrintingMachine {
 }
 
 // 2.Command interface
+class Command {
+  execute() {}
+}
 
 // 3.Concrete Command
+class TurnOnCommand extends Command {
+  constructor(printingMachine) {
+    super();
+    this.printingMachine = printingMachine;
+  }
+  execute() {
+    this.printingMachine.turnOn();
+  }
+}
+class TurnOffCommand extends Command {
+  constructor(printingMachine) {
+    super();
+    this.printingMachine = printingMachine;
+  }
+  execute() {
+    this.printingMachine.turnOff();
+  }
+}
+class PrintCommand extends Command {
+  constructor(printingMachine) {
+    super();
+    this.printingMachine = printingMachine;
+  }
+  execute() {
+    this.printingMachine.print();
+  }
+}
 
 // 4. invoker
+class PrinterControlPanel {
+  constructor() {
+    this.lastCommand = null;
+  }
+  pressButton(command) {
+    this.lastCommand = command;
+    command.execute();
+  }
+  pressLastCommand() {
+    if (this.lastCommand) this.lastCommand.execute();
+  }
+}
+const printingMachine = new PrintingMachine();
+const printerControlPanel = new PrinterControlPanel();
+const turnOnCommand = new TurnOnCommand(printingMachine);
+const turnOffCommand = new TurnOffCommand(printingMachine);
+const printCommand = new PrintCommand(printingMachine);
+
+printerControlPanel.pressButton(turnOnCommand);
+printerControlPanel.pressButton(turnOffCommand);
+printerControlPanel.pressButton(printCommand);
+printerControlPanel.pressLastCommand();
