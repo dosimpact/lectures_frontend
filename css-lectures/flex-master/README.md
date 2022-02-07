@@ -61,6 +61,36 @@ flex-direction : row 는 축의 방향이 row(왼쪽->오른쪽)이다
 
     그래서 main-axis 역시 row의 방향을 따라간다.
 
+```
+
+flex
+
+flex-grow	Item의 증가 너비 비율을 설정	0
+
+
+flex-shrink	Item의 감소 너비 비율을 설정	1
+
+
+flex-basis	Item의 (공간 배분 전) 기본 너비 설정	auto
+    auto    : Item의 Content-fit 을 기본으로 잡음 (기본값)
+    0       : Item의 Block-fit 을 기준
+    100px   : Item의 직접 너비를 설정
+
+cf) 블록요소의 크기는 border은 제외되는것이 기본이다.
+    box-sizing: content-box | border-box ;
+
+cf) 블록 요소의 크기는 기본으로 content-fit 이다.
+    블록 요소의 크기를 결정하면, content에 상관이 없이 결정된다.
+        이때, content가 더 많으면 내용이 넘친다
+        이는 overflow:hidden으로 가려주는것이 좋다.
+
+    flex item이 가지는 속성은 width 와 연동된다.
+    flex가 기변 너비로써 width 속성을 대처할 수 있다.
+    하지만 정적인 width를 가지고자 한다면 flex가 width를 책임지지 않도록한다.
+        이를 auto 속성으로 표기한다. ( )
+
+```
+
 # TestCase
 
 주요 포인트
@@ -69,9 +99,18 @@ flex-direction : row 는 축의 방향이 row(왼쪽->오른쪽)이다
     가변 너비의 비율을 사용하는 경우
     가변 너비의 상한선 하안선을 사용하는 경우
 
+    auto와 100% 의 차이
+
 Case.1
 
-    한줄에 요소1,2,3 이 있다.
+    한줄에 요소 1,2,3 이 있다.
     요소 1,3은 고정 너비이고, 요소 2만 늘었다 줄었다 해야하는 상황
 
-# 03
+    flex 컨테이너는 720px 까지만 늘어나야 한다.
+
+        더 커지는 상황이면 margin을 주도록 한다.
+        flex 컨테이너는 500px 이하로는 줄 수 없다.
+
+# 03 - Case.1
+
+# 04 - Case.2

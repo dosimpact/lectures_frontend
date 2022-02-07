@@ -1,16 +1,37 @@
-/* IE 핵이나 기타 방식을 제외하고 가장 원리에 충실한 방법 */
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: block;
-}
 .box {
-  float: left;
-}
-.box {
-  width: 150px;
+  /* width: 150px; */
   height: 150px;
   background-color: lightgray;
   margin: 10px;
-  float: left;
+}
+
+.flexContainer {
+  display: flex;
+  min-width: 500px;
+  /*  */
+  background-color: lightgreen;
+  margin: 0 auto;
+  max-width: 720px;
+}
+
+.flexItem {
+  /* 기본값 : 늘리지 않음, 줄어든다면 같이 줄어, 명시된 너비를 받음 */
+  /* flex: 0 1 auto; */
+
+  /* 기본값 */
+  /* flex: 1; */
+  /* flex: 1 1; */
+  /* flex: 1 1 0; */
+}
+
+.flexItem:nth-child(1) {
+  flex: 0 1 auto;
+  width: 100px;
+}
+.flexItem:nth-child(2) {
+  flex: 1 1 auto;
+}
+.flexItem:nth-child(3) {
+  flex: 0 1 auto;
+  width: 200px;
 }
