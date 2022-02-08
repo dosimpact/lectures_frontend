@@ -1,0 +1,15 @@
+/* IE 핵이나 기타 방식을 제외하고 가장 원리에 충실한 방법 */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+.box {
+  float: left;
+}
+.box {
+  width: 150px;
+  height: 150px;
+  background-color: lightgray;
+  margin: 10px;
+}
