@@ -1,8 +1,9 @@
-
 # Modern FrontEnd 학습 및 정리
 
+Points :  
+ CoreJS, Typescript, Webpack, Performance, TDD, CleanCode, Refactoring
 
-
+---
 
 # JS -> Typescript
 
