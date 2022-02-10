@@ -30,3 +30,39 @@ React Testing Library : React 구성요소 test api
 DOM Testing Library : DOM(Node) test api 
 
     https://testing-library.com/docs/
+
+
+Jest : Javascript Testing Library  
+
+    facebook made
+    ```
+        {filename}.test.js , {filename}.spec.js , files in "tests" folder
+    ```
+
+
+## documents 
+
+https://testing-library.com/docs/queries/about/  
+
+
+```
+Type of Query	0 Matches	1 Match	    >1 Matches	        Retry (Async/Await)
+
+Single Element				
+
+getBy...	Throw error	Return element	Throw error	No
+queryBy...	Return null	Return element	Throw error	No
+findBy...	Throw error	Return element	Throw error	Yes
+
+Multiple Elements				
+
+getAllBy...	    Throw error	    Return array	Return array	No
+queryAllBy...	Return []	    Return array	Return array	No
+findAllBy...	Throw error	    Return array	Return array	Yes
+
+```
+
+# 리액트 테스트를 위한 모듈 설치 및 설정
+
+
+# 간단한 앱 만들며 테스트
