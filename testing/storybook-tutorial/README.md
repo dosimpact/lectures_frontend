@@ -23,5 +23,24 @@ cd taskbox
 # install latest package(-p) & init 
 npx -p @storybook/cli sb init
 
+--- 
+
+# Run the test runner (Jest) in a terminal:
+yarn test --watchAll
+
+# Start the component explorer on port 6006:
+yarn storybook
+
+# Run the frontend app proper on port 3000:
 yarn start
+
+---
+# CSS 복붙 index.css < https://github.com/chromaui/learnstorybook-code/blob/master/src/index.css
+
+# git에 리소스 일부분 복사해오기 
+
+npx degit chromaui/learnstorybook-code/src/assets/font src/assets/font
+npx degit chromaui/learnstorybook-code/src/assets/icon src/assets/icon
+
 ```
+

@@ -21,7 +21,7 @@ test.only("update product's total when products change", async () => {
 
   userEvent.type(americaInput, "1");
 
-  console.log('use', productsTotal.textContent);
+  console.log("use", productsTotal.textContent);
   expect(productsTotal).toHaveTextContent("1000");
 });
 
