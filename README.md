@@ -5,6 +5,33 @@ Points :
 
 ---
 
+### Catagory & type
+
+```
+# Catagory 
+  
+Javascript
+Styles
+JS-DOM
+Typescript
+Webpack
+Performance
+Testing
+Refactoring  
+  CleanCode  
+Library
+
+# type
+
+lecture : 영상 강의  
+conf : 컨퍼런스  
+article : 책, 인터넷 자료  
+tutorials : start 코스 스니펫  
+pratice : 연습  
+
+```
+---
+
 # JS -> Typescript
 
 ## 코어 JS
