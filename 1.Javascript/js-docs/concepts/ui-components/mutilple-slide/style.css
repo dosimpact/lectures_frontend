@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.slide-wrapper {
+  position: relative;
+  height: 300px;
+  margin: 50px auto;
+  overflow: hidden;
+  width: 900px;
+}
+.slide-container {
+  background-color: bisque;
+  position: absolute;
+  display: flex;
+  flex-flow: row nowrap;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 200px;
+  transition: transform 0.5s ease-out, left 0.5s ease-out;
+}
+.slide-item {
+  margin-right: 10px;
+}
+.slide-item img {
+  width: 300px;
+  height: 200px;
+}
+.slide-handler {
+  width: 900px;
+  margin: 0px auto;
+}
+.slide-handler .prevBtn {
+  cursor: pointer;
+}
+.slide-handler .nextBtn {
+  cursor: pointer;
+}

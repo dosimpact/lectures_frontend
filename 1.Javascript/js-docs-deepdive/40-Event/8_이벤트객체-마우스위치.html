@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      .box {
+        width: 50px;
+        height: 50px;
+        background-color: yellowgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <div id="minfo">x: y:</div>
+    <script>
+      // ✅ 이벤트 객체의 프로퍼티 - 마우스 정보
+      const $info = document.querySelector("#minfo");
+      const handleMouseMove = (e) => {
+        console.log(e.clientX, e.clientY);
+        $info.style.transform = `translate(${e.clientX}px,${e.clientY}px)`;
+        $info.innerHTML = `x:${e.clientX},y:${e.clientY}`;
+      };
+      document.addEventListener("mousemove", handleMouseMove);
+    </script>
+  </body>
+</html>

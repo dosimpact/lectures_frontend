@@ -1,0 +1,23 @@
+{
+  "name": "ch09-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chance": "^1.0.8",
+    "@types/node": "^13.5.2",
+    "@types/ramda": "^0.26.40",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "chance": "^1.1.4",
+    "ramda": "^0.26.1"
+  }
+}

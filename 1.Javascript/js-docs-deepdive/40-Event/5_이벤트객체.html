@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // ✅ ## 40.5 이벤트 객체
+      let e = new Event("foo");
+      console.log(e); //Event {isTrusted: false, type: 'foo', target: null, currentTarget: null, eventPhase: 0, …}
+      console.log(e.type); // foo 라는 이벤트
+      console.log(e instanceof Event); // true  // Event는 object르 상속받는다.
+      console.log(e instanceof Object); // true // object
+
+      // ✅ Event객체를 상속받는 다양한 이벤트들이 있다.
+      // -- Object - Event - UIEvent - MouseEvent | - click 이벤트객체 와 같이
+      // -- 프로토타입 체인이 생성이 된다.
+      e = new FocusEvent("focus");
+      e = new MouseEvent("click");
+      e = new KeyboardEvent("keydown");
+      e = new InputEvent("change");
+
+      // ✅ 이벤트 객체의 생성
+      // -- 1. JS코드가 커스텀 이벤트를  생성하는 경우
+      // -- 2. 사용자에 의해(사용자의 클릭) 이벤트 객체를 생성하는 경우
+
+      // ✅ 이벤트 인터페이스
+      // -- 동록된 이벤트 type에 따라서 , Event객체를 생성시킨다.
+      window.onload = console.log // Event 객체 생성
+      window.oninput = console.log // InputEvent 객체 생성
+      window.onclick = console.log // MouseEvent 객체 생성
+
+
+      // ✅ 이벤트 객체의 프로퍼티
+      $button = document.createElement("button")
+      $button.addEventListener("click",function(e){
+          console.log("click",e);
+      })
+      document.body.appendChild($button)
+      document.querySelector("button").click()
+
+    </script>
+  </body>
+</html>

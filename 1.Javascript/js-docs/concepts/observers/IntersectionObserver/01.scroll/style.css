@@ -1,0 +1,31 @@
+.example {
+  padding-top: 800px;
+  padding-bottom: 300px;
+  width: 100%;
+  background: #eee;
+  position: relative;
+}
+
+.title {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.arrow {
+  display: inline-block;
+  animation: bounce 1s infinite ease;
+}
+
+.box {
+  margin: 0 auto 200px auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  background: #7de2fc linear-gradient(-225deg, #7de2fc 0%, #b9b6e5 100%);
+}
+
+.box.tada {
+  animation: tada 1s ease;
+}

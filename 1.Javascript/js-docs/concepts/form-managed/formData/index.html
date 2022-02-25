@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var wantedBody = {
+            name:"dodo",
+            refEmail:["t1@t.c","t2@t.c","t3@t.c"],
+            introduce:"At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.",
+            favCourse:"js", // radio button one of [js,ts,react]
+            smsId:true, // checkbox -> boolean
+            emailId:false,// checkbox -> boolean
+            tags:["A","B"], //checkbox -> string array
+            grade:1,// select & option -> one of [1,2,3,4]
+            startDate:"2021-08-05",
+            endDateTime:"2021-08-05T11:42", // trans UTC+00 
+            refer:{
+                name:'참고인이름',
+                age:12
+            }
+        }
+    </script>
+    <!-- name -> {name:value} -->
+    <form id="formId">
+        <!-- (1) input -->
+        <label for="nameID">이름</label>
+        <input type="text" name="name" id="nameID" value="dodo">
+        <br/>
+
+        <!-- (2) input Array -->
+        <label for="nameID">참조자 이메일</label>
+        <input type="email" name="refEmail" value="t1@t.c">
+        <input type="email" name="refEmail" value="t2@t.c">
+        <input type="email" name="refEmail" value="t3@t.c"><br/>
+        
+        <!-- (3) textarea -->
+        <label for="desc">소개</label>
+        <textarea id="desc" name="introduce" rows="3" cols="50">At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
+        </textarea>
+        <br/>
+        <!-- radio -->
+        <label>과정 선택</label>
+        <input type="radio" name="favCourse" id="Javascript" value="js">
+        <label for="Javascript">자스</label>
+
+        <input type="radio" name="favCourse" id="Tyescript" value="ts" checked>
+        <label for="Tyescript">타스</label>
+        
+        <input type="radio" name="favCourse" id="React" value="react">
+        <label for="React">리액트</label>
+        <br/>
+
+        <!-- checkbox eachValue-->
+        <label>알림설정</label>
+        <input type="checkbox" name="notice_sms" id="smsId" value="notice_sms" checked>
+        <label for="smsId">문자 알림</label>
+
+        <input type="checkbox" name="notice_email" id="emailId" value="notice_email">
+        <label for="emailId">email 알림</label><br>
+        
+        
+        <!-- checkbox Array Value-->
+        <label>테그 설정</label>
+        <input type="checkbox" name="tags" id="AId" value="A" checked>
+        <label for="AId">#A</label>
+
+        <input type="checkbox" name="tags" id="BId" value="B">
+        <label for="BId">#B</label><br>
+        
+       
+        <!-- select & option -->
+        <label for="gradeId">학년 선택</label>
+        <select name="grade" id="gradeId">
+            <option value="1">1학년</option>
+            <option value="2">2학년</option>
+            <option value="3">3학년</option>
+            <option value="4">4학년</option>
+        </select><br/>
+
+        <!-- date -->
+        <label for="startDateId">수강 시작 날짜</label>
+        <input type="date" name="startDate" id="startDateId"><br/>
+
+        <!-- datetime -->
+        <label for="endDateTimeId">강의 종료 시각</label>
+        <input type="datetime-local" name="endDateTime" id="endDateTimeId"><br/>
+
+        <!-- deep name -->
+        <label>참고인 : </label>
+        <label >이름</label>
+        <input type="text" name="refer.name" value="참고인이름"  >
+        <label >나이</label>
+        <input type="text" name="refer.age" value="23" >
+
+        <!-- button - submit  -->
+        <br/>
+        <button type="submit">제출</button>
+    </form>
+    <script src="index.js"></script>
+</body>
+</html>
