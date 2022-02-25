@@ -8,28 +8,30 @@ Points :
 ### Catagory & type
 
 ```
-# Catagory 
-  
-Javascript
-Styles
-JS-DOM
-Typescript
-Webpack
-Performance
-Testing
-Refactoring  
-  CleanCode  
-Library
+# Catagory
+
+1.Javascript
+2.Typescript
+3.Styles
+4.DOM
+5.Webpack
+6.Performance
+7.Testing
+8.Refactoring
+  8.1 CleanCode
+9.Library
+10.Architecture
 
 # type
 
-lecture : 영상 강의  
-conf : 컨퍼런스  
-article : 책, 인터넷 자료  
-tutorials : start 코스 스니펫  
-pratice : 연습  
+lecture : 영상 강의
+conf : 컨퍼런스
+article : 책, 인터넷 자료
+tutorials : start 코스 스니펫
+pratice : 연습
 
 ```
+
 ---
 
 # JS -> Typescript

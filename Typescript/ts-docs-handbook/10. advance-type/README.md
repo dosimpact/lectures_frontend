@@ -1,3 +1,0 @@
-## intersection type
-
-##
