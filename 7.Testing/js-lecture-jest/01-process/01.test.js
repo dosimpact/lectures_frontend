@@ -69,3 +69,43 @@ describe("inner test", () => {
   //   console.log("counter", counter);
   // });
 });
+
+/**
+  console.log
+    outter beforeAll
+
+  console.log
+    inner beforeAll
+
+  console.log
+    outter beforeEach
+
+  console.log
+    inner beforeEach
+
+  console.log
+    counter 1
+
+  console.log
+    inner afterEach
+
+  console.log
+    done # 1
+
+  console.log
+    outter afterEach
+
+  console.log
+    inner afterAll
+
+  console.log
+    outter afterAll
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        0.186 s
+Ran all test suites.
+✨  Done in 1.04s.
+
+ */
