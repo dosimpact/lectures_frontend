@@ -28,6 +28,8 @@ console.log(o); // {a: 1}
 
 # 11-02
 
+JS 에서는 1개의 문자열당 2바이트 공간을 차지한다.  
+  - 그러면서 가변공간을 할당 후 원시타임처럼 불변성을 가진다.  
 
 
 ```javascript
@@ -39,15 +41,15 @@ var str2 = 'Hello'; // 5개의 문자로 이뤄진 문자열
 # 11-03
 
 ```javascript
+// str은 새로운 공간에 할당된 world 문자열을 가르킨다 ( 불변성)
 var str = 'Hello';
 str = 'world';
 ```
 
 # 11-04
 ```javascript
-var str = 'string';
-
 // 문자열은 유사 배열이므로 배열과 유사하게 인덱스를 사용해 각 문자에 접근할 수 있다.
+var str = 'string';
 console.log(str[0]); // s
 
 // 원시 값인 문자열이 객체처럼 동작한다.
@@ -59,12 +61,10 @@ console.log(str.toUpperCase()); // STRING
 
 ```javascript
 var str = 'string';
-
 // 문자열은 유사 배열이므로 배열과 유사하게 인덱스를 사용해 각 문자에 접근할 수 있다.
 // 하지만 문자열은 원시값이므로 변경할 수 없다. 이때 에러가 발생하지 않는다.
 str[0] = 'S';
-
-console.log(str); // string
+console.log(str); // string (불변성)
 ```
 
 # 11-06
@@ -79,7 +79,7 @@ console.log(copy);  // 80
 score = 100;
 
 console.log(score); // 100
-console.log(copy);  // ?
+console.log(copy);  // ? -- 80 유지, 값에의한 전달
 ```
 
 # 11-07
@@ -91,7 +91,7 @@ var score = 80;
 var copy = score;
 
 console.log(score, copy); // 80  80
-console.log(score === copy); // true
+console.log(score === copy); // true -- 다른 메모리공간의 80이다. 
 ```
 
 # 11-08
@@ -116,18 +116,32 @@ console.log(score === copy); // false
 # 11-09
 
 ```javascript
-var x = 10;
+var x = 10; // x라는 식별자는, 10이라는 값이 저장된 메모리의 주소값에 대한 별칭이다.
 ```
 
 # 11-10
 
 ```javascript
-var copy = score;
+var copy = score; // 값에 의한 전달도 사실, 메모리 주소를 전달 할 수 있다.
+// TMI - 파이썬의 변수는 , 
+// 두 변수가 - 동일한 메모리 주소를 가르키다가
+copy = 999;
+// 변수에 값을 넣을때야 비로소, 메모리 주소를 옮겨간다. (lazy한 불변성)
+// 이는 ECMA 스펙에 명시되지 않아 브라우저 마다 다를 수 있다. !
+
 ```
+---
+
+# 11.2 객체
+
+JS의 객체는 해시 테이블과 유사하지만 더 최적화 된 방식으로 구현되었다.  
+  - 객체는 동적으로 프로퍼티가 추가가 된다. 히든 클래스 방식을 이용한다.  
+  - C++ 같은 클래스 기반의 언어보다 느린 단점을 극복한다.  
 
 # 11-11
 
 ```javascript
+// person 이라는 변수는 안을 가보면 객체를 가르키는 주소값을 값으로 가진다.
 var person = {
   name: 'Lee'
 };
@@ -148,13 +162,14 @@ console.log(person); // {name: "Lee"}
 # 11-13
 
 ```javascript
+// 객체는 뮤터블한 특성을 가지고 있다.
+
 var person = {
   name: 'Lee'
 };
 
 // 프로퍼티 값 갱신
 person.name = 'Kim';
-
 // 프로퍼티 동적 생성
 person.address = 'Seoul';
 
@@ -166,7 +181,9 @@ console.log(person); // {name: "Kim", address: "Seoul"}
 ```javascript
 const o = { x: { y: 1 } };
 
-// 얕은 복사
+// 얕은 복사 - one Layer 만 복사가된다. 
+// 반면 깊은 복사는 객체안의 모든 객체가 deepcopy 되어진다. 
+
 const c1 = { ...o }; // 35장 "스프레드 문법" 참고
 console.log(c1 === o); // false
 console.log(c1.x === o.x); // true
@@ -185,13 +202,13 @@ console.log(c2.x === o.x); // false
 ```javascript
 const v = 1;
 
-// "깊은 복사"라고 부르기도 한다.
+// "깊은 복사"라고 부르기도 한다. (원시값)
 const c1 = v;
 console.log(c1 === v); // true
+// 원시값의 할당은 === 깊은복사라고도 ..
 
 const o = { x: 1 };
-
-// "얕은 복사"라고 부르기도 한다.
+// "얕은 복사"라고 부르기도 한다. (객체인경우)
 const c2 = o;
 console.log(c2 === o); // true
 ```
@@ -222,7 +239,6 @@ console.log(copy === person); // true
 
 // copy를 통해 객체를 변경한다.
 copy.name = 'Kim';
-
 // person을 통해 객체를 변경한다.
 person.address = 'Seoul';
 
@@ -243,6 +259,6 @@ var person2 = {
   name: 'Lee'
 };
 
-console.log(person1 === person2); // ①
-console.log(person1.name === person2.name); // ②
+console.log(person1 === person2); // false -- 메모리 주소값 비교
+console.log(person1.name === person2.name); // true -- 프리미티브 값 비교
 ```
