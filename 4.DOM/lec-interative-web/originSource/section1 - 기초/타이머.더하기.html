@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>더하기</title>
+    <style>
+      body {
+        height: 100vh;
+      }
+      .contWrap {
+        position: relative;
+        padding : 20px;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+      button {
+        font-size : 20px;
+        padding : 8px 20px;
+      }
+    </style>
+    <script>
+      //타이머, setInterval
+
+      window.onload = function(){
+
+        var num = document.querySelector(".num");
+        var button = document.querySelector(".startBtn");
+
+        button.addEventListener("click", function(){
+          interval();
+        });
+
+        var timer;
+
+        function interval(){
+          clearInterval(timer);
+
+          var secNum = 0;
+          timer = setInterval(function(){
+            secNum ++;
+            num.innerHTML = secNum;
+          }, 10)
+        }
+      }
+      
+    </script>
+    </head>
+    <body>
+      <div class="contWrap">
+        <button type="button" class="startBtn">더하기 시작</button>
+        <h1 class="num">0</h1>
+      </div>
+    </body>
+</html>

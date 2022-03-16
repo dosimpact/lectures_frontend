@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이징</title>
+    <style>
+      body {
+        /* transition : all 2.5s cubic-bezier(0.075, 0.82, 0.165, 1); */
+        overflow-x: hidden;
+        background-color: #e8e19b;
+      }
+
+      section {
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+        /* border-top: 1px dashed #333; */
+      }
+
+      section.active .image {
+        display : block;
+        /* opacity: 1; */
+      }
+
+      .innerWrap {
+        padding: 120px;
+        width: 340px;
+        margin-top:50px;
+        z-index: 50;
+      }
+      .image {
+        position: fixed;
+        right: 5%;
+        top: 20%;
+        display: none;
+        /* opacity: 0; */
+        width: 800px;
+        /* transition : all 1s ease-in-out; */
+      }
+
+
+      h1 {
+        color: #111;
+        text-align: center;
+        padding-top : 40vh;
+        font-size: 60px;
+      }
+      h2 {
+        color: #111;
+      }
+      p {
+        color : #333;
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      .pointWrap {
+        position: fixed;
+        right: 3vw;
+        top: 40%;
+        z-index: 100;
+      }
+
+      .pointWrap li {
+        list-style: none;
+        width: 12px;
+        height: 12px;
+        margin-top: 15px;
+        cursor: pointer;
+        background-color: #666;
+        border-radius: 50%;
+        transition: background .3s ease-out;
+      }
+
+      .pointWrap li.active {
+        background-color: #000;
+      }
+
+    </style>
+    <script>
+      window.onload = function(){
+        var section = document.getElementsByTagName("section");
+        // var pointBtn = document.querySelector('.pointWrap').querySelectorAll("li");
+        var pointBtn = document.querySelectorAll('.pointWrap li');
+
+        var pageNum = 0;
+        var totalNum = section.length;
+        // alert(pointBtn.length);
+
+
+        // pointBtn.addEventListener("click",)
+
+        for( var i = 0; i < pointBtn.length; i++ ){
+          (function(idx) {
+              pointBtn[idx].onclick = function() {
+                  //alert(idx);
+                  pageNum = idx;
+                  pageChangeFunc();
+
+                  window.scrollTo({
+                    top: section[pageNum].offsetTop,
+                    behavior: 'smooth',
+                  })
+              }
+          })(i);
+          
+      }
+
+
+        //스크롤 이벤트
+        window.addEventListener("scroll", function(event){
+          var scroll = this.scrollY;
+
+          for(var i=0; i<totalNum; i++){
+            if(scroll > section[i].offsetTop - window.outerHeight/1.5  && scroll < section[i].offsetTop - window.outerHeight/1.5 + section[i].offsetHeight){
+              pageNum = i;
+              break;
+            }
+          }
+          pageChangeFunc();
+        });
+
+
+        //페이지 변경
+        function pageChangeFunc(){
+          for(var i=0; i<totalNum; i++){
+            section[i].classList.remove("active");
+            // section[i].className = "";
+            pointBtn[i].classList.remove("active");
+          }
+          section[pageNum].classList.add("active");
+          pointBtn[pageNum].classList.add("active");
+          
+        }
+
+
+
+        //페이지 로드되면 바로 실행
+        pageChangeFunc();
+      }
+      
+    </script>
+    </head>
+    <body>
+      <ul class="pointWrap">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+
+      <section>
+        <h1>페이지 타이틀</h1>
+      </section>
+
+      <section>
+        <div class="innerWrap">
+          <h2>page 1</h2>
+          <p>스케치를 한다</p>
+        </div>
+        <img src="./image/pic_1.jpg" class="image" alt="나이키 스니커즈 스케치">
+      </section>
+
+      <section>
+        <div class="innerWrap">
+          <h2>page 2</h2>
+          <p>선을 정리한다.</p>
+        </div>
+        <img src="./image/pic_2.jpg" class="image" alt="">
+      </section>
+
+      <section>
+        <div class="innerWrap">
+          <h2>page 3</h2>
+          <p>컬러를 넣는다.</p>
+        </div>
+        <img src="./image/pic_3.jpg" class="image" alt="">
+      </section>
+
+      <section>
+        <div class="innerWrap">
+          <h2>page 4</h2>
+          <p>블랙 컬러를 넣는다.</p>
+        </div>
+        <img src="./image/pic_4.jpg" class="image" alt="">
+      </section>
+
+      <section>
+        <div class="innerWrap">
+          <h2>page 4</h2>
+          <p>포인트 컬러를 칠해줍니다.</p>
+        </div>
+        <img src="./image/pic_5.jpg" class="image" alt="">
+      </section>
+
+      <section>
+        <div class="innerWrap">
+          <h2>page 4</h2>
+          <p>그리고 마무리</p>
+        </div>
+        <img src="./image/pic_6.jpg" class="image" alt="">
+      </section>
+
+      <section>
+        <div class="innerWrap">
+          <h2>page 4</h2>
+          <p>스티치를 넣으면 끝</p>
+        </div>
+        <img src="./image/pic_7.jpg" class="image" alt="">
+      </section>
+    </body>
+</html>

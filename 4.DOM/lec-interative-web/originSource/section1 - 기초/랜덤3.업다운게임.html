@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤 업.다운 게임</title>
+    <style>
+      body {
+        height: 100vh;
+      }
+      .contWrap {
+        position: relative;
+        width: 400px;
+        background: #e6e6e6;
+        padding : 20px;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+      input {
+        padding : 10px 20px;
+        font-size : 20px;
+        text-align: center;
+        max-width: 170px;
+      }
+      button {
+        font-size : 20px;
+        padding : 8px 20px;
+      }
+    </style>
+    <script>
+      //변수, 조건문 if, 배열
+
+      window.onload = function(){
+        var input = document.getElementsByTagName("input")[0];
+        var result = document.querySelector(".result");
+        var button = document.querySelector(".startBtn");
+
+        button.addEventListener("click", function(){
+          resultFunc();
+        });
+
+        var resultArr = ["업 ▲", "다운 ▼", "정답!"];
+        var randomNum = 5; //정답
+
+        function resultFunc(){
+          var value = input.value;
+          // alert(value)
+
+          // if(value == randomNum){
+          //   alert("정답")
+          // }else {
+          //   alert("오답")
+          // }
+
+          if(value < randomNum){
+            result.innerHTML = resultArr[0];
+
+          }else if(value > randomNum){
+            result.innerHTML = resultArr[1];
+            
+          }else{
+            //정답
+            result.innerHTML = resultArr[2];
+          }
+          
+        }
+      }
+      
+    </script>
+    </head>
+    <body>
+
+      <div class="contWrap">
+        <h3>내가 생각한 숫자는 몇 일까~요?</h3>
+        <p class="result">(1부터 10사이)</p>
+        <input type="number" value="1" max="10" min="1">
+        <button type="button" class="startBtn">확인</button>
+      </div>
+
+    </body>
+</html>

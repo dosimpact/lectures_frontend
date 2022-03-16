@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연봉계산기</title>
+    <style>
+      body {
+        height: 100vh;
+      }
+      .contWrap {
+        position: relative;
+        width: 400px;
+        background: #eee;
+        padding : 20px;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+      input {
+        padding : 10px 20px;
+        font-size : 20px;
+        text-align: center;
+        max-width: 170px;
+      }
+      button {
+        font-size : 20px;
+        padding : 8px 20px;
+      }
+    </style>
+    <script>
+      //타이머, setInterval
+      //https://news.joins.com/DigitalSpecial/345
+      //스포츠스타 연봉계산기
+      //손흥민 연봉 153억
+
+      window.onload = function(){
+        var input = document.getElementsByTagName("input")[0];
+        var sec = document.querySelector(".sec");
+        
+        var button = document.querySelector(".startBtn");
+        button.addEventListener("click", function(){
+          interval();
+        });
+
+        var timer;
+
+        function interval(){
+          clearInterval(timer);
+
+          value = input.value * 10000;
+          secValue = value / 365 / 24 / 60 / 60;
+          
+          var secNum = 0;
+          timer = setInterval(function(){
+            secNum ++;
+            // console.log(secNum, secValue * secNum)
+            // sec.innerHTML = (secValue * secNum).toFixed(1) +"원";
+            sec.innerHTML = "당신은 "+secNum+"초에 "+ (secValue * secNum).toFixed(1) +"원 벌고 있습니다";
+          }, 1000)
+        }
+      }
+      
+    </script>
+    </head>
+    <body>
+      
+      <div class="contWrap">
+        <h3>연봉을 입력해보세요(만)</h3>
+        <input type="number" value="5000">
+        <button type="button" class="startBtn">확인</button>
+
+        <p class="sec">당신은 1초에 얼마를 벌고 있을까요?</p>
+      </div>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가위바위보</title>
+    <style>
+      h1 {
+        font-size: 100px;
+        font-weight: bold;
+      }
+      button {
+        font-size: 20px;
+        padding: 10px 30px;
+        cursor: pointer;
+      }
+    </style>
+
+    <script>
+      //배열, 랜덤, 변수
+
+      window.onload = function () {
+        var button = document.querySelector(".startBtn");
+        var h1 = document.getElementsByTagName("h1")[0];
+
+        var handArr = ["가위", "바위", "보"];
+
+        button.addEventListener("click", function () {
+          var num = Math.round(Math.random() * (handArr.length - 1));
+          // var num = Math.round( Math.random() * 2);
+          h1.innerHTML = handArr[num];
+          // alert(handArr[num])
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <button type="button" class="startBtn">리셋</button>
+    <h1>가위</h1>
+  </body>
+</html>
