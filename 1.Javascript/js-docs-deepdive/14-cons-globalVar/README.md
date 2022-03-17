@@ -192,30 +192,35 @@ console.log(db1 === db2); // true
 # 1.6.SingletonC
 
 ```js
-// 1.5 싱글톤 패턴
-// ✅ 오로지 하나의 인스턴스만 존재함을 보장
+// using private property
+// using static property
+// using readonly property
 
-const Database = (function () {
-  let instance = null;
-  function Database(url, dbName) {
-    this.url = url;
-    this.dbName = dbName;
+class DataBase {
+  // - instance
+  static #instance = null;
+  // ==
+  // - createInstance
+  static createInstance() {
+    return new DataBase();
   }
-  function createDatabaseInstance() {
-    return new Database();
-  }
-  function getDatabaseInstance() {
-    if (instance === null) {
-      instance = createDatabaseInstance();
+  // - getInstance
+  static getInstance() {
+    if (this.#instance === null) {
+      this.#instance = this.createInstance();
     }
-    return instance;
+    return this.#instance;
   }
-  return { getDatabaseInstance };
-})();
-
-const db1 = Database.getDatabaseInstance();
-// another side
-const db2 = Database.getDatabaseInstance();
-console.log(db1 === db2); // true
+  // static + readonly
+  static get instance() {
+    return this.#instance;
+  }
+  // -
+}
+const inst1 = DataBase.getInstance();
+const inst2 = DataBase.getInstance();
+console.log(inst1);
+console.log(inst1 === inst2);
+console.log(DataBase.instance);
 
 ```
