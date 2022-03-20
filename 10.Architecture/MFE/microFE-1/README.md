@@ -1,7 +1,24 @@
-- [ref](#ref)
-- [이점](#이점)
-- [예) 음식배달 웹](#예-음식배달-웹)
+- [micro-frontends](#micro-frontends)
+  - [ref](#ref)
+  - [이점](#이점)
+  - [예) 음식배달 웹](#예-음식배달-웹)
+  - [통합 접근 방식](#통합-접근-방식)
+    - [서버 측 템플릿 구성 (SSR 런타임)](#서버-측-템플릿-구성-ssr-런타임)
+    - [빌드 타임 통합](#빌드-타임-통합)
+    - [iframe을 통한 런타임 통합](#iframe을-통한-런타임-통합)
+    - [JavaScript를 통한 런타임 통합](#javascript를-통한-런타임-통합)
+    - [웹 구성 요소를 통한 런타임 통합](#웹-구성-요소를-통한-런타임-통합)
+- [고려해야할 점](#고려해야할-점)
+  - [스타일링](#스타일링)
+  - [Shared component libraries](#shared-component-libraries)
+  - [애플리케이션 간 커뮤니케이션](#애플리케이션-간-커뮤니케이션)
+  - [백엔드 통신](#백엔드-통신)
+  - [테스트](#테스트)
+- [Pattern: Backends For Frontends](#pattern-backends-for-frontends)
+  - [ref](#ref-1)
 
+
+# micro-frontends
 
 ## ref
 
@@ -46,8 +63,10 @@ https://martinfowler.com/articles/micro-frontends.html.
 
 ## 통합 접근 방식
 
+- 1. 빌드 타임 통합  
+- 2. 런타임 통합  
 
-### 서버 측 템플릿 구성
+### 서버 측 템플릿 구성 (SSR 런타임)
 
 html template 을 이용해서 microApp의 HTML 파일을 합쳐서 서버측 랜더링을 한다.  
 
@@ -237,3 +256,15 @@ Backend for frontend 패턴 : https://samnewman.io/patterns/architectural/bff/
 ## 테스트
 
 ...continue
+
+
+
+
+# Pattern: Backends For Frontends
+
+
+## ref 
+
+Pattern: Backends For Frontends : https://samnewman.io/patterns/architectural/bff/
+
+
