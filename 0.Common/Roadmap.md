@@ -49,6 +49,7 @@
 - [ ] Web3.0 - infra structure configure.
 - [ ] Web3.0 - NFT ecosystem - toyProject(Youtube commenter)
 - [ ] Web3.0 - NFT ecosystem - cache slider (web2.0을 옮기는 플젝)
+- [ ] DAO - ChromeWeb Extension Ads cache slider (web2.0을 옮기는 플젝)
 
 # VOD - project: tutorials with todo. 
 
