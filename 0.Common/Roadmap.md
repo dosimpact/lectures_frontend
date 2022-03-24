@@ -42,6 +42,7 @@
 
 # toy project list-up
 
+- [ ] Javascript Ui Library Common Module Package.  
 - [ ] 🚀 Grafana Sentry Overview.   
 - [ ] 🚀 React MFE - script run time Integration.
 - [ ] 🚀 javascript module build time integration.
