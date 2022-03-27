@@ -1,0 +1,15 @@
+{
+  "name": "consumer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "dosimpact <ypd03008@gmail.com> (https://github.com/DosImpact)",
+  "license": "ISC",
+  "dependencies": {
+    "@dosimpact/hi": "^0.1.0"
+  }
+}
