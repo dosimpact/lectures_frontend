@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+// https://fonts.google.com/
+
+body {
+    overflow-x: hidden;
+    background: url(../image/bg.jpg);
+    font-family: 'Do Hyeon', sans-serif;
+}
+.starBg {
+    background: url(../image/star.png);
+}
+
+section {
+    position: relative;
+    width:100vw;
+    &.top {
+        min-height: 160vh;
+        h1.title {
+            position: relative;
+            color: #fff;
+            text-align: center;
+            padding-top: 35vh;
+            font-size: 40px;
+            font-weight: 100;
+        }
+    }
+    &.bottom {
+        background: url(../image/bottom.png) center bottom / 100% no-repeat;
+        min-height: 60vh;
+        
+        .contWrap {
+            margin: 0 auto;
+            width:100%;
+            max-width: 700px;
+            ul{
+                li {
+                    display: inline-block;
+                    margin : 0 2%;
+                    width: 130px;
+                    height: 200px;
+                    border-radius: 6px 6px 6px 6px;
+                    box-sizing: border-box ;
+                    padding: 10px;
+                    background: linear-gradient(45deg, #f7b733, #fc4a1a); 
+
+                    p {
+                        font-size: 20px;
+                        color: #fff;
+                        border-bottom: 2px dashed #fff;
+                    }
+                }
+            }
+            h2 {
+                text-align: center;
+                color: #fff;
+                margin-top:30px;
+                font-weight: 100;
+            }
+        }
+    }
+}
+
+
+.starBg {
+    position: fixed;
+    top:0;
+    width:100vw;
+    height: 200vh;
+}

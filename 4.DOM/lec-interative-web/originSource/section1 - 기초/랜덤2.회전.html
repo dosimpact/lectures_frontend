@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>화살표 회전</title>
+    <style>
+      body {
+        overflow: hidden;
+      }
+      h1 {
+        font-size : 20px;
+      }
+      button {
+        font-size: 20px;
+        padding : 10px 30px;
+        cursor : pointer;
+      }
+      .arrowWrap {
+        margin : 30px;
+      }
+      .arrowWrap img {
+        transition : transform 2s cubic-bezier(1.000, -0.010, 0.175, 0.970);
+        /* transition: all .2s ease-in-out; */
+        width: 30%;
+      }
+
+    </style>
+    <script>
+      //랜덤, transform, rotate
+
+      window.onload = function(){
+        var resetBtn = document.querySelector(".resetBtn");
+        var startBtn = document.querySelector(".startBtn");
+
+        var h1 = document.getElementsByTagName("h1")[0];
+        var arrow = document.querySelector(".arrow");
+        var rotateNum = 0;
+
+        //초기화
+        resetBtn.addEventListener("click", function(){
+          rotateNum = 0;
+          h1.innerHTML = rotateNum + "deg";
+          arrow.style.transform = "rotate("+ rotateNum +"deg)";
+        })
+
+        startBtn.addEventListener("click", function(){
+          rotateNum = Math.round(Math.random()*720);
+          // alert(rotateNum)
+          h1.innerHTML = rotateNum + "deg";
+
+          arrow.style.transform = "rotate("+ rotateNum +"deg)";
+
+        })
+      }
+      
+    </script>
+    </head>
+    <body>
+      <button type="button" class="resetBtn">리셋</button>
+      <button type="button" class="startBtn">회전</button>
+      <h1>0deg</h1>
+      <div class="arrowWrap">
+        <img src="./image/up-arrow.svg" alt="arrow" class="arrow">
+      </div>
+    </body>
+</html>
