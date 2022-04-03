@@ -1,6 +1,6 @@
 // using private property
 // using static property
-// using readonlt property
+// using readonly property
 
 class DataBase {
   // - instance

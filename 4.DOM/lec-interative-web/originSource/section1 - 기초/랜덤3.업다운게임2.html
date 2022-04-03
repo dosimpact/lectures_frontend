@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤 업.다운 게임</title>
+    <style>
+      body {
+        height: 100vh;
+        background: linear-gradient(120deg, #0272a4, #f6a564);
+      }
+      .contWrap {
+        position: relative;
+        width: 400px;
+        background: rgba(255,255,255, .7);
+        padding : 50px 20px;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        border-radius: 20px 20px 20px 20px;
+      }
+      input {
+        padding : 10px 20px;
+        font-size : 20px;
+        text-align: center;
+        max-width: 60px;
+      }
+      button {
+        font-size : 18px;
+        font-weight: bold;
+        padding : 10px 40px;
+      }
+    </style>
+    <script>
+      //변수, 조건문 if, 배열, setTimeout
+
+      window.onload = function(){
+        var input = document.getElementsByTagName("input")[0];
+        var result = document.querySelector(".result");
+        
+        var button = document.querySelector(".startBtn");
+        button.addEventListener("click", function(){
+          resultFunc();
+        });
+
+        var resultArr = ["업 ▲", "다운 ▼", "정답!"]
+        var randomNum = returnNum(50);//Math.round(Math.random()*50);
+
+        function resultFunc(){
+          var value = input.value;
+
+          if(value < randomNum){
+            result.innerHTML = resultArr[0];
+
+          }else if(value > randomNum){
+            result.innerHTML = resultArr[1];
+
+          }else{
+            //정답
+            result.innerHTML = resultArr[2];
+            alert("정답입니다.")
+            //2초뒤 리셋
+            setTimeout(function(){
+              resetFunc();
+            }, 2000)
+          }
+          
+        }
+
+        //초기화
+        function resetFunc(){
+          input.value = 1;
+          result.innerHTML = "한 판더! (1부터 50사이 정수)";
+          // randomNum = Math.round(Math.random()*50);
+          randomNum = returnNum(50);
+        }
+
+        //랜덤 넘버 리턴
+        function returnNum(num){
+          return Math.round(Math.random()*num);
+        }
+
+      }
+      
+    </script>
+    </head>
+    <body>
+      
+      <div class="contWrap">
+        <h2>내가 생각한 숫자를 맞춰보세요!</h2>
+        <p class="result">(힌트 : 1부터 50사이 정수)</p>
+        <input type="number" value="1" max="50" min="1">
+        <button type="button" class="startBtn">확인</button>
+      </div>
+    </body>
+</html>

@@ -1,0 +1,155 @@
+body {
+  overflow: hidden;
+  font-size: 16px;
+}
+
+.contentWrap {
+  background: linear-gradient(120deg, #0272a4, #f6a564);
+  width: 100vw;
+  height: 100vh;
+}
+
+.contentWrap .album {
+  position: absolute;
+  top: 47%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 400px;
+  transition: all .4s ease-in-out;
+}
+
+@media only screen and (max-width: 720px) {
+  .contentWrap .album {
+    top: 40%;
+    width: 300px;
+    height: 200px;
+  }
+}
+
+.contentWrap .album .coverImg {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  box-shadow: 2px 14px 40px rgba(0, 0, 0, 0.3);
+}
+
+.contentWrap .album .coverImg img {
+  width: inherit;
+  height: inherit;
+}
+
+@media only screen and (max-width: 720px) {
+  .contentWrap .album .coverImg {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+.contentWrap .album .disk {
+  position: absolute;
+  top: 4px;
+  left: 30%;
+  width: 392px;
+  height: 392px;
+  border-radius: 50%;
+  background: linear-gradient(120deg, #000, #333333, #000);
+  box-shadow: 4px 14px 40px rgba(0, 0, 0, 0.3);
+  transition: left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: rotateAni 10s ease infinite;
+}
+
+@media only screen and (max-width: 720px) {
+  .contentWrap .album .disk {
+    width: 244px;
+    height: 244px;
+  }
+}
+
+.contentWrap .album .disk .disk_inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 160px;
+  height: 160px;
+  background-color: #0473a4;
+  border-radius: 50%;
+  border: 3px dashed rgba(255, 255, 255, 0.4);
+}
+
+@media only screen and (max-width: 720px) {
+  .contentWrap .album .disk .disk_inner {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.contentWrap .album .disk .disk_inner::after {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 7px;
+  height: 7px;
+  background-color: black;
+  border-radius: 50%;
+}
+
+.contentWrap .album:hover .disk {
+  left: 40%;
+  transition-delay: 0s;
+}
+
+.buttonWrap {
+  position: fixed;
+  bottom: 5vh;
+  text-align: center;
+  width: 100%;
+}
+
+.buttonWrap button {
+  padding: 6px 20px;
+  margin: 0 3px;
+  background-color: #000;
+  color: #fff;
+  transition: all .3s ease-out;
+}
+
+.buttonWrap button:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.buttonWrap .pointWrap {
+  position: relative;
+  display: inline-block;
+  padding: 0 10px;
+}
+
+.buttonWrap .pointWrap li {
+  position: relative;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  text-align: center;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  transition: background .3s ease-out;
+}
+
+.buttonWrap .pointWrap li.active {
+  background-color: black;
+}
+
+@keyframes rotateAni {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

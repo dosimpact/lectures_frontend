@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이징</title>
+    <style>
+      body {
+        overflow-x: hidden;
+        background-color: #000;
+      }
+
+      section {
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+        border-top: 1px dashed #333;
+      }
+
+      /* 본문 */
+      section .innerWrap {
+        position: relative;
+        z-index: 100;
+        padding: 120px;
+        width: 340px;
+        margin-top:50px;
+      }
+
+      /* 이미지 영역 활성 */
+      section.active .image {
+        opacity: 1;
+      }
+
+      /* 이미지 */
+      section .image {
+        position: fixed;
+        width: 100%;
+        right: -10%;
+        top: 22%;
+        opacity: 0;
+        transition : opacity 1s ease-in-out;
+      }
+
+
+
+      h1 {
+        color: #fff;
+        text-align: center;
+        margin-top : 40vh;
+        font-size: 60px;
+      }
+      h2 {
+        color: #333;
+      }
+      p {
+        color : #fff;
+        font-size: 16px;
+        line-height: 24px;
+      }
+    </style>
+    <script>
+      window.onload = function(){
+        var section = document.getElementsByTagName("section");
+        var pageNum = 0;
+        var totalNum = section.length;
+
+        //스크롤 이벤트
+        window.addEventListener("scroll", function(event){
+          var scroll = this.scrollY;
+
+          for(var i=0; i<totalNum; i++){
+            if(scroll > section[i].offsetTop - window.outerHeight/1.5  && scroll < section[i].offsetTop - window.outerHeight/1.5 + section[i].offsetHeight){
+              pageNum = i;
+              break;
+            }
+          }
+          pageChangeFunc();
+        });
+
+
+        //페이지 변경
+        function pageChangeFunc(){
+
+          for(var i=0; i<totalNum; i++){
+            section[i].classList.remove("active");
+            // section[i].className = "";
+          }
+          section[pageNum].classList.add("active");
+
+        }
+
+        //페이지 로드되면 바로 실행
+        pageChangeFunc();
+      }
+      
+    </script>
+    </head>
+    <body>
+      
+      <section>
+        <h1>페이지 타이틀</h1>
+      </section>
+
+      <section>
+        <div class="innerWrap">
+          <h2>page 1</h2>
+          <p>같이 이름자 없이 어머니, 이제 소학교 봅니다. 어머니, 애기 사람들의 오면 별 듯합니다. 마리아 이제 봄이 하나에 별빛이 보고, 이런 릴케 아이들의 듯합니다. 잔디가 써 한 가난한 하나에 내일 이름을 이름자를 피어나듯이 까닭입니다. 어머님, 새워 시인의 까닭이요, 이름과, 못 나는 듯합니다. 이런 하나에 잔디가 까닭이요, 풀이 경, 계십니다. 아이들의 이름자 하나에 북간도에 봅니다. 별 너무나 다 있습니다. 이름과, 아무 아스라히 불러 때 이름을 듯합니다. 겨울이 책상을 부끄러운 멀리 나는 듯합니다.</p>
+        </div>
+        <img src="./image/sample1.png" class="image" alt="">
+      </section>
+
+      <section>
+        <div class="innerWrap">
+          <h2>page 2</h2>
+          <p>한 사람들의 멀리 추억과 까닭입니다. 그리워 이름자 별 위에 이런 당신은 별들을 까닭입니다. 밤이 다 차 파란 시와 버리었습니다. 속의 못 별에도 별들을 멀리 릴케 봅니다. 하늘에는 소녀들의 이름자 것은 속의 나의 까닭이요, 듯합니다. 패, 이름을 이름자 보고, 별 비둘기, 언덕 마디씩 가득 봅니다. 프랑시스 계절이 많은 하나에 이런 까닭이요, 까닭입니다. 이국 옥 부끄러운 나는 하나의 겨울이 이름과, 피어나듯이 멀듯이, 까닭입니다. 부끄러운 시인의 차 이네들은 새워 무성할 하나에 나는 있습니다. 사랑과 못 나는 차 이국 까닭입니다.</p>
+        </div>
+        <img src="./image/sample2.png" class="image" alt="">
+      </section>
+
+      <section>
+        <div class="innerWrap">
+          <h2>page 3</h2>
+          <p>이런 덮어 아무 마디씩 이름과, 하나에 별들을 딴은 멀리 듯합니다. 계집애들의 아스라히 헤일 계십니다. 때 했던 어머님, 하나 별 경, 봅니다. 불러 별에도 헤일 별 라이너 오면 봅니다. 묻힌 못 소학교 까닭입니다. 자랑처럼 벌써 나의 소녀들의 지나고 까닭입니다. 써 쉬이 나는 이름자 다 노루, 이름과, 이름과, 봅니다. 나의 한 하나에 봅니다. 별 프랑시스 딴은 애기 지나고 마디씩 이름자를 언덕 자랑처럼 봅니다. 오면 파란 비둘기, 노새, 있습니다.</p>
+        </div>
+        <img src="./image/sample3.png" class="image" alt="">
+      </section>
+
+      <section>
+        <div class="innerWrap">
+          <h2>page 4</h2>
+          <p>책상을 멀리 많은 이런 이름과, 별을 거외다. 까닭이요, 하나 하나에 때 지나가는 언덕 헤는 거외다. 풀이 북간도에 잔디가 위에 봅니다. 이름을 하나에 별들을 나는 가난한 내 다하지 있습니다. 벌레는 패, 아무 듯합니다. 이름자 이름과, 헤는 이웃 흙으로 봅니다. 없이 이네들은 묻힌 벌써 오면 책상을 한 봅니다. 나의 마디씩 위에도 때 이름과, 내린 별 딴은 버리었습니다. 토끼, 이웃 하나의 가득 써 무성할 있습니다.</p>
+        </div>
+        <img src="./image/sample4.png" class="image" alt="">
+      </section>
+    </body>
+</html>
