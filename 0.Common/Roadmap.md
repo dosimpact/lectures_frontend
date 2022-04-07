@@ -42,6 +42,9 @@
 
 # toy project list-up
 
+- [ ] 특정 컴포넌트와 사용자의 인터렉션 로깅을 남기는 HOC, Hooks 만들기 
+- [ ] 특정 포트를 사용하는 프로세스 종료하기. node cli 만들기 
+- [ ] Backend for frontend fullStack Settings.  
 - [ ] Javascript Ui Library Common Module Package.  
 - [ ] 🚀 Grafana Sentry Overview.   
 - [ ] 🚀 React MFE - script run time Integration.
