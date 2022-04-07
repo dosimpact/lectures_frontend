@@ -42,6 +42,7 @@
 
 # toy project list-up
 
+- [ ] boiler plate maker- https://dustinpfister.github.io/2019/09/23/nodejs-simple-file-generator/
 - [ ] 특정 컴포넌트와 사용자의 인터렉션 로깅을 남기는 HOC, Hooks 만들기 
 - [ ] 특정 포트를 사용하는 프로세스 종료하기. node cli 만들기 
 - [ ] Backend for frontend fullStack Settings.  
