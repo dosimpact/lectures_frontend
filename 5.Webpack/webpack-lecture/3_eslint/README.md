@@ -110,7 +110,8 @@ module.exports = {
 
 ```
 
-## .prettierrc
+## .prettierrc. 
+
 - 프리티어의 규칙을 설정
 - 플러그인덕에 eslint-plugin-prettier에서 인식한다.
 
