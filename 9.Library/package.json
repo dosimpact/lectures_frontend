@@ -1,0 +1,13 @@
+{
+  "name": "9.Library",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "joi": "^17.6.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.34",
+    "query-string": "^7.1.1"
+  }
+}
