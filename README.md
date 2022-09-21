@@ -271,3 +271,54 @@ console.log(nCourse4.toJS());
 
 render(<App />, document.getElementById("root"));
 ```
+
+
+
+---
+
+```
+
+
+
+
+docker run -d \
+  -e REDIS_PASSWORD=forestgo \
+  -p 3000:6379 \
+  --name forest_redis \
+  --restart always \
+  redis:latest /bin/sh -c 'redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}'
+
+
+docker run -d \
+  -e REDIS_PASSWORD=forestgo \
+  -p 4000:6379 \
+  --name forest_redis_q \
+  --restart always \
+  redis:latest /bin/sh -c 'redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}'
+
+
+docker run -d \
+  -e REDIS_PASSWORD=forestgo \
+  -p 5000:6379 \
+  --name forest_redis_session \
+  --restart always \
+  redis:latest /bin/sh -c 'redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}'
+
+docker run -d \
+  -e REDIS_PASSWORD=forestgo \
+  -p 6000:6379 \
+  --name forest_redis_api_cache \
+  --restart always \
+  redis:latest /bin/sh -c 'redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}'
+
+
+
+redis-cli -p 3000 -a forestgo
+
+// 메시지큐, REST API 캐시
+
+redis-cli -h dosimpact.iptime.org -p 23000 -a forestgo
+
+
+
+```
