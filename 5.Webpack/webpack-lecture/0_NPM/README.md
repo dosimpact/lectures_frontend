@@ -1,3 +1,9 @@
+- [1. NPM](#1-npm)
+  - [프론트 엔드 개발에 Nodejs가 필요한 이유](#프론트-엔드-개발에-nodejs가-필요한-이유)
+  - [패키지 관리](#패키지-관리)
+  - [버전의 범위 관리](#버전의-범위-관리)
+- [ref](#ref)
+
 
 ## 1. NPM
 
@@ -14,12 +20,14 @@
 ### 패키지 관리  
 
 NPM은 유의적버전(semantic version)을 따른다.
+
 - eg) react:"^16.12.0"  
 - 주 버전 Major Version : 16    -> 기존 버전과 호환되지 않게 변경한 경우
 - 부 버전 Minor Version : 12    -> 기존 버전과 호환되면서 기능이 추가된 경우
 - 수 부전 Patch  Version : 0     -> 기존 버전과 호환되면서 버그를 수정한 경우  
 
 ### 버전의 범위 관리
+
 case1 ) 버전을 직접 명시  
 - eg) npm install react:16.0.12  
 
@@ -50,6 +58,7 @@ case4 ) ^ 버전 명시 --- ✔ 지금 사용하는 방법
 
 
 ## ref
+
 - 강의  
 https://www.inflearn.com/course/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/lecture/31727?tab=curriculum
 

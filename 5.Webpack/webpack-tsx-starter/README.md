@@ -6,7 +6,7 @@ npx degit https://github.com/gopinav/React-TypeScript-Webpack-Starter my-app
 
 cd my-app &&
 yarn
-
+ 
 ## Run dev server
 
 yarn start
