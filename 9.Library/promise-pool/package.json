@@ -1,0 +1,15 @@
+{
+  "name": "promise-pool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "01.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "dosimpact <ypd03008@gmail.com> (https://github.com/DosImpact)",
+  "license": "ISC",
+  "dependencies": {
+    "@supercharge/promise-pool": "^2.3.2"
+  }
+}
