@@ -3,6 +3,9 @@
     shots: number;
     hasMilk: boolean;
   };
+  /**
+   * Point1. static member field, function
+   */
 
   class CoffeeMaker {
     static BEANS_GRAMM_PER_SHOT: number = 7; // class level
@@ -18,7 +21,7 @@
 
     makeCoffee(shots: number): CoffeeCup {
       if (this.coffeeBeans < shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT) {
-        throw new Error('Not enough coffee beans!');
+        throw new Error("Not enough coffee beans!");
       }
       this.coffeeBeans -= shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT;
       return {

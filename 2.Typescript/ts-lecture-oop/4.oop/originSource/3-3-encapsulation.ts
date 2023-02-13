@@ -3,6 +3,11 @@
     shots: number;
     hasMilk: boolean;
   };
+  /**
+   * Point1. access control : public/private/protected
+   *
+   * Point2. 캡슐화 : with private 변수 + getter, setter
+   */
 
   // public
   // private
@@ -21,14 +26,14 @@
 
     fillCoffeeBeans(beans: number) {
       if (beans < 0) {
-        throw new Error('value for beans should be greater than 0');
+        throw new Error("value for beans should be greater than 0");
       }
       this.coffeeBeans += beans;
     }
 
     makeCoffee(shots: number): CoffeeCup {
       if (this.coffeeBeans < shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT) {
-        throw new Error('Not enough coffee beans!');
+        throw new Error("Not enough coffee beans!");
       }
       this.coffeeBeans -= shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT;
       return {
@@ -56,7 +61,7 @@
     }
     constructor(private firstName: string, public lastName: string) {}
   }
-  const user = new User('Steve', 'Jobs');
+  const user = new User("Steve", "Jobs");
   user.age = 6;
   console.log(user.fullName);
 }
