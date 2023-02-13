@@ -2,7 +2,8 @@
   // function: login -> success, fail ⏱
 
   // Point1. discriminated로 union(literal object) 타입을 좁히고자 한다.
-  // - 공통적인 필드 가지고, 이는 다른 string liberal 값으로 구별 할 수 있다.
+  // - 공통적인 프로퍼티를 가지도록 한다.
+  // - [key]:string1 | string2 등
 
   type SuccessState = {
     result: "success";
