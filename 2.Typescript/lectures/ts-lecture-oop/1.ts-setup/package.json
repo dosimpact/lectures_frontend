@@ -1,0 +1,19 @@
+{
+  "name": "1.ts-setup",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/index.ts"
+  },
+  "dependencies": {
+    "typescript": "^4.9.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.1"
+  },
+  "description": "- [init ts project setting](#init-ts-project-setting)   - [node.js with ts-node](#nodejs-with-ts-node)",
+  "keywords": [],
+  "author": ""
+}
