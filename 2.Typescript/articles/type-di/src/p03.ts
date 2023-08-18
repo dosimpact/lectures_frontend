@@ -8,6 +8,12 @@ class MySQLDataBaseService implements DBService {
   }
 }
 
+class RedisService implements DBService {
+  connect(): void {
+    console.log("✔️ RedisService Connected");
+  }
+}
+
 class ServerModule {
   private dbService!: DBService;
 
@@ -22,3 +28,6 @@ class ServerModule {
 
 const appService = new ServerModule(new MySQLDataBaseService());
 appService.prepare();
+
+const cacheService = new ServerModule(new RedisService());
+cacheService.prepare();
