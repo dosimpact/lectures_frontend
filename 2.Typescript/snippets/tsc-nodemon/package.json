@@ -1,0 +1,19 @@
+{
+  "name": "tsc-nodemon",
+  "version": "1.0.0",
+  "description": "## prepare - node.js >= 16",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^5.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1"
+  }
+}
