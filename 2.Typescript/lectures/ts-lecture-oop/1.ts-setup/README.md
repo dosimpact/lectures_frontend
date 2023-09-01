@@ -8,7 +8,7 @@
 ```
 yarn init -y
 yarn add typescript
-npx tsx init
+npx tsc --init
 ```
 
 ## node.js with ts-node
