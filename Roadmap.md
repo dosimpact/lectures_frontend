@@ -1,41 +1,8 @@
 # Learning Modules
 
-## Typescript Series
-
-- [ ] 1.1 Typescript OOP
-- [ ] 1.2 Typescript DesignPattern
-- [ ] 1.3 Effective Typescript
-
----
-
-- [ ] 2.1 Typescript React
-- [ ] 2.2 NextJS with Typescript
-
----
-
-- [ ] 3.1 Typescript with Node.js
-- [ ] 3.2 Typescript with Nest.js
-
----
-
---- 
-
-블록체인 스터디. 
-
-    방식1. 정해진 시간에 모여 강의를 듣고, 질의 체크  --- EASY
-    방식2. 강의를 듣고, 결과를 발표 --- HARD
-
-커리큘럼 ( 인프런 ). 
-
-- [ ] Klaytn 클레이튼 블록체인 이론. 
-- [ ] Klaytn 클레이튼 블록체인 실습.  
-- [ ] Klaytn 클레이튼 블록체인 DApp. 
-- [ ] Klaytn 클레이튼 블록체인 NFT. 
-
-
 ## Ads Domain. 
 
-- [ ] KOCW http://www.kocw.net/home/index.do
+- [ ] KOCW http://www.kocw.net/home/search/search.do?query=%EA%B4%91%EA%B3%A0 
 - [ ] amazon ads https://advertising.amazon.com/resources/faq?ref_=a20m_us_hnav_faq#display-ads
 
 
