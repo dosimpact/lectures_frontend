@@ -1,0 +1,11 @@
+.navigation {
+  background-color: cadetblue;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  min-height: 30px;
+}
+.navigation li {
+  color: wheat;
+  margin-right: 30px;
+}

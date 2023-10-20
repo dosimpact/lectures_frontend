@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lecture React</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header>
+      <h2 class="container">검색</h2>
+    </header>
+    <div class="container">
+      <form id="search-form-view">
+        <input type="text" placeholder="검색어를 입력하세요" autofocus />
+        <button type="reset" class="btn-reset"></button>
+      </form>
+      <div class="content">
+        <div id="tab-view"></div>
+        <div id="keyword-list-view"></div>
+        <div id="history-list-view"></div>
+        <div id="search-result-view"></div>
+      </div>
+    </div>
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
