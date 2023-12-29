@@ -10,8 +10,9 @@
   - [tailwind css](#tailwind-css)
     - [yarn add tailwind-merge](#yarn-add-tailwind-merge)
     - [치트 시트](#치트-시트)
-  - [Component 개발](#component-개발)
   - [next/image](#nextimage)
+  - [Task](#task)
+  - [Button + forwardRef](#button--forwardref)
 - [3.SuperBase](#3superbase)
 - [superbase setting](#superbase-setting)
   - [install cli](#install-cli)
@@ -22,7 +23,12 @@ ref
 
 # 1.Goal
 
-tech stack : Next 13.4, React, Stripe, Supabase, PostgreSQL, Tailwind
+tech stack 
+- Next 14, zustand
+- Stripe, 
+- Supabase, PostgreSQL, 
+- Tailwind
+
 feature
 - [ ] 월 구독
 - [ ] 음악 썸네일 및 파일 업로드
@@ -100,28 +106,72 @@ yarn add react-icons
   - classnames와 같은 기능  
 
 ### 치트 시트 
-```
-# cheet-sheet 
 
-color
-<div className="text-green-500" />;
+```
+# cheat-sheet 
+
+---flex, justify-content(main-axis), align-items(cross-axis)
+className="flex flex-col gap-y-4"
+
+# main-axis(justify)
+className="flex justify-between"
+
+# cross-axios(items)
+className="flex flex-row items-center gap-x"
+
+
+---width, heigth, padding, margin
+className="h-auto w-full py-1"
+className="px-5 py-4"
+
+---color, font-size, font-weight, background
+className="text-green-500"
+className="text-md text-neutral-400 font-medium cursor-pointer"
+className="bg-green-500 text-black font-bold"
+
+---border, border-round
+className="rounded-full border border-transparent"
+
+---transition, :hover, :disabled
+className="hover:text-white transition"
+className="disabled:cursor-not-allowed disabled:opacity-50"
+
+---overflow
+# 평소에는 스크롤이 없다가, 오버플로 발생시 스크롤이 나온다.
+className="overflow-y-auto"
+
+
+---twMerge
+className={twMerge(``,active && "text-white")}
+
+
 ---
 - 반응형 UI만드는 방법  
   - md:hidden : 모바일의 경우에는 숨길수 있는 기능  
 ---
 - group 이라는 classname
   - 부모 선택자 (group), 부모 요소에 hover할 떄 자식요소들이 반응할 수 있다.  
+
+
+    <Link
+      href={href}
+      className={twMerge(
+        `flex flex-row items-center gap-x-4 
+      h-auto w-full py-1 
+      text-md text-neutral-400 font-medium cursor-pointer
+      hover:text-white transition`,
+        active && "text-white"
+      )}
+    >
+      <Icon size={26} />
+      <p className="w-100 truncate">{label}</p>
+    </Link>
+
 ```
 
 ---
 
-## Component 개발
-- Box
-- SideBar
-- SideBarItem
-- Libray
-- Header
-- Button
+
 
 ## next/image  
 
@@ -129,6 +179,67 @@ color
 - public/liked.png > import  
 
 
+## Task 
+
+global.css
+```
+html,
+body,
+:root {
+  height: 100%;
+  background-color: black;
+  color-scheme: dark;
+}
+```
+
+SideBar
+- routes 정의(아이콘,라벨,활성화여부)
+
+Component 개발
+- Box
+- SideBarItem
+- Libray
+- Header
+- Button
+
+
+## Button + forwardRef
+
+```js
+import React, { forwardRef } from "react";
+import { twMerge } from "tailwind-merge";
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ children, type = "button", className, disabled }, ref) => {
+    return (
+      <button
+        ref={ref}
+        type={type}
+        disabled={disabled}
+        className={twMerge(
+          `w-full px-3 py-3 
+          bg-green-500 text-black font-bold 
+          rounded-full border border-transparent
+          hover:opacity-75 transition 
+          disabled:cursor-not-allowed disabled:opacity-50
+          `,
+          className
+        )}
+      >
+        {children}
+      </button>
+    );
+  }
+);
+
+Button.displayName = "Button"; // 개발자 도구에서 표시할 이름
+
+export default Button;
+
+```
 
 # 3.SuperBase
 
