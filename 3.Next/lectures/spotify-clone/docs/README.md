@@ -1,16 +1,23 @@
+- [ref](#ref)
 - [1.Goal](#1goal)
 - [2.Layout](#2layout)
   - [install](#install)
     - [vscode extension](#vscode-extension)
   - [NextJS Basic](#nextjs-basic)
+    - [Client, Server Component](#client-server-component)
+    - [metadata](#metadata)
+    - [revalidate](#revalidate)
+    - [middleware](#middleware)
   - [Typescript TSX](#typescript-tsx)
   - [App Router](#app-router)
-    - [metadata](#metadata)
+    - [AppRouter 컨벤션](#approuter-컨벤션)
     - [useRouter](#userouter)
   - [react-icons](#react-icons)
   - [tailwind css](#tailwind-css)
     - [yarn add tailwind-merge](#yarn-add-tailwind-merge)
   - [next/image](#nextimage)
+    - [public 폴더 이미지 넣기](#public-폴더-이미지-넣기)
+    - [image domains allow](#image-domains-allow)
   - [Task](#task)
   - [Button + forwardRef](#button--forwardref)
 - [3.SuperBase](#3superbase)
@@ -38,22 +45,38 @@
     - [New OAuth Apps](#new-oauth-apps)
     - [Superbase Provider add](#superbase-provider-add)
 - [7.Upload modal and functionality](#7upload-modal-and-functionality)
+  - [Task](#task-3)
+- [8.Songs fetching and list display](#8songs-fetching-and-list-display)
+  - [Task](#task-4)
+  - [install](#install-2)
+  - [query-string](#query-string)
+- [9.Favorites functionality](#9favorites-functionality)
+- [10.](#10)
+- [11.](#11)
+- [12.](#12)
+- [13.](#13)
 
-ref
+# ref
+
 - github : https://github.com/antonioerdeljac/next13-spotify
 - yt : https://www.youtube.com/watch?v=2aeMRB8LL4o&t=3509s
 
 # 1.Goal
 
-tech stack 
+Tech stack 
 - Next 14, zustand
-- Stripe, 
-- Supabase, PostgreSQL, 
-- Tailwind
+- Supabase, PostgreSQL, Stripe
+- Tailwind, @radix-ui, react-hot-toast, react-icons
 
-feature
-- [ ] 월 구독
+Tech Feature
+- [ ] Superbase OAuth, SQL, Stoage
+- [ ] stripe 결제
+
+Feature
 - [ ] 음악 썸네일 및 파일 업로드
+- [ ] 음악 검색
+- [ ] 좋아요 한 음악  
+- [ ] 내 라이브러리  
 
 # 2.Layout
 
@@ -73,33 +96,18 @@ yarn create next-app
 ### vscode extension
 
 Tailwind CSS IntelliSense
-ES7+ React/Redux/React-Native snippets
+ES7+ React/Redux/React-Native snippets  
+- rafac. 
 
 ---
 
 ## NextJS Basic
 
-클라이언트 컴포넌트 선언  
-- 'use client'  
-- 클라이언 컴포넌트에서 import하는 하위 컴포넌트는 모두 클라이언트 컴포넌트 이다.   
-
-
-
-
-## Typescript TSX  
-- React.FC
-
-
-## App Router
-
-Router
-- routes 설정방법
-- next/navigation
-  - useRouter  
-
-AppRouter 컨벤션 
-- ()로 묶어주는 기능 : app router에서 ()은 페이지 그룹을 의미한다.  
-  - url에 영향을 주는 설정은 아니지만, layout과 같은 예약된 컴포넌트에 영향을 준다.    
+### Client, Server Component 
+1.NextJS에서 컴포넌트는 기본적으로 서버컴포넌트이다.  
+- Client Component 선언을 위해서 'use client'을 파일위에 적어준다.    
+- Client Component에서 import하는 하위 컴포넌트는 모두 Client Component 이다.   
+- Client Component에서 useState 등의 리액트 라이프싸이클 훅을 사용할 수 있다.  
 
 ### metadata
 
@@ -110,6 +118,42 @@ export const metadata: Metadata = {
   description: "Listen to music",
 };
 ```
+
+### revalidate
+
+ref : https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating
+```js
+// 0 은 요청이 들어오면 페이지가 다시 생성된다는 의미이다.  
+// 60 이라면, 60초마다 페이지를 다시 생성 한다, 정적페이지의 내용을 주기적으로 업데이트하고 최신데이터를 유지한다.  
+export const revalidate = 0;
+```
+
+### middleware
+
+```js
+import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
+import { NextRequest, NextResponse } from "next/server";
+
+export async function middleware(req: NextRequest) {
+  const res = NextResponse.next();
+  /* 사용자 세션을 가져와야 서버컴포넌트에서 object에 접근할 수 있다. */
+  const supabase = createMiddlewareClient({ req, res });
+  await supabase.auth.getSession();
+  return res;
+}
+
+```
+
+
+## Typescript TSX  
+- React.FC 로 props 정의하는 법  
+- forwardRef로 props 정의하는 법  
+
+## App Router
+
+### AppRouter 컨벤션 
+- ()로 묶어주는 기능 : app router에서 ()은 페이지 그룹을 의미한다.  
+  - url에 영향을 주는 설정은 아니지만, layout과 같은 예약된 컴포넌트에 영향을 준다.    
 
 ### useRouter
 
@@ -137,20 +181,52 @@ yarn add react-icons
 
 ### yarn add tailwind-merge
 
-  - 추가적인 클래스 네임을 조건에 따라 넣을 수 있다.  
-  - tailwind css를 상속받아야 하는 경우  
+추가적인 클래스 네임을 조건에 따라 넣을 수 있다.  
   - classnames와 같은 기능  
-
+  - 1.props로 className을 받는 경우
+  - 2.상태에 따라 조건부로 className을 거는 경우
 
 ---
 
-
-
 ## next/image  
 
-- next/image  
-- public/liked.png > import  
+### public 폴더 이미지 넣기 
 
+```js
+import Image from "next/image";
+
+src : public 폴더 하위의 경로
+<Image className="object-cover" src={"/images/liked.png"} fill alt="Image" />
+```
+
+### image domains allow
+
+```js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  images: {
+    domains: [
+      "misc.scdn.co",
+      "i.scdn.co",
+      "geo-media.beatsource.com",
+      "i1.sndcdn.com",
+      "media.pitchfork.com",
+      "seed-mix-image.spotifycdn.com",
+      "sxknzhgfshqsjwocxtnc.supabase.co",
+    ],
+  },
+};
+
+module.exports = nextConfig;
+
+---
+        <Image
+          className="object-cover"
+          src={imagePath || "/images/music-placeholder.png"}
+          fill
+          alt="Image"
+        />
+```
 
 ## Task 
 
@@ -293,6 +369,10 @@ user_id uuid primary # user.id 외래키
 song_id int8 primary # song.id 외래키  
 created_at timestamptz now()
 ```
+
+결과 : 다음의 테이블이 생성된다.  
+- songs  
+- liked_songs  
 
 ## RLS Poilicy 설정 
 
@@ -463,3 +543,63 @@ github의 Client ID, Client secrets 을 superbase 에 입력해준다.
 - Client secrets 생성 후 입력
 
 # 7.Upload modal and functionality
+
+
+```
+yarn add react-hook-form
+yarn add @types/uniqid -D
+yarn add uniqid
+```
+
+## Task
+- useUploadModal
+- /components/Input.tsx
+- UploadModal.tsx
+
+# 8.Songs fetching and list display
+
+
+## Task
+
+- actions/getSongs.ts
+- PageContent.tsx
+- SongItem.tsx
+- useLoadImage.ts
+- PlayButton.tsx
+- middleware.ts
+- getSongById.ts
+- MediaItem.tsx
+- getSongsByTitle.ts
+- SearchInput.tsx
+- useDebounce.ts
+
+## install
+```
+yarn add query-string
+```
+
+## query-string
+
+```js
+import qs from "query-string";
+    
+    const query = {
+      title: debouncedValue,
+    };
+
+    const url = qs.stringifyUrl({
+      url: "/search",
+      query,
+    });
+
+```
+
+# 9.Favorites functionality
+
+# 10.
+
+# 11.
+
+# 12.
+
+# 13.
