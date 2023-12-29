@@ -5,7 +5,8 @@ import { useMemo } from "react";
 import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
 import Box from "@/components/Box";
-import SidebarItem from "./SideBarItem";
+import Library from "@/components/Library";
+import SidebarItem from "@/components/SideBarItem";
 
 interface SideBarProps {
   children: React.ReactNode;
@@ -39,6 +40,9 @@ const SideBar = ({ children }: SideBarProps) => {
               <SidebarItem key={key} {...item} />
             ))}
           </div>
+        </Box>
+        <Box className="h-full overflow-y-auto px-5 py-4">
+          <Library />
         </Box>
       </div>
       <main>{children}</main>
