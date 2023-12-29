@@ -1,3 +1,6 @@
+- [example of tables](#example-of-tables)
+  - [todos](#todos)
+  - [stripe](#stripe)
 
 ## example of tables
 
