@@ -18,6 +18,7 @@
   - [next/image](#nextimage)
     - [public 폴더 이미지 넣기](#public-폴더-이미지-넣기)
     - [image domains allow](#image-domains-allow)
+    - [Image 속성](#image-속성)
   - [Task](#task)
   - [Button + forwardRef](#button--forwardref)
 - [3.SuperBase](#3superbase)
@@ -51,7 +52,9 @@
   - [install](#install-2)
   - [query-string](#query-string)
 - [9.Favorites functionality](#9favorites-functionality)
+  - [Task](#task-5)
 - [10.](#10)
+  - [Task](#task-6)
 - [11.](#11)
 - [12.](#12)
 - [13.](#13)
@@ -226,6 +229,22 @@ module.exports = nextConfig;
           fill
           alt="Image"
         />
+```
+
+### Image 속성
+
+https://mycodings.fly.dev/blog/2022-09-08-all-about-nextjs-image-component
+
+```js
+-> fill : 이미지를 상위 엘리먼트의 width, height에 맞추기 위해 자동으로 width, height를 조절합니다. 꼭 상위 엘리먼트에 position: relative 옵션을 적용해야 합니다. 
+            <div className="relative h-32 w-32 lg:h-44 lg:w-44">
+              <Image
+                className="object-cover"
+                fill
+                src="/images/liked.png"
+                alt="Playlist"
+              />
+            </div>
 ```
 
 ## Task 
@@ -596,7 +615,15 @@ import qs from "query-string";
 
 # 9.Favorites functionality
 
+## Task
+- getLikedSongs.ts
+- LikedContent.tsx
+
+
 # 10.
+
+## Task
+- usePlayer.ts
 
 # 11.
 

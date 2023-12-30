@@ -19,13 +19,17 @@ className={twMerge(``,active && "text-white")}
 
 ## 반응형 UI만드는 방법  
 
-```js
-# md:hidden : 모바일의 경우에는 숨길수 있는 기능  
+https://tailwindcss.com/docs/responsive-design
 
-# PC에서 보여주다가, mobile의 경우 숨긴다.
+```js
+# md:hidden : @media (min-width: 768px) { ... }
+- 최소 768px 이상의 너비를 가진 화면이라면,(예 PC) 작동하는 로직
+- 모바일을 기준으로 작업을한다. 모바일에서 보이는건 PC에서 보이지만 반대의 경우에는 그렇진 않기 떄문. 
+
+# mobile 보여주다가, PC 숨긴다.
 className="flex md:hidden gap-x-2 items-center"
 
-# mobile 보여주다가, pc 숨긴다.
+# PC에서 보여주다가, mobile의 경우 숨긴다.
 className="hidden md:flex gap-x-2 items-center"
 
 ```
