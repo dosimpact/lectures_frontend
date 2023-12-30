@@ -8,6 +8,7 @@ import ModalProvider from "@/providers/ModalProvider";
 import ToasterProvider from "@/providers/ToasterProvider";
 
 import getSongsByUserId from "@/actions/getSongsByUserId";
+import Player from "@/components/Player";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default async function RootLayout({
           <UserProvider>
             <SideBar songs={userSongs}>{children}</SideBar>
             <ModalProvider />
+            <Player />
           </UserProvider>
         </SuperbaseProvider>
         <ToasterProvider />

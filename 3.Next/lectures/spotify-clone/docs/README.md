@@ -8,6 +8,7 @@
     - [metadata](#metadata)
     - [revalidate](#revalidate)
     - [middleware](#middleware)
+    - [Fixed UI with dynamic URL](#fixed-ui-with-dynamic-url)
   - [Typescript TSX](#typescript-tsx)
   - [App Router](#app-router)
     - [AppRouter 컨벤션](#approuter-컨벤션)
@@ -53,8 +54,9 @@
   - [query-string](#query-string)
 - [9.Favorites functionality](#9favorites-functionality)
   - [Task](#task-5)
-- [10.](#10)
+- [10.Player functionality](#10player-functionality)
   - [Task](#task-6)
+  - [install](#install-3)
 - [11.](#11)
 - [12.](#12)
 - [13.](#13)
@@ -145,6 +147,17 @@ export async function middleware(req: NextRequest) {
   return res;
 }
 
+```
+
+### Fixed UI with dynamic URL
+
+```js
+      <PlayerContent
+        /* key값으로 완전히 컴포넌트가 리랜더링된다. 내부의 hook이 재생성되어 다시 작동한다. key를 설정하지 않으면 다음 노래 재생에 문제가 발생. (dynamic & modular URL Change)  */
+        key={songUrl}
+        song={song}
+        songUrl={songUrl}
+      />
 ```
 
 
@@ -620,10 +633,23 @@ import qs from "query-string";
 - LikedContent.tsx
 
 
-# 10.
+# 10.Player functionality
 
 ## Task
 - usePlayer.ts
+- PlayerContent.tsx
+- Player.tsx
+- useGetSongById.ts
+- useLoadSongUrl.ts
+- useOnPlay.ts
+- Slider.tsx
+
+
+## install
+```
+yarn add use-sound
+@radix-ui/react-slider
+```
 
 # 11.
 
