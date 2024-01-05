@@ -7,6 +7,8 @@ import PageContent from "./components/PageContent";
 export const revalidate = 0;
 
 export default async function Home() {
+  console.log("-->Home");
+
   const songs = await getSongs();
 
   return (

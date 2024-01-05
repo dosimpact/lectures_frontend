@@ -4,11 +4,13 @@
   - [install](#install)
     - [vscode extension](#vscode-extension)
   - [NextJS Basic](#nextjs-basic)
+    - [RCS, SSR 이해](#rcs-ssr-이해)
     - [Client, Server Component](#client-server-component)
     - [metadata](#metadata)
     - [revalidate](#revalidate)
     - [middleware](#middleware)
     - [Fixed UI with dynamic URL](#fixed-ui-with-dynamic-url)
+    - [Server Actions](#server-actions)
   - [Typescript TSX](#typescript-tsx)
   - [App Router](#app-router)
     - [AppRouter 컨벤션](#approuter-컨벤션)
@@ -57,7 +59,9 @@
 - [10.Player functionality](#10player-functionality)
   - [Task](#task-6)
   - [install](#install-3)
-- [11.](#11)
+- [11. Stripe integration](#11-stripe-integration)
+  - [Task](#task-7)
+  - [stripe 가입](#stripe-가입)
 - [12.](#12)
 - [13.](#13)
 
@@ -107,6 +111,12 @@ ES7+ React/Redux/React-Native snippets
 ---
 
 ## NextJS Basic
+
+### RCS, SSR 이해
+
+https://yozm.wishket.com/magazine/detail/2271/
+https://reactnext-central.xyz/blog/8-things-you-shold-konw-about-nextjs-13#1-react-%EC%84%9C%EB%B2%84-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-rsc
+https://github.com/reactwg/react-18/discussions/37
 
 ### Client, Server Component 
 1.NextJS에서 컴포넌트는 기본적으로 서버컴포넌트이다.  
@@ -158,6 +168,29 @@ export async function middleware(req: NextRequest) {
         song={song}
         songUrl={songUrl}
       />
+```
+
+### Server Actions 
+
+```
+## 클라이언트에서 서버에 있는 함수를 직접 호출한다고? 이게 어떻게 가능한가!?
+
+next 컴파일 단계에서 use server 지시문이 있는 함수에 대한 고유 라우팅 경로를 할당합니다.
+길이가 40인 유니크 문자열 (Ex. 984ed20e3a894190cd12e4db981795e43fe8c042)
+해당 함수를 클라에서 호출하면 헤더에 Next-Action : 고유 라우팅 경로를 담아 POST 요청을 하게 됩니다.
+next 서버는 리퀘스트 헤더에 Next-Action 필드가 있으면 미들웨어를 거쳐 해당 server action으로 라우팅을 시도합니다.
+해당 함수를 실행하고 그 리턴값을 response 합니다.
+현재 alpha 단계이기 때문에 구현 방식은 바뀔 수 있습니다.
+
+## Pages Router의 pages/api 디렉토리에 있는거랑 뭐가 다른가..?
+1. 신기술이라서 간지난다
+2. 정의/호출방식이 더 편리함. pages/api 디렉토리 구조에 맞게 경로 작성해서 요청할 필요 없다.
+3. 서버 액션, 서버컴포넌트 등의 server only 코드는 클라에 내려주는 JS 번들에 포함되지 않아서, 전체적으로 JS 번들 사이즈가 줄어든다.
+4. 사실 확 와닿는 차이는 모르겠다.. 제보 바랍니다.
+
+ref
+https://velog.io/@jjunyjjuny/nextjs-Server-Action#%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EC%97%90%EC%84%9C-%EC%84%9C%EB%B2%84%EC%97%90-%EC%9E%88%EB%8A%94-%ED%95%A8%EC%88%98%EB%A5%BC-%EC%A7%81%EC%A0%91-%ED%98%B8%EC%B6%9C%ED%95%9C%EB%8B%A4%EA%B3%A0-%EC%9D%B4%EA%B2%8C-%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B0%80%EB%8A%A5%ED%95%9C%EA%B0%80
+
 ```
 
 
@@ -648,10 +681,88 @@ import qs from "query-string";
 ## install
 ```
 yarn add use-sound
-@radix-ui/react-slider
+yarn add @radix-ui/react-slider
 ```
 
-# 11.
+# 11. Stripe integration
+```
+yarn add react-spinners
+@stripe/stripe-js
+```
+
+
+## Task
+- loading.tsx
+- error.tsx
+- libs/stripe
+
+## stripe 가입
+https://blog.maru.or.kr/2022/02/10/%ED%95%9C%EA%B5%AD%EC%97%90%EC%84%9C-stripe-%EA%B0%80%EC%9E%85%ED%95%98%EA%B8%B0/
+
+
+```
+# 호주 국적으로 가입했다. 
+
+# Create new account
+
+# webhook
+
+## webhook이란?
+
+webhook을 사용하면 타 서버의 이벤트를 받을 수 있다.  
+- 내 서버에 특정 URL을 오픈하고, 들어오는 데이터에 따라서 적절한 action, payload 를 처리하면 된다.   
+- 결제 시스템을 사용하면, 타 시스템 내부적으로 비동기 처리가 필요할텐데, 그 처리가 끝나는 이벤트를 받아서 처리하는 것이다.  
+- 예) 
+- 브라우저:결제 요청 -> stripe:invoice 생성
+- stripe:invoice 생성 완료 -> nextjs:웹훅 call
+- nextjs: superbase 업데이트 -> stripe:invoice 처리
+- stripe:invoice 처리 완료 -> 브라우저:결제 완료
+
+webhook STRIPE_WEBHOOK_SECRET 을 발급받기 위해서는 내 서버의 주소가 결정되어야 한다.  
+- localhost인 경우에는 stripe cli을 통해서 임시 서버로 발급이 되며,
+- (dev,stage,prod) 경우에도 마찬가지로 시크릿 키를 발급 받아야 한다. (?)
+
+## Local listeners, Hosted endpoints
+
+아래 명려어인 stripe listen --forward-to localhost:4242/webhook 을 켜두면 웹훅 리스너를 만들 수 있다.  
+- stripe 개발자 도구에서 Listen 상태를 볼 수 있음.  
+- 이러한 상태를 유지시켜야지 stripe에서 상품을 추가하거나, 가격을 업데이트 하는 등의 정보를 받아서 superbase와 연동 할 수 있다.  
+
+---
+2024-01-05 12:37:54   --> product.deleted [evt_1OV4EIHas57YuQ3yoyvfLk60]
+2024-01-05 12:38:02  <--  [404] POST http://localhost:4242/webhook [evt_1OV4EIHas57YuQ3yvd17ADuJ]
+
+
+## local webhook 발급 과정
+
+brew install stripe/stripe-cli/stripe
+
+stripe login //
+
+### Proxy 리스너
+- stripe에서 제공하는 모듈이며, 웹훅 요청을 처리하고 이를 nextjs에 넘긴다.  
+- 반드시 api/webhooks 로 경로설정을 잘 해야 한다.  
+- 확인 사항 2개의 서버를 잘 거쳐서 DB까지 데이터가 잘 들어오는지 e2e 테스트
+stripe listen --forward-to localhost:4242/api/webhooks
+
+### 테스트
+stripe trigger payment_intent.succeeded
+
+---
+
+# Product catalog 추가
+
+- 1) stripe proxy에 올바르게 이벤트가 인입되어야 한다.  
+- 2) nextjs api/webhooks 에 올바르게 이벤트가 인입되어야 한다.  
+- 3) superbase 에 products, prices의 row가 생성되어야 한다.    
+
+*stripe에서 발생한 event에 대해서 nextjs에서 처리하지 못하는 경우는 ?   
+*stripe에서 발생한 event에 대해서 의도적으로 결제를 취소해야 하는 경우는 ?  
+
+```
+
+
+
 
 # 12.
 
