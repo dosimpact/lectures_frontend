@@ -8,6 +8,7 @@ import ModalProvider from "@/providers/ModalProvider";
 import ToasterProvider from "@/providers/ToasterProvider";
 
 import getSongsByUserId from "@/actions/getSongsByUserId";
+import getActiveProductsWithPrices from "@/actions/getActiveProductsWithPrices";
 import Player from "@/components/Player";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,6 +23,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const products = await getActiveProductsWithPrices();
   const userSongs = await getSongsByUserId();
 
   return (
@@ -30,7 +32,7 @@ export default async function RootLayout({
         <SuperbaseProvider>
           <UserProvider>
             <SideBar songs={userSongs}>{children}</SideBar>
-            <ModalProvider />
+            <ModalProvider products={products} />
             <Player />
           </UserProvider>
         </SuperbaseProvider>

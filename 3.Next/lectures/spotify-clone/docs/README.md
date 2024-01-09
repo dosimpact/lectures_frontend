@@ -62,8 +62,10 @@
 - [11. Stripe integration](#11-stripe-integration)
   - [Task](#task-7)
   - [stripe 가입](#stripe-가입)
-- [12.](#12)
-- [13.](#13)
+- [12.Subscribe modal and account page](#12subscribe-modal-and-account-page)
+  - [Task](#task-8)
+  - [active Customer portal](#active-customer-portal)
+- [13. Deployment](#13-deployment)
 
 # ref
 
@@ -759,11 +761,28 @@ stripe trigger payment_intent.succeeded
 *stripe에서 발생한 event에 대해서 nextjs에서 처리하지 못하는 경우는 ?   
 *stripe에서 발생한 event에 대해서 의도적으로 결제를 취소해야 하는 경우는 ?  
 
+---
+
+# Customer portal
+
+Launch customer portal with a link
+- stripe 결제 내역 및 구독 취소 등의 고객 전용 포털을 제공해준다.  
+- 이를 활성화 해야 한다.  
+
 ```
 
 
+# 12.Subscribe modal and account page
+
+## Task 
+- api/create-checkout-session
+- api/create-portal-link
+- SubscribeModal.tsx
+- actions/getActiveProductsWithPrices.ts
+- app/account
+- useOnPlay.ts
+
+## active Customer portal
 
 
-# 12.
-
-# 13.
+# 13. Deployment
